@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profil - Pondok Pesantren Assalafi Al Aulia</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/fontawesome.min.css">
+    <link rel="stylesheet" href="assets/css/fontawesome-fonts.css">
+    <!-- CDN fallback -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="none" onload="if(media!='all')media='all'">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/custom.css" />
+    <link rel="stylesheet" href="assets/css/enhanced-home.css">
+    <link rel="stylesheet" href="assets/css/program-enhanced.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+    <link rel="icon" href="foto/aulia1.png" type="image/png" />
+    <link rel="stylesheet" href="assets/css/hero.css">
+    <link rel="stylesheet" href="assets/css/footer.css">
+</head>
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="spinner-border text-success" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <img src="foto/logo.jpg" alt="Logo Pondok Pesantren Assalafi Al Aulia" class="me-2" style="height: 45px;" />
+                <span class="fw-bold">Pondok Pesantren Assalafi Al Aulia</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html"><i class="fas fa-home me-1"></i> Beranda</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="profil.html"><i class="fas fa-info-circle me-1"></i> Profil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="program.html"><i class="fas fa-book-open me-1"></i> Program</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="jadwal.html"><i class="fas fa-calendar-alt me-1"></i> Jadwal</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="galeri.html"><i class="fas fa-images me-1"></i> Galeri</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="kontak.html"><i class="fas fa-envelope me-1"></i> Kontak</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section profile-hero text-center text-white d-flex align-items-center justify-content-center" style="background: url('foto/aulia1.png') center/cover no-repeat; height: 100vh;">
+        <div class="container position-relative hero-content" data-aos="fade-up">
+            <div class="row">
+                <div class="col-lg-10 mx-auto">
+                    <h1 class="display-3 fw-bold mb-3">Profil Pondok Pesantren</h1>
+                    <div class="mx-auto mb-4" style="width:60px;height:3px;background:linear-gradient(90deg,transparent,#28a745,transparent);"></div>
+                    <div class="hero-chips d-flex justify-content-center flex-wrap gap-2 mb-4">
+                        <span class="badge bg-success rounded-pill"><i class="fas fa-book-open me-1"></i> Sejarah</span>
+                        <span class="badge bg-success rounded-pill"><i class="fas fa-bullseye me-1"></i> Visi & Misi</span>
+                    </div>
+                    <p class="lead mb-5">Mengenal lebih dalam Pondok Pesantren Assalafi Al Aulia dan perjalanan pendidikan Islam yang berkualitas dengan tradisi salaf yang autentik.</p>
+                    <div class="mt-5">
+                        <a href="#sejarah" class="btn btn-light hero-btn me-3 mb-3 mb-md-0">
+                            <i class="fas fa-book-open me-2"></i>Pelajari Lebih Lanjut
+                        </a>
+                        <a href="kontak.html" class="btn btn-outline-light hero-btn">
+                            <i class="fas fa-envelope me-2"></i>Hubungi Kami
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll down indicator -->
+        <div class="scroll-down">
+            <a href="#sejarah" class="text-white">
+                <i class="fas fa-chevron-down fa-2x"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Sejarah Pesantren -->
+    <section id="sejarah" class="py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6 mb-4 mb-md-0" data-aos="fade-right" data-aos-delay="100">
+                    <img src="foto/aulia1.png" alt="Sejarah Pesantren" class="img-fluid sejarah-image" loading="lazy" decoding="async">
+                </div>
+                <div class="col-md-6" data-aos="fade-left" data-aos-delay="200">
+<h2 class="section-title text-start">Sejarah Pesantren</h2>
+<p>Pondok Pesantren Assalafi Al Aulia didirikan pada tahun 2005 oleh KH. Amay Faruq, seorang ulama yang memiliki perhatian besar terhadap pendidikan Islam. Berawal dari pengajian kecil di musholla dengan santri yang hanya berjumlah 15 orang, pesantren ini terus berkembang hingga saat ini.</p>
+<p>Nama <strong>"Al Aulia"</strong> dipilih sebagai pengingat bahwa tujuan pendidikan di pesantren ini adalah untuk mencetak generasi yang dekat dengan Allah SWT dan mengikuti jejak para wali (aulia).</p>
+<p>Seiring berjalannya waktu, pesantren ini terus mengalami perkembangan baik dari segi infrastruktur maupun sistem pendidikan. Saat ini, Pondok Pesantren Assalafi Al Aulia telah memiliki ratusan santri dari berbagai daerah di Indonesia.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Visi dan Misi -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center mb-4">
+                    <h2 class="section-title">Visi dan Misi</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 mb-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="card h-100 vision-mission-card">
+                        <div class="card-body">
+                            <h3 class="card-title text-success with-icon"><span class="title-icon"><i class="fas fa-bullseye"></i></span>Visi</h3>
+                            <p class="card-text">Menjadi pusat pendidikan Islam yang unggul dalam melahirkan generasi Qur'ani yang berakhlak mulia dan berwawasan luas.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="card h-100 vision-mission-card">
+                        <div class="card-body">
+<h3 class="card-title text-success with-icon"><span class="title-icon"><i class="fas fa-list-check"></i></span>Misi</h3>
+<ul class="card-text">
+    <li>Menanamkan aqidah lurus sesuai dengan Al-Qur’an dan Sunnah berdasarkan pemahaman salafus shalih (Ahlusunnah wal Jama’ah).</li>
+    <li>Menyelenggarakan pengajaran ilmu-ilmu syar’i melalui kajian Al-Qur’an, Hadits, dan kitab-kitab turats ulama salaf.</li>
+    <li>Membina santri agar berakhlakul karimah, berdisiplin, dan beradab mulia dalam kehidupan sehari-hari.</li>
+    <li>Mempersiapkan santri menjadi kader dakwah Ahlusunnah wal Jama’ah yang bermanfaat bagi agama, bangsa, dan masyarakat.</li>
+    <li>Melestarikan amaliyah Ahlusunnah wal Jama'ah seperti dzikir, sholawat, istighosah, dan tradisi keislaman yang sesuai dengan syariat.</li>
+</ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Fasilitas -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center mb-4">
+                    <h2 class="section-title">Fasilitas Pesantren</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="card h-100 facility-card">
+                        <div class="card-body">
+                            <h4 class="card-title text-success with-icon"><span class="title-icon"><i class="fas fa-bed"></i></span>Asrama Santri</h4>
+                            <p class="card-text">Asrama putra dan putri yang terpisah dengan kapasitas total 500 santri, dilengkapi dengan kamar mandi, tempat cuci, dan ruang belajar.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="card h-100 facility-card">
+                        <div class="card-body">
+                            <h4 class="card-title text-success with-icon"><span class="title-icon"><i class="fas fa-mosque"></i></span>Masjid</h4>
+                            <p class="card-text">
+                                Masjid pesantren yang menjadi pusat kegiatan ibadah para santri, termasuk sholat berjamaah, dzikir, sholawat, istighosah, serta berbagai aktivitas lainnya.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="card h-100 facility-card">
+                        <div class="card-body">
+                            <h4 class="card-title text-success with-icon"><span class="title-icon"><i class="fas fa-school"></i></span>Madrasah</h4>
+                            <p class="card-text">
+                                Madrasah sebagai pusat kegiatan belajar mengajar, tempat dilaksanakannya pengajian kitab kuning serta pendidikan formal, dengan fasilitas yang memadai untuk menunjang proses pembelajaran santri.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="400">
+                    <div class="card h-100 facility-card">
+                        <div class="card-body">
+                            <h4 class="card-title text-success with-icon"><span class="title-icon"><i class="fas fa-fire-burner"></i></span>Ruang Masak</h4>
+                            <p class="card-text">
+                                Setiap asrama putra maupun putri dilengkapi dengan ruang masak berbasis tungku, yang digunakan santri untuk memasak kebutuhan sehari-hari secara mandiri.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ: Pertanyaan Umum -->
+    <section class="py-5" id="faq">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center mb-4">
+                    <h2 class="section-title">Pertanyaan Umum</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 mx-auto" data-aos="fade-up" data-aos-delay="100">
+                    <div class="accordion" id="faqAccordion">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="faqOneHeading">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faqOne" aria-expanded="true" aria-controls="faqOne">
+                                    Bagaimana prosedur pendaftaran santri baru?
+                                </button>
+                            </h2>
+                            <div id="faqOne" class="accordion-collapse collapse show" aria-labelledby="faqOneHeading" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Calon santri dapat mengisi formulir pendaftaran di halaman <a href="kontak.html" class="btn-link">Kontak</a> atau datang langsung ke pesantren dengan membawa berkas persyaratan seperti fotokopi KTP/KK, ijazah terakhir, dan pas foto.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="faqTwoHeading">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqTwo" aria-expanded="false" aria-controls="faqTwo">
+                                    Berapa kisaran biaya pendidikan?
+                                </button>
+                            </h2>
+                            <div id="faqTwo" class="accordion-collapse collapse" aria-labelledby="faqTwoHeading" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Biaya pendidikan disesuaikan dengan program yang diambil. Informasi detail dapat ditanyakan melalui nomor resmi atau WhatsApp pesantren. Tersedia skema keringanan bagi yang membutuhkan.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="faqThreeHeading">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqThree" aria-expanded="false" aria-controls="faqThree">
+                                    Seperti apa jadwal harian santri?
+                                </button>
+                            </h2>
+                            <div id="faqThree" class="accordion-collapse collapse" aria-labelledby="faqThreeHeading" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Jadwal harian mencakup sholat berjamaah, pengajian kitab, hafalan Al-Qur'an, belajar formal, kegiatan kebersihan, dan olahraga. Detail jadwal dapat dilihat di halaman <a href="jadwal.html" class="btn-link">Jadwal</a>.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="faqFourHeading">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqFour" aria-expanded="false" aria-controls="faqFour">
+                                    Apa saja peraturan asrama yang perlu diperhatikan?
+                                </button>
+                            </h2>
+                            <div id="faqFour" class="accordion-collapse collapse" aria-labelledby="faqFourHeading" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Santri wajib menjaga kedisiplinan, kebersihan, adab terhadap guru, dan mengikuti semua kegiatan terjadwal. Penggunaan perangkat elektronik dibatasi sesuai kebijakan pesantren.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="faqFiveHeading">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faqFive" aria-expanded="false" aria-controls="faqFive">
+                                    Bagaimana cara menghubungi pihak pesantren?
+                                </button>
+                            </h2>
+                            <div id="faqFive" class="accordion-collapse collapse" aria-labelledby="faqFiveHeading" data-bs-parent="#faqAccordion">
+                                <div class="accordion-body">
+                                    Untuk pertanyaan lebih lanjut, silakan kunjungi halaman <a href="kontak.html" class="btn-link">Kontak</a> atau gunakan tombol WhatsApp di kiri bawah untuk pesan cepat.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+        <!-- Lokasi & Peta -->
+    <section class="map-section py-5" id="lokasi">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center mb-4">
+                    <h2 class="section-title">Lokasi Pesantren</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12" data-aos="fade-up" data-aos-delay="100">
+                    <div class="map-card">
+                        <div class="header d-flex justify-content-between align-items-center">
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-map-marker-alt me-2 text-success"></i>
+                                <span>Kp. Bojong Kawung RT03/RW05, Desa Mekar Maju, Pasirjambu, Kec. Pasirjambu, Kabupaten Bandung, Jawa Barat 40972</span>
+                            </div>
+                            <a class="btn btn-success btn-sm" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Kp.%20Bojong%20Kawung%20RT03%2FRW05%2C%20Desa%20Mekar%20Maju%2C%20Pasirjambu%2C%20Kec.%20Pasirjambu%2C%20Kabupaten%20Bandung%2C%20Jawa%20Barat%2040972">
+                                <i class="fas fa-directions me-1"></i> Buka di Maps
+                            </a>
+                        </div>
+                        <iframe class="map-iframe" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen
+                            src="https://www.google.com/maps?q=Kp.%20Bojong%20Kawung%20RT03%2FRW05%2C%20Desa%20Mekar%20Maju%2C%20Pasirjambu%2C%20Kec.%20Pasirjambu%2C%20Kabupaten%20Bandung%2C%20Jawa%20Barat%2040972&output=embed"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Footer -->
+<footer class="footer footer-black">
+        <div class="container-fluid px-0">
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="footer-content">
+                        <h5 class="mb-4"><i class="fas fa-mosque me-2"></i>Pondok Pesantren Assalafi Al Aulia</h5>
+                        <p class="mb-3">
+                            <i class="fas fa-map-marker-alt me-2"></i>Kp. Bojong Kawung RT03/RW05, Desa Mekar Maju, Pasirjambu, Kec. Pasirjambu, Kabupaten Bandung, Jawa Barat 40972
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="footer-content">
+                        <h5 class="mb-4"><i class="fas fa-envelope me-2"></i>Kontak Kami</h5>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="fas fa-phone me-2"></i>Telepon: (021) 12345678</li>
+                            <li class="mb-2"><i class="fas fa-envelope me-2"></i>Email: info@alaulia.ac.id</li>
+                            <li class="mb-2"><i class="fab fa-whatsapp me-2"></i>WhatsApp: +62 812 3456 7890</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-12" data-aos="fade-up" data-aos-delay="300">
+                    <div class="footer-content">
+                        <h5 class="mb-4"><i class="fas fa-share-alt me-2"></i>Media Sosial</h5>
+                        <div class="social-links mb-4">
+                            <a href="#" class="me-2" aria-label="Facebook">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="me-2" aria-label="Twitter">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="me-2" aria-label="Instagram">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" class="me-2" aria-label="Youtube">
+                                <i class="fab fa-youtube"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4" style="border-color: rgba(255,255,255,0.1);">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <p class="mb-0">&copy; <span id="current-year">2024</span> Pondok Pesantren Assalafi Al Aulia. All Rights Reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Back to Top Button (match index order) -->
+    <button id="backToTop" aria-label="Kembali ke atas">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Floating WhatsApp Contact (match index markup) -->
+    <a class="floating-contact" href="https://wa.me/6281234567890" target="_blank" rel="noopener" aria-label="WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="assets/js/animations.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            easing: 'ease-out-cubic',
+            once: true,
+            offset: 100
+        });
+
+        // Hide preloader when page is fully loaded
+        window.addEventListener('load', function() {
+            const preloader = document.getElementById('preloader');
+            if (preloader) {
+                preloader.style.opacity = '0';
+                setTimeout(() => {
+                    preloader.style.display = 'none';
+                }, 500);
+            }
+        });
+
+        // Back to Top visibility and smooth scroll
+        const backToTop = document.getElementById('backToTop');
+        const toggleBackToTop = () => {
+            if (!backToTop) return;
+            const show = window.scrollY > 300;
+            backToTop.classList.toggle('show', show);
+        };
+        window.addEventListener('scroll', toggleBackToTop);
+        toggleBackToTop();
+        backToTop && backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Ripple effect on buttons
+        document.querySelectorAll('.btn').forEach(btn => {
+            btn.classList.add('ripple-parent');
+            btn.addEventListener('click', function (e) {
+                const rect = this.getBoundingClientRect();
+                const ripple = document.createElement('span');
+                const size = Math.max(rect.width, rect.height);
+                ripple.style.width = ripple.style.height = size + 'px';
+                ripple.style.left = (e.clientX - rect.left - size / 2) + 'px';
+                ripple.style.top = (e.clientY - rect.top - size / 2) + 'px';
+                ripple.className = 'ripple';
+                this.appendChild(ripple);
+                ripple.addEventListener('animationend', () => ripple.remove());
+            });
+        });
+
+        // Update current year like index
+        (function(){
+            const cy = document.getElementById('current-year');
+            if (cy) cy.textContent = new Date().getFullYear();
+        })();
+
+        // Footer reveal on scroll (match index behavior)
+        (function() {
+            const footer = document.querySelector('.footer');
+            if (!footer || typeof IntersectionObserver === 'undefined') return;
+            const io = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        footer.classList.add('footer-visible');
+                        const cards = footer.querySelectorAll('.footer-content');
+                        cards.forEach((card, i) => {
+                            card.style.transitionDelay = `${i * 120}ms`;
+                        });
+                        io.disconnect();
+                    }
+                });
+            }, { threshold: 0.2 });
+            io.observe(footer);
+        })();
+
+        // Ripple effect for social icons (match index)
+        document.querySelectorAll('.footer .social-links a').forEach(link => {
+            link.addEventListener('click', function (e) {
+                const rect = this.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const ripple = document.createElement('span');
+                ripple.className = 'ripple';
+                ripple.style.left = x + 'px';
+                ripple.style.top = y + 'px';
+                this.appendChild(ripple);
+                setTimeout(() => ripple.remove(), 600);
+            });
+        });
+    </script>
+
+    <!-- Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            easing: 'ease-out-cubic',
+            once: true,
+            offset: 100
+        });
+    </script>
+</body>
+</html>

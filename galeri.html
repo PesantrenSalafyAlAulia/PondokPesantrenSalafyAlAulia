@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Galeri foto kegiatan dan fasilitas Pesantren Modern - dokumentasi kehidupan santri, kegiatan pembelajaran, dan momen bersejarah">
+    <meta name="keywords" content="galeri pesantren, foto santri, kegiatan pesantren, dokumentasi pesantren, galeri foto">
+    <meta name="author" content="Pesantren Modern">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Galeri - Pesantren Modern">
+    <meta property="og:description" content="Galeri foto kegiatan dan fasilitas Pesantren Modern">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="galeri.html">
+    
+    <title>Galeri - Pesantren Modern</title>
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" href="assets/css/bootstrap.min.css" as="style">
+    <link rel="preload" href="assets/css/style.css" as="style">
+    
+    <!-- CSS Files (local only) -->
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/fontawesome.min.css">
+    <link rel="stylesheet" href="assets/css/fontawesome-fonts.css">
+    <link href="assets/css/style.css" rel="stylesheet">
+    <link href="assets/css/galeri-enhanced.css" rel="stylesheet">
+    <link href="assets/css/hero.css" rel="stylesheet">
+    <link href="assets/css/footer.css" rel="stylesheet">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/img/favicon.ico">
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="spinner-border text-success" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <img src="foto/logo.jpg" alt="Logo Pondok Pesantren Assalafi Al Aulia" class="me-2" style="height: 45px;" />
+                <span class="fw-bold">Pondok Pesantren Assalafi Al Aulia</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html"><i class="fas fa-home me-1"></i> Beranda</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="profil.html"><i class="fas fa-info-circle me-1"></i> Profil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="program.html"><i class="fas fa-book-open me-1"></i> Program</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="jadwal.html"><i class="fas fa-calendar-alt me-1"></i> Jadwal</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="galeri.html"><i class="fas fa-images me-1"></i> Galeri</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="kontak.html"><i class="fas fa-envelope me-1"></i> Kontak</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section text-center text-white d-flex align-items-center justify-content-center" style="background: url('foto/aulia1.png') center/cover no-repeat; height: 100vh;">
+        <div class="container position-relative hero-content" data-aos="fade-up">
+            <div class="row">
+                <div class="col-lg-10 mx-auto">
+                    <h1 class="display-3 fw-bold mb-3">Galeri Pondok Pesantren</h1>
+                    <div class="mx-auto mb-4" style="width:60px;height:3px;background:linear-gradient(90deg,transparent,#28a745,transparent);"></div>
+                    <div class="hero-chips d-flex justify-content-center flex-wrap gap-2 mb-4">
+                        <span class="badge bg-success rounded-pill"><i class="fas fa-images me-1"></i> Foto</span>
+                        <span class="badge bg-success rounded-pill"><i class="fas fa-camera me-1"></i> Kegiatan</span>
+                        <span class="badge bg-success rounded-pill"><i class="fas fa-building me-1"></i> Fasilitas</span>
+                    </div>
+                    <p class="lead mb-5">Dokumentasi kegiatan dan fasilitas Pondok Pesantren Assalafi Al Aulia yang menggambarkan kehidupan santri dan proses pembelajaran yang Islami.</p>
+                    <div class="mt-5">
+                        <a href="#gallery" class="btn btn-light hero-btn me-3 mb-3 mb-md-0">
+                            <i class="fas fa-images me-2"></i>Lihat Galeri
+                        </a>
+                        <a href="kontak.html" class="btn btn-outline-light hero-btn">
+                            <i class="fas fa-envelope me-2"></i>Hubungi Kami
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll down indicator -->
+        <div class="scroll-down">
+            <a href="#gallery" class="text-white">
+                <i class="fas fa-chevron-down fa-2x"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main id="main">
+
+        <!-- Filter Kategori -->
+        <section id="gallery" class="py-4">
+            <div class="container">
+                <div id="gallery-filter" class="filter-bar d-flex flex-wrap align-items-center">
+                    <span class="text-muted small me-2"><i class="fas fa-filter me-1"></i>Filter:</span>
+                    <!-- Chips ditambahkan via JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Photo: Pimpinan Mahad Al Aulia -->
+        <section class="featured-photo my-5" aria-label="Pimpinan Mahad Al Aulia">
+            <div class="container">
+                <div class="col-12 text-center mb-3 section-header card-slab">
+                    <h2 class="section-title fw-bold">Pimpinan Mahad Al Aulia</h2>
+                    <div class="divider mx-auto" style="width: 60px; height: 3px; background: linear-gradient(90deg, transparent, #28a745, transparent);"></div>
+                </div>
+                <div class="featured-card position-relative overflow-hidden">
+                    <img src="foto/11.jpg" alt="Pimpinan Mahad Al Aulia" class="featured-img w-100">
+                    <div class="featured-overlay text-center">
+                        <a href="foto/11.jpg" class="btn btn-light btn-sm glightbox mt-3" aria-label="Lihat foto pimpinan">
+                          <i class="fas fa-search-plus me-1"></i> Lihat Detail
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Special Row for Keluarga Photos -->
+        <div class="col-12 text-center mt-5 mb-4 section-header card-slab">
+            <h3 class="fw-bold text-success mb-3">Keluarga Besar Pondok Pesantren</h3>
+            <div class="divider mx-auto mb-4" style="width: 60px; height: 3px; background: linear-gradient(90deg, transparent, #28a745, transparent);"></div>
+        </div>
+
+        <!-- Gallery Row: 3 kolom satu jajar -->
+        <div class="container">
+          <div class="row g-4 justify-content-center">
+            
+        <div class="col-lg-4 col-md-4 col-sm-12 mb-4 gallery-item hvr-grow-shadow keluarga" data-aos="fade-up" data-aos-delay="100">
+            <span class="category-badge">Keluarga</span>
+            <img src="foto/a2.jpg" alt="Keluarga besar pondok" class="img-fluid">
+            <div class="overlay">
+                <h5>Keluarga Besar Pondok</h5>
+                <p>Foto keluarga besar pondok pesantren dalam suasana hangat</p>
+                <a href="foto/a2.jpg" class="btn btn-light btn-sm glightbox" data-gallery="keluarga-gallery">
+                    <i class="fas fa-search-plus me-1"></i> Lihat Detail
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-12 mb-4 gallery-item hvr-grow-shadow keluarga" data-aos="fade-up" data-aos-delay="200">
+            <span class="category-badge">Keluarga</span>
+            <img src="foto/a1.jpg" alt="Keluarga besar pondok" class="img-fluid">
+            <div class="overlay">
+                <h5>Keluarga Besar Pondok</h5>
+                <p>Foto keluarga besar pondok pesantren dalam suasana hangat</p>
+                <a href="foto/a1.jpg" class="btn btn-light btn-sm glightbox" data-gallery="keluarga-gallery">
+                    <i class="fas fa-search-plus me-1"></i> Lihat Detail
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-12 mb-4 gallery-item hvr-grow-shadow keluarga" data-aos="fade-up" data-aos-delay="300">
+            <span class="category-badge">Keluarga</span>
+            <img src="foto/a3.jpg" alt="Keluarga besar pondok" class="img-fluid">
+            <div class="overlay">
+                <h5>Keluarga Besar Pondok</h5>
+                <p>Foto keluarga besar pondok pesantren dalam suasana hangat</p>
+                <a href="foto/a3.jpg" class="btn btn-light btn-sm glightbox" data-gallery="keluarga-gallery">
+                    <i class="fas fa-search-plus me-1"></i> Lihat Detail
+                </a>
+            </div>
+        </div>
+          </div>
+        </div>
+    </div>
+</div>
+            </div>
+        </section>
+
+        <!-- Galeri Santri (3 kolom) -->
+        <section class="py-5">
+            <div class="container">
+                <div class="col-12 text-center mb-4 section-header card-slab">
+                    <h3 class="fw-bold text-success">Galeri Santri</h3>
+                    <div class="divider mx-auto" style="width:60px;height:3px;background:linear-gradient(90deg,transparent,#28a745,transparent)"></div>
+                </div>
+                <div class="row g-4 justify-content-center gallery-row">
+                    <div class="col-lg-4 col-md-4 col-sm-12 mb-4 gallery-item" data-aos="fade-up">
+                        <span class="category-badge">Santri</span>
+                        <img src="foto/16.jpg" alt="Santri di pondok" class="img-fluid">
+                        <div class="overlay">
+                            <h5>Santri di Pondok</h5>
+                            <p>Aktivitas harian santri dengan suasana islami</p>
+                            <a href="foto/16.jpg" class="btn btn-light btn-sm glightbox" data-gallery="santri-gallery">
+                                <i class="fas fa-search-plus me-1"></i> Lihat Detail
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-12 mb-4 gallery-item" data-aos="fade-up" data-aos-delay="100">
+                        <span class="category-badge">Santri</span>
+                        <img src="foto/17.jpg" alt="Kegiatan belajar santri" class="img-fluid">
+                        <div class="overlay">
+                            <h5>Kegiatan Belajar</h5>
+                            <p>Santri mengikuti pembelajaran di kelas</p>
+                            <a href="foto/17.jpg" class="btn btn-light btn-sm glightbox" data-gallery="santri-gallery">
+                                <i class="fas fa-search-plus me-1"></i> Lihat Detail
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-12 mb-4 gallery-item" data-aos="fade-up" data-aos-delay="200">
+                        <span class="category-badge">Santri</span>
+                        <img src="foto/18.jpg" alt="Kegiatan santri lainnya" class="img-fluid">
+                        <div class="overlay">
+                            <h5>Ekstrakurikuler</h5>
+                            <p>Santri mengembangkan bakat melalui kegiatan</p>
+                            <a href="foto/18.jpg" class="btn btn-light btn-sm glightbox" data-gallery="santri-gallery">
+                                <i class="fas fa-search-plus me-1"></i> Lihat Detail
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Kegiatan Santri Section -->
+        <section class="py-5 bg-light">
+            <div class="container">
+                <div class="row mb-4">
+                    <div class="col-12 text-center section-header card-slab">
+                        <h2 class="section-title animate__animated animate__fadeInDown">Kegiatan Santri</h2>
+                        <div class="divider mx-auto" style="width: 60px; height: 3px; background: linear-gradient(90deg, transparent, #28a745, transparent);"></div>
+                        <p class="lead mb-4 animate__animated animate__fadeIn animate__delay-1s">Dokumentasi berbagai aktivitas santri di Pondok Pesantren Assalafi Al Aulia</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12" data-aos="fade-up">
+                        <div id="kegiatanSantriSlider" class="carousel slide" data-bs-ride="carousel">
+                            <div class="carousel-indicators">
+                                <button type="button" data-bs-target="#kegiatanSantriSlider" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                                <button type="button" data-bs-target="#kegiatanSantriSlider" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                                <button type="button" data-bs-target="#kegiatanSantriSlider" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                            </div>
+                            <div class="carousel-inner rounded shadow">
+                                <div class="carousel-item active">
+                                    <img src="foto/5.jpg" class="d-block w-100" alt="Kegiatan Santri" style="height: 400px; object-fit: cover;">
+                                    <div class="carousel-caption">
+                                        <h5 class="animate__animated animate__fadeInDown">Kegiatan Belajar</h5>
+                                        <p class="d-none d-md-block animate__animated animate__fadeInUp">Santri sedang mengikuti kegiatan belajar mengajar di pondok</p>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="foto/4.jpg" class="d-block w-100" alt="Kegiatan Santri" style="height: 400px; object-fit: cover;">
+                                    <div class="carousel-caption">
+                                        <h5 class="animate__animated animate__fadeInDown">Kegiatan Ekstrakurikuler</h5>
+                                        <p class="d-none d-md-block animate__animated animate__fadeInUp">Berbagai kegiatan ekstrakurikuler untuk mengembangkan bakat santri</p>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="foto/2.jpg" class="d-block w-100" alt="Kegiatan Santri" style="height: 400px; object-fit: cover;">
+                                    <div class="carousel-caption">
+                                        <h5 class="animate__animated animate__fadeInDown">Pengajian Kitab</h5>
+                                        <p class="d-none d-md-block animate__animated animate__fadeInUp">Santri mempelajari kitab kuning bersama ustadz</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#kegiatanSantriSlider" data-bs-slide="prev" aria-label="Previous slide">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#kegiatanSantriSlider" data-bs-slide="next" aria-label="Next slide">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pasaran Ramadhan Section -->
+        <section class="py-5">
+            <div class="container">
+                <div class="row mb-4">
+                    <div class="col-12 text-center section-header card-slab">
+                        <h2 class="section-title animate__animated animate__fadeInDown">Pasaran Ramadhan</h2>
+                        <div class="divider mx-auto" style="width: 60px; height: 3px; background: linear-gradient(90deg, transparent, #28a745, transparent);"></div>
+                        <p class="lead mb-4 animate__animated animate__fadeIn animate__delay-1s">Kegiatan khusus selama bulan suci Ramadhan di Pondok Pesantren</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12" data-aos="fade-up">
+                        <div id="pasaranRamadhanSlider" class="carousel slide" data-bs-ride="carousel">
+                            <div class="carousel-indicators">
+                                <button type="button" data-bs-target="#pasaranRamadhanSlider" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                                <button type="button" data-bs-target="#pasaranRamadhanSlider" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                                <button type="button" data-bs-target="#pasaranRamadhanSlider" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                                <button type="button" data-bs-target="#pasaranRamadhanSlider" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                                <button type="button" data-bs-target="#pasaranRamadhanSlider" data-bs-slide-to="4" aria-label="Slide 5"></button>
+                            </div>
+                            <div class="carousel-inner rounded shadow">
+                                <div class="carousel-item active">
+                                    <img src="foto/7.jpg" class="d-block w-100" alt="Pasaran Ramadhan" style="height: 400px; object-fit: cover;">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h5>Pengajian Pasaran</h5>
+                                        <p>Kegiatan pengajian intensif selama bulan Ramadhan</p>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="foto/pasaran.jpg" class="d-block w-100" alt="Pasaran Ramadhan" style="height: 400px; object-fit: cover;">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h5>Kajian Kitab Ramadhan</h5>
+                                        <p>Kajian kitab khusus selama bulan Ramadhan</p>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="foto/6.jpg" class="d-block w-100" alt="Pasaran Ramadhan" style="height: 400px; object-fit: cover;">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h5>Tadarus Al-Qur'an</h5>
+                                        <p>Kegiatan tadarus Al-Qur'an bersama</p>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="foto/9.jpg" class="d-block w-100" alt="Pasaran Ramadhan" style="height: 400px; object-fit: cover;">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h5>Buka Bersama</h5>
+                                        <p>Kegiatan buka puasa bersama santri dan masyarakat</p>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="foto/8.jpg" class="d-block w-100" alt="Pasaran Ramadhan" style="height: 400px; object-fit: cover;">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h5>Kegiatan Ramadhan Lainnya</h5>
+                                        <p>Aktivitas tambahan selama bulan suci</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#pasaranRamadhanSlider" data-bs-slide="prev" aria-label="Previous slide">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#pasaranRamadhanSlider" data-bs-slide="next" aria-label="Next slide">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Isra Miraj dan Maulid Nabi Section -->
+        <section class="py-5 bg-light">
+            <div class="container">
+                <div class="row mb-4">
+                    <div class="col-12 text-center section-header card-slab">
+                        <h2 class="section-title">Kegiatan Isra Miraj dan Maulid Nabi</h2>
+                        <div class="divider mx-auto mb-4" style="width: 80px; height: 4px; background: linear-gradient(90deg, transparent, #28a745, transparent);"></div>
+                        <p class="lead">Peringatan hari besar Islam di Pondok Pesantren Assalafi Al Aulia</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <div id="israMirajMaulidSlider" class="carousel slide" data-bs-ride="carousel">
+                            <div class="carousel-indicators">
+                                <button type="button" data-bs-target="#israMirajMaulidSlider" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                                <button type="button" data-bs-target="#israMirajMaulidSlider" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                            </div>
+                            <div class="carousel-inner rounded shadow">
+                                <div class="carousel-item active">
+                                    <img src="foto/13.jpg" class="d-block w-100" alt="Isra Miraj dan Maulid Nabi" style="height: 350px; object-fit: cover;">
+                                    <div class="carousel-caption d-none d-md-block" style="background: rgba(0,0,0,0.5); border-radius: 10px; padding: 10px;">
+                                        <h5 class="mb-1">Peringatan Maulid Nabi</h5>
+                                    </div>
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="foto/15.jpg" class="d-block w-100" alt="Isra Miraj dan Maulid Nabi" style="height: 350px; object-fit: cover;">
+                                    <div class="carousel-caption d-none d-md-block" style="background: rgba(0,0,0,0.5); border-radius: 10px; padding: 10px;">
+                                        <h5 class="mb-1">Peringatan Isra Miraj</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#israMirajMaulidSlider" data-bs-slide="prev" aria-label="Previous slide">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#israMirajMaulidSlider" data-bs-slide="next" aria-label="Next slide">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer id="footer" class="footer footer-black">
+        <div class="container-fluid px-0">
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="footer-content">
+                        <div class="footer-label"><i class="fas fa-leaf"></i><span>PESANTREN</span></div>
+                        <h5 class="mb-4"><i class="fas fa-mosque me-2"></i>Pondok Pesantren Assalafi Al Aulia</h5>
+                        <p class="mb-3">
+                            <i class="fas fa-map-marker-alt me-2"></i>Kp. Bojong Kawung RT03/RW05, Desa Mekar Maju, Pasirjambu, Kec. Pasirjambu, Kabupaten Bandung, Jawa Barat 40972
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="footer-content">
+                        <div class="footer-label"><i class="fas fa-phone"></i><span>KONTAK</span></div>
+                        <h5 class="mb-4"><i class="fas fa-envelope me-2"></i>Kontak Kami</h5>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="fas fa-phone me-2"></i>Telepon: (021) 12345678</li>
+                            <li class="mb-2"><i class="fas fa-envelope me-2"></i>Email: info@alaulia.ac.id</li>
+                            <li class="mb-2"><i class="fab fa-whatsapp me-2"></i>WhatsApp: +62 812 3456 7890</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-12" data-aos="fade-up" data-aos-delay="300">
+                    <div class="footer-content">
+                        <div class="footer-label"><i class="fas fa-share"></i><span>SOSIAL</span></div>
+                        <h5 class="mb-4"><i class="fas fa-share-alt me-2"></i>Media Sosial</h5>
+                        <div class="social-links mb-4">
+                            <a href="#" class="me-2" aria-label="Facebook">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="me-2" aria-label="Twitter">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="me-2" aria-label="Instagram">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" class="me-2" aria-label="Youtube">
+                                <i class="fab fa-youtube"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4" style="border-color: rgba(255,255,255,0.1);">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <p class="mb-0">&copy; <span id="current-year">2024</span> Pondok Pesantren Assalafi Al Aulia. All Rights Reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to top button -->
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="fas fa-arrow-up"></i></a>
+
+    <script src="assets/js/bootstrap.bundle.min.js" defer></script>
+    <script src="assets/js/custom.js" defer></script>
+    <!-- Removed external Bootstrap and AOS JS to prevent aborted requests -->
+    <script src="assets/js/animations.js" defer></script>
+    <script>
+        if (window.AOS && typeof AOS.init === 'function') {
+            AOS.init({
+                duration: 800,
+                easing: 'ease-out-cubic',
+                once: true,
+                offset: 100
+            });
+        }
+    </script>
+    <script>
+        // Highlight current day and add interactive features
+        document.addEventListener('DOMContentLoaded', function() {
+            // Highlight current day
+            const days = ['minggu', 'senin', 'selasa', 'rabu', 'kamis', 'jumat', 'sabtu'];
+            const today = new Date().getDay();
+            const currentDay = days[today];
+            
+            // Add hover effects to table rows
+            const dayRows = document.querySelectorAll('.day-row');
+            dayRows.forEach(row => {
+                if(row.getAttribute('data-day') === currentDay) {
+                    row.classList.add('current-day');
+                    
+                    // Animate the current day icon
+                    const icon = row.querySelector('.day-icon i');
+                    if(icon) {
+                        icon.classList.add('animate__animated', 'animate__pulse', 'animate__infinite');
+                    }
+                }
+                
+                // Add hover effect to all rows
+                row.addEventListener('mouseenter', function() {
+                    this.style.backgroundColor = 'rgba(25, 135, 84, 0.05)';
+                    
+                    // Scale up the icon
+                    const icon = this.querySelector('.day-icon');
+                    if(icon) {
+                        icon.style.transform = 'scale(1.2)';
+                    }
+                    
+                    // Highlight the book icons
+                    const bookIcons = this.querySelectorAll('.fa-book');
+                    bookIcons.forEach(icon => {
+                        icon.classList.add('animate__animated', 'animate__fadeIn');
+                    });
+                });
+                
+                row.addEventListener('mouseleave', function() {
+                    if(this.getAttribute('data-day') !== currentDay) {
+                        this.style.backgroundColor = '';
+                    }
+                    
+                    // Reset the icon
+                    const icon = this.querySelector('.day-icon');
+                    if(icon) {
+                        icon.style.transform = '';
+                    }
+                    
+                    // Remove highlight from book icons
+                    const bookIcons = this.querySelectorAll('.fa-book');
+                    bookIcons.forEach(icon => {
+                        icon.classList.remove('animate__animated', 'animate__fadeIn');
+                    });
+                });
+            });
+            
+            // Add pulse animation to time badges on hover
+            const timeBadges = document.querySelectorAll('.badge');
+            timeBadges.forEach(badge => {
+                badge.addEventListener('mouseenter', function() {
+                    this.classList.add('animate__animated', 'animate__pulse');
+                });
+                
+                badge.addEventListener('mouseleave', function() {
+                    this.classList.remove('animate__animated', 'animate__pulse');
+                });
+            });
+            
+            // Add smooth scroll to schedule section
+            const scheduleLinks = document.querySelectorAll('a[href="#jadwal"]');
+            scheduleLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    document.querySelector('.py-5.bg-light').scrollIntoView({ 
+                        behavior: 'smooth' 
+                    });
+                });
+            });
+        });
+    </script>
+    
+</body>
+</html>

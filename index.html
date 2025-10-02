@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Pondok Pesantren Assalafi Al Aulia - Beranda</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="assets/css/fontawesome.min.css">
+    <link rel="stylesheet" href="assets/css/fontawesome-fonts.css">
+    <!-- CDN fallback -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="none" onload="if(media!='all')media='all'">
+    <link rel="stylesheet" href="assets/css/custom.css" />
+    <link rel="stylesheet" href="assets/css/program-enhanced.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+    <!-- Fonts & Animations -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="assets/css/enhanced-home.css">
+    <link rel="stylesheet" href="assets/css/footer.css">
+    <link rel="icon" href="foto/logo.jpg" type="image/png" />
+</head>
+<body>
+    <!-- Scroll Progress -->
+    <div id="scrollProgress"></div>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="spinner-border text-success" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <img src="foto/logo.jpg" alt="Logo Pondok Pesantren Assalafi Al Aulia" class="me-2" style="height: 45px;" />
+                <span class="fw-bold">Pondok Pesantren Assalafi Al Aulia</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.html"><i class="fas fa-home me-1"></i> Beranda</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="profil.html"><i class="fas fa-info-circle me-1"></i> Profil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="program.html"><i class="fas fa-book-open me-1"></i> Program</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="jadwal.html"><i class="fas fa-calendar-alt me-1"></i> Jadwal</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="galeri.html"><i class="fas fa-images me-1"></i> Galeri</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="kontak.html"><i class="fas fa-envelope me-1"></i> Kontak</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section text-center text-white d-flex align-items-center justify-content-center" style="background: url('foto/aulia1.png') center/cover no-repeat; height: 100vh;">
+        <div class="container position-relative" data-aos="fade-up">
+            <div class="row g-4 align-items-stretch">
+                <div class="col-lg-10 mx-auto">
+                    <h1 class="display-3 fw-bold mb-4 animate__animated animate__fadeInDown">Pondok Pesantren<br><span class="text-warning">Assalafi Al Aulia</span></h1>
+                    <p class="lead mb-5 animate__animated animate__fadeInUp animate__delay-1s">Membangun generasi Qur'ani yang berakhlak mulia dan berwawasan luas melalui pendidikan Islam yang berkualitas dan komprehensif.</p>
+                    <div class="mt-5">
+                        <a href="profil.html" class="btn btn-light hero-btn me-3 mb-3 mb-md-0 animate__animated animate__fadeInUp animate__delay-2s">
+                            <i class="fas fa-mosque me-2"></i>Tentang Kami
+                        </a>
+                        <a href="kontak.html" class="btn btn-outline-light hero-btn animate__animated animate__fadeInUp animate__delay-2s">
+                            <i class="fas fa-envelope me-2"></i>Hubungi Kami
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll down indicator -->
+        <div class="scroll-down">
+            <a href="#tentang-kami" class="text-white">
+                <i class="fas fa-chevron-down fa-2x"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Highlights: Quick Actions -->
+    <section class="highlights py-4">
+        <div class="container">
+            <div class="row g-3" data-aos="fade-up" data-aos-delay="100">
+                <div class="col-6 col-md-3">
+                    <a href="program.html" class="highlight-card" aria-label="Program">
+                        <span class="icon"><i class="fas fa-book-open"></i></span>
+                        <span class="label">Program</span>
+                    </a>
+                </div>
+                <div class="col-6 col-md-3">
+                    <a href="jadwal.html" class="highlight-card" aria-label="Jadwal">
+                        <span class="icon"><i class="fas fa-calendar-alt"></i></span>
+                        <span class="label">Jadwal</span>
+                    </a>
+                </div>
+                <div class="col-6 col-md-3">
+                    <a href="galeri.html" class="highlight-card" aria-label="Galeri">
+                        <span class="icon"><i class="fas fa-images"></i></span>
+                        <span class="label">Galeri</span>
+                    </a>
+                </div>
+                <div class="col-6 col-md-3">
+                    <a href="kontak.html" class="highlight-card" aria-label="Kontak">
+                        <span class="icon"><i class="fas fa-envelope"></i></span>
+                        <span class="label">Kontak</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tentang Kami -->
+    <section class="py-5" id="tentang-kami">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center mb-5">
+                    <h2 class="section-title position-relative pb-3 mb-3" data-aos="fade-up">Tentang Kami</h2>
+                    <div class="section-title-line mx-auto" data-aos="fade-up" data-aos-delay="100"></div>
+                </div>
+                <div class="col-md-6" data-aos="fade-right" data-aos-delay="200">
+                    <div class="feature-box">
+                        <div class="icon-wrapper icon-lg mb-4">
+                            <i class="fas fa-quote-right"></i>
+                        </div>
+                        <p class="lead mb-4">Pondok Pesantren Assalafi Al Aulia merupakan lembaga pendidikan Islam yang berfokus pada pengajaran Al-Qur'an, Hadits, dan ilmu-ilmu keislaman lainnya. Didirikan dengan visi untuk mencetak generasi yang hafal Al-Qur'an, berakhlak mulia, dan memiliki pemahaman agama yang kuat.</p>
+                        <p>Pesantren kami menggabungkan metode pembelajaran tradisional (salaf) dengan pendekatan modern untuk memastikan santri mendapatkan pendidikan yang komprehensif dan relevan dengan tantangan zaman.</p>
+                        <div class="mt-4">
+                            <a href="profil.html" class="btn btn-success">Pelajari Lebih Lanjut <i class="fas fa-arrow-right ms-2"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-12 mb-4" data-aos="fade-left" data-aos-delay="300">
+                            <div class="card vision-mission-card h-100">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <div class="icon-wrapper icon-md me-3">
+                                            <i class="fas fa-eye"></i>
+                                        </div>
+                                        <h4 class="card-title mb-0">Visi</h4>
+                                    </div>
+                                    <p class="card-text">Menjadi pusat pendidikan Islam yang unggul dalam melahirkan generasi Qur'ani yang berakhlak mulia dan berwawasan luas.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12" data-aos="fade-left" data-aos-delay="400">
+                            <div class="card vision-mission-card h-100">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <div class="icon-wrapper icon-md me-3">
+                                            <i class="fas fa-bullseye"></i>
+                                        </div>
+                                        <h4 class="card-title mb-0">Misi</h4>
+                                    </div>
+                                    <p class="card-text">Menyelenggarakan pendidikan Al-Qur'an yang berkualitas, membentuk karakter Islami, dan mengembangkan potensi santri secara optimal.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Bergabung -->
+    <section class="py-5 bg-white" aria-label="Ajakan Bergabung">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-8 text-center">
+                    <h2 class="section-title position-relative pb-3 mb-3" data-aos="fade-up">Bergabung di Mahad Al Aulia</h2>
+                    <div class="section-title-line mx-auto" data-aos="fade-up" data-aos-delay="100"></div>
+                    <p class="lead text-muted mb-4" data-aos="fade-up" data-aos-delay="100">Fokus pada kajian Kitab Kuning dengan pembinaan akhlak dan kedisiplinan santri.</p>
+                    <div class="d-flex flex-wrap justify-content-center gap-3" data-aos="fade-up" data-aos-delay="200">
+                        <a href="program.html" class="btn btn-success btn-lg"><i class="fas fa-book me-2"></i>Lihat Program</a>
+                        <a href="jadwal.html" class="btn btn-outline-success btn-lg"><i class="fas fa-calendar-alt me-2"></i>Lihat Jadwal</a>
+                        <a href="kontak.html" class="btn btn-outline-secondary btn-lg"><i class="fas fa-phone me-2"></i>Hubungi Kami</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Program Unggulan -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center mb-5">
+                    <h2 class="section-title position-relative pb-3 mb-3" data-aos="fade-up">Program Unggulan</h2>
+                    <div class="section-title-line mx-auto" data-aos="fade-up" data-aos-delay="100"></div>
+                </div>
+            </div>
+            <div class="row justify-content-center g-4 align-items-stretch">
+                <div class="col-12 col-md-8 col-lg-6" data-aos="zoom-in" data-aos-delay="150">
+                    <div class="program-card">
+                        <div class="card h-100">
+                            <div class="program-icon">
+                                <i class="fas fa-book"></i>
+                            </div>
+                            <div class="card-body text-center">
+                                <h3 class="card-title">Kitab Kuning</h3>
+                                <p class="card-text">Fokus pada kajian kitab-kitab klasik yang mencakup fiqih, tauhid, dan akhlak sebagai kurikulum inti pesantren.</p>
+                                <a href="program.html" class="btn btn-link stretched-link">Selengkapnya</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Profil -->
+    <section class="py-5 bg-light" aria-label="Video Profil">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-10">
+                    <div class="col-12 text-center mb-4">
+                        <h2 class="section-title position-relative pb-3 mb-3" data-aos="fade-up">Video Profil</h2>
+                        <div class="section-title-line mx-auto" data-aos="fade-up" data-aos-delay="100"></div>
+                        <p class="text-muted" data-aos="fade-up" data-aos-delay="150">Sekilas kegiatan dan suasana pembelajaran di Mahad Al Aulia.</p>
+                    </div>
+                    <div class="ratio ratio-16x9" data-aos="fade-up" data-aos-delay="200">
+                        <video controls preload="none" poster="foto/logo.jpg" class="w-100 h-100">
+                            <source src="foto/maulid.mp4" type="video/mp4">
+                            Browser Anda tidak mendukung video HTML5. Silakan unduh atau tonton di platform lain.
+                        </video>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Galeri Kegiatan -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center mb-5">
+                    <h2 class="section-title position-relative pb-3 mb-3" data-aos="fade-up">Galeri Kegiatan</h2>
+                    <div class="section-title-line mx-auto" data-aos="fade-up" data-aos-delay="100"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="gallery-item">
+                        <img src="foto/3.jpg" alt="Kegiatan Pesantren" class="img-fluid" loading="lazy" decoding="async">
+                        <div class="gallery-caption">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="gallery-item">
+                        <img src="foto/1.jpg" alt="Kegiatan Pesantren" class="img-fluid" loading="lazy" decoding="async">
+                        <div class="gallery-caption">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="gallery-item">
+                        <img src="foto/4.jpg" alt="Kegiatan Pesantren" class="img-fluid" loading="lazy" decoding="async">
+                        <div class="gallery-caption">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 text-center mt-4" data-aos="fade-up" data-aos-delay="400">
+                    <a href="galeri.html" class="btn btn-success btn-lg">Lihat Semua <i class="fas fa-images ms-2"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+<footer class="footer footer-black">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="footer-content">
+                        <h5 class="mb-4"><i class="fas fa-mosque me-2"></i>Pondok Pesantren Assalafi Al Aulia</h5>
+                        <p class="mb-3">
+                            <i class="fas fa-map-marker-alt me-2"></i>Kp. Bojong Kawung RT03/RW05, Desa Mekar Maju, Pasirjambu, Kec. Pasirjambu, Kabupaten Bandung, Jawa Barat 40972
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="footer-content">
+                        <h5 class="mb-4"><i class="fas fa-envelope me-2"></i>Kontak Kami</h5>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="fas fa-phone me-2"></i>Telepon: (021) 12345678</li>
+                            <li class="mb-2"><i class="fas fa-envelope me-2"></i>Email: info@alaulia.ac.id</li>
+                            <li class="mb-2"><i class="fab fa-whatsapp me-2"></i>WhatsApp: +62 812 3456 7890</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-12" data-aos="fade-up" data-aos-delay="300">
+                    <div class="footer-content">
+                        <h5 class="mb-4"><i class="fas fa-share-alt me-2"></i>Media Sosial</h5>
+                        <div class="social-links mb-4">
+                            <a href="#" class="me-2" aria-label="Facebook">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="me-2" aria-label="Twitter">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="me-2" aria-label="Instagram">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" class="me-2" aria-label="Youtube">
+                                <i class="fab fa-youtube"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4" style="border-color: rgba(255,255,255,0.1);">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <p class="mb-0">&copy; <span id="current-year">2024</span> Pondok Pesantren Assalafi Al Aulia. All Rights Reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" aria-label="Kembali ke atas">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Floating WhatsApp Contact -->
+    <a class="floating-contact" href="https://wa.me/6281234567890" target="_blank" rel="noopener" aria-label="WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="assets/js/animations.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            easing: 'ease-out-cubic',
+            once: true,
+            offset: 100
+        });
+
+        // Preloader
+        window.addEventListener('load', function() {
+            const preloader = document.getElementById('preloader');
+            if (preloader) {
+                preloader.style.opacity = '0';
+                setTimeout(() => {
+                    preloader.style.display = 'none';
+                }, 500);
+            }
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(255, 255, 255, 0.98)';
+                navbar.style.boxShadow = '0 2px 20px rgba(0,0,0,0.1)';
+            } else {
+                navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+                navbar.style.boxShadow = 'none';
+            }
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Update current year
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // Footer reveal on scroll
+        (function() {
+            const footer = document.querySelector('.footer');
+            if (!footer || typeof IntersectionObserver === 'undefined') return;
+            const io = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        footer.classList.add('footer-visible');
+                        const cards = footer.querySelectorAll('.footer-content');
+                        cards.forEach((card, i) => {
+                            card.style.transitionDelay = `${i * 120}ms`;
+                        });
+                        io.disconnect();
+                    }
+                });
+            }, { threshold: 0.2 });
+            io.observe(footer);
+        })();
+
+        // Ripple effect for social icons
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.footer .social-links a').forEach(link => {
+                link.addEventListener('click', function (e) {
+                    const rect = this.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const ripple = document.createElement('span');
+                    ripple.className = 'ripple';
+                    ripple.style.left = x + 'px';
+                    ripple.style.top = y + 'px';
+                    this.appendChild(ripple);
+                    setTimeout(() => ripple.remove(), 600);
+                });
+            });
+        });
+
+        // Back to top button
+        (function() {
+            const btn = document.getElementById('backToTop');
+            if (!btn) return;
+            const toggle = () => {
+                if (window.scrollY > 300) {
+                    btn.classList.add('show');
+                } else {
+                    btn.classList.remove('show');
+                }
+            };
+            window.addEventListener('scroll', toggle);
+            toggle();
+            btn.addEventListener('click', function() {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        })();
+
+        // Scroll progress bar width update
+        (function() {
+            const bar = document.getElementById('scrollProgress');
+            if (!bar) return;
+            const update = () => {
+                const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+                const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const progress = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+                bar.style.width = progress + '%';
+            };
+            window.addEventListener('scroll', update);
+            window.addEventListener('resize', update);
+            update();
+        })();
+    </script>
+</body>
+</html>

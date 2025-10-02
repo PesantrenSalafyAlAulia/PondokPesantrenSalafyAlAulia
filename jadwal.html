@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Jadwal Mengaji - Pondok Pesantren Assalafi Al Aulia</title>
+    <!-- Use local Bootstrap CSS to avoid external load errors -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="assets/css/fontawesome.min.css">
+    <link rel="stylesheet" href="assets/css/fontawesome-fonts.css">
+    <!-- Removed external Font Awesome CDN fallback to prevent aborted requests -->
+    <!-- Removed external Animate.css to prevent aborted requests -->
+    <!-- Removed Google Fonts to prevent external aborted requests -->
+    <!-- (Keep local Font Awesome fonts once) -->
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/css/custom.css">
+    <link rel="stylesheet" href="assets/css/program-enhanced.css">
+    <!-- Removed external AOS CSS to prevent aborted requests -->
+    <!-- Jadwal page enhancements -->
+    <link rel="stylesheet" href="assets/css/jadwal-enhanced.css">
+    <link rel="stylesheet" href="assets/css/footer.css">
+    <link rel="icon" href="foto/aulia1.png" type="image/png" />
+    
+    <style>
+        /* Custom Styles for Jadwal Page */
+        .section-title {
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+        
+        .day-icon {
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .day-row:hover .day-icon {
+            transform: scale(1.1);
+        }
+        
+        .table th, .table td {
+            vertical-align: middle;
+        }
+        
+        .badge {
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .badge:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+        
+        .card {
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+        }
+        
+        /* List item animations */
+        .list-unstyled li {
+            transition: all 0.3s ease;
+            padding: 3px 0;
+        }
+        
+        .list-unstyled li:hover {
+            transform: translateX(5px);
+        }
+        
+        /* Current day highlight */
+        .current-day {
+            background-color: rgba(25, 135, 84, 0.1);
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .day-icon {
+                width: 35px;
+                height: 35px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+    
+    <script>
+        // Will highlight current day when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            const days = ['minggu', 'senin', 'selasa', 'rabu', 'kamis', 'jumat', 'sabtu'];
+            const today = new Date().getDay();
+            const currentDay = days[today];
+            
+            document.querySelectorAll('.day-row').forEach(row => {
+                if(row.getAttribute('data-day') === currentDay) {
+                    row.classList.add('current-day');
+                }
+            });
+        });
+    </script>
+    <link rel="stylesheet" href="assets/css/hero.css">
+</head>
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="spinner-border text-success" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <img src="foto/logo.jpg" alt="Logo Pondok Pesantren Assalafi Al Aulia" class="me-2" style="height: 45px;" />
+                <span class="fw-bold">Pondok Pesantren Assalafi Al Aulia</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html"><i class="fas fa-home me-1"></i> Beranda</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="profil.html"><i class="fas fa-info-circle me-1"></i> Profil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="program.html"><i class="fas fa-book-open me-1"></i> Program</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="jadwal.html"><i class="fas fa-calendar-alt me-1"></i> Jadwal</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="galeri.html"><i class="fas fa-images me-1"></i> Galeri</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="kontak.html"><i class="fas fa-envelope me-1"></i> Kontak</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Scroll Progress Bar -->
+    <div id="scroll-progress"></div>
+
+    <!-- Hero Section -->
+    <section class="hero-section text-center text-white d-flex align-items-center justify-content-center" style="background: url('foto/aulia1.png') center/cover no-repeat; height: 100vh;">
+        <div class="container position-relative" data-aos="fade-up">
+            <div class="row">
+                <div class="col-lg-10 mx-auto">
+                    <h1 class="display-3 fw-bold mb-3">Jadwal Mengaji</h1>
+                    <div class="mx-auto mb-4" style="width:60px;height:3px;background:linear-gradient(90deg,transparent,#28a745,transparent);"></div>
+                    <div class="hero-chips d-flex justify-content-center flex-wrap gap-2 mb-4">
+                        <span class="badge bg-success rounded-pill"><i class="fas fa-calendar-alt me-1"></i> Harian</span>
+                        <span class="badge bg-success rounded-pill"><i class="fas fa-calendar-week me-1"></i> Mingguan</span>
+                        <span class="badge bg-success rounded-pill"><i class="fas fa-book-open me-1"></i> Kajian</span>
+                    </div>
+                    <p class="lead mb-5">Jadwal kegiatan mengaji dan pembelajaran di Pondok Pesantren Assalafi Al Aulia yang terstruktur dan komprehensif untuk pembentukan karakter santri yang berakhlak mulia.</p>
+                    <div class="mt-5">
+                        <a href="#jadwal-section" class="btn btn-light hero-btn me-3 mb-3 mb-md-0">
+                            <i class="fas fa-calendar-alt me-2"></i>Lihat Jadwal
+                        </a>
+                        <a href="kontak.html" class="btn btn-outline-light hero-btn">
+                            <i class="fas fa-envelope me-2"></i>Hubungi Kami
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll down indicator -->
+        <div class="scroll-down">
+            <a href="#jadwal-section" class="text-white">
+                <i class="fas fa-chevron-down fa-2x"></i>
+            </a>
+        </div>
+    </section>
+    
+    <!-- Particles.js for background effect -->
+    <!-- Jadwal Mengaji Section -->
+<section id="jadwal-section" class="py-5 bg-light" data-aos="fade-up">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-lg-8 mx-auto text-center">
+                <h2 class="section-title position-relative mb-3">
+                    <span class="bg-light px-3 position-relative" style="z-index: 2;">Jadwal Kegiatan Mengaji Santri</span>
+                    <div class="position-absolute w-100 h-1 bg-success" style="top: 50%; left: 0; height: 2px; z-index: 1;"></div>
+                </h2>
+                <p class="lead text-muted">Berikut adalah jadwal kegiatan mengaji santri di Pondok Pesantren Assalafi Al Aulia yang dilaksanakan setiap hari</p>
+            </div>
+        </div>
+
+        <!-- Scoped UI/UX tuning for Jadwal Section (appearance-only) -->
+        <style id="jadwal-scoped-tune">
+            /* Typography: system stack for performance, stronger heading hierarchy */
+            #jadwal-section { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif; color: #1f2937; }
+            #jadwal-section .section-title span { font-weight: 800; }
+            #jadwal-section .lead { color: #475569; }
+
+            /* Schedule card aesthetics */
+            #jadwal-section .schedule-card {
+                border-radius: 16px;
+                border: 1px solid rgba(25,135,84,0.12);
+                box-shadow: 0 12px 28px rgba(25,135,84,0.12);
+                overflow: hidden;
+            }
+            #jadwal-section .schedule-card .card-header {
+                background: linear-gradient(135deg, #198754 0%, #1ea368 60%, #24b377 100%);
+                position: relative; border-bottom: none;
+            }
+            #jadwal-section .schedule-card .card-header::after {
+                content: ""; position: absolute; inset: 0;
+                background: radial-gradient(120% 80% at 10% 10%, rgba(255,255,255,0.28) 0%, rgba(255,255,255,0) 55%);
+            }
+            #jadwal-section .schedule-title { letter-spacing: .3px; }
+
+            /* Table layout and head styling */
+            #jadwal-section .table { table-layout: fixed; width: 100%; border-collapse: separate; border-spacing: 0; }
+            #jadwal-section .table thead {
+                position: sticky; top: 0; z-index: 2;
+                backdrop-filter: saturate(1.2) blur(6px);
+                box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+            }
+            #jadwal-section .table thead th {
+                text-transform: uppercase; letter-spacing: .06em; font-weight: 800;
+                border: none; color: #14532d;
+                background: linear-gradient(180deg, rgba(25,135,84,0.06), rgba(25,135,84,0));
+            }
+            #jadwal-section .table td { color: #1f2937; word-break: break-word; }
+
+            /* Row micro-interactions */
+            #jadwal-section .table tbody tr { opacity: 0; transform: translateY(8px); transition: opacity .35s ease, transform .35s ease, background-color .18s ease; }
+            #jadwal-section .table tbody tr.animate-in { opacity: 1; transform: none; }
+            #jadwal-section .table tbody tr:hover { background-color: rgba(25,135,84,0.06); box-shadow: inset 0 1px 0 rgba(25,135,84,0.08); }
+            #jadwal-section table tbody tr { position: relative; }
+            #jadwal-section table tbody tr::before {
+                content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 0;
+                background: linear-gradient(180deg, #22c55e, #16a34a); border-radius: 4px; transition: width 220ms ease;
+            }
+            #jadwal-section table tbody tr:hover::before, #jadwal-section table tbody tr.current-day::before { width: 4px; }
+
+            /* Day column and icon polish */
+            #jadwal-section .table tbody td[rowspan] { border-right: 2px solid rgba(25,135,84,0.12); }
+            #jadwal-section .day-icon { background: linear-gradient(135deg, #effaf3 0%, #ffffff 100%); box-shadow: 0 6px 14px rgba(25,135,84,0.12); }
+            @keyframes dayBob { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-2px)} }
+            #jadwal-section .day-row.current-day .day-icon { animation: dayBob 1.6s ease-in-out infinite; }
+
+            /* Badges: richer look with subtle glow */
+            #jadwal-section .badge { box-shadow: 0 4px 10px rgba(0,0,0,0.08); font-weight: 600; }
+            #jadwal-section .badge.bg-primary { background-image: linear-gradient(180deg, #4ea8ff, #2f74c0); }
+            #jadwal-section .badge.bg-info    { background-image: linear-gradient(180deg, #5fd1e6, #2aa5c0); }
+            #jadwal-section .badge.bg-dark    { background-image: linear-gradient(180deg, #495057, #212529); }
+
+            /* Kegiatan list alignment */
+            #jadwal-section td ul { padding-left: 0; }
+            #jadwal-section td ul li { display: flex; align-items: center; margin-bottom: 6px; }
+            #jadwal-section td ul li i { width: 22px; text-align: center; }
+
+            /* Responsive cards without changing content */
+            @media (max-width: 768px) {
+                #jadwal-section .table thead { display: none; }
+                #jadwal-section .table tbody, #jadwal-section .table tr, #jadwal-section .table td { display: block; width: 100%; }
+                #jadwal-section .table tr { border: 1px solid rgba(0,0,0,0.06); border-radius: 12px; box-shadow: 0 8px 18px rgba(0,0,0,0.06); padding: 12px 12px 6px; margin-bottom: 14px; }
+                #jadwal-section .table tbody td[rowspan] { display: none; }
+                #jadwal-section .table tr::before { content: attr(data-day); display: block; font-weight: 700; color: #198754; text-transform: capitalize; margin-bottom: 8px; letter-spacing: .02em; }
+                #jadwal-section .table td { padding: 10px 12px; }
+                /* Label universal: baris apapun, td pertama=Waktu, td terakhir=Kegiatan */
+                #jadwal-section .table td:first-child::before { content: "Waktu"; display: block; font-size: .78rem; font-weight: 700; color: #6c757d; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 6px; }
+                #jadwal-section .table td:last-child::before  { content: "Kegiatan"; display: block; font-size: .78rem; font-weight: 700; color: #6c757d; letter-spacing: .06em; margin-bottom: 6px; }
+            }
+        </style>
+        <script>
+            // Lightweight, scoped row reveal animation (no content changes)
+            document.addEventListener('DOMContentLoaded', function() {
+                const rows = Array.from(document.querySelectorAll('#jadwal-section table tbody tr'));
+                if (!rows.length) return;
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach((entry) => {
+                        if (entry.isIntersecting) {
+                            const el = entry.target;
+                            const idx = parseInt(el.getAttribute('data-idx') || '0', 10);
+                            el.style.transitionDelay = (idx * 60) + 'ms';
+                            el.classList.add('animate-in');
+                            observer.unobserve(el);
+                        }
+                    });
+                }, { threshold: 0.08 });
+                rows.forEach((row, i) => {
+                    row.setAttribute('data-idx', String(i));
+                    observer.observe(row);
+                });
+            });
+        </script>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card schedule-card shadow-sm border-0 rounded-3 overflow-hidden" data-aos="fade-up" data-aos-delay="100">
+                    <div class="card-header bg-success text-white p-3">
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-calendar-alt fa-2x me-3"></i>
+                            <h4 class="mb-0 fw-bold schedule-title" data-aos="fade-right">Jadwal Kegiatan Harian</h4>
+                        </div>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-hover align-middle mb-0" style="table-layout: fixed; width: 100%;">
+                                <colgroup>
+                                    <col style="width:28%">
+                                    <col style="width:22%">
+                                    <col style="width:50%">
+                                </colgroup>
+                                <thead class="bg-light table-head-premium" data-aos="fade-down">
+                                    <tr>
+                                        <th class="py-3 px-4 text-success fw-bold" data-aos="fade-down" data-aos-delay="80"><i class="fas fa-calendar-day me-2"></i></th>
+                                        <th class="py-3 px-4 text-success fw-bold" data-aos="fade-down" data-aos-delay="130"><i class="fas fa-clock me-2"></i>Waktu</th>
+                                        <th class="py-3 px-4 text-success fw-bold" data-aos="fade-down" data-aos-delay="180"><i class="fas fa-book-open me-2"></i>Kegiatan</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <!-- Senin -->
+                                    <tr class="day-block" data-day="senin" id="senin">
+                                        <td class="py-4 px-4" colspan="3">
+                                            <div class="d-flex align-items-center mb-3">
+                                                <div class="day-icon rounded-circle bg-success bg-opacity-10 p-3 me-3">
+                                                    <i class="fas fa-sun text-success"></i>
+                                                </div>
+                                                <h5 class="mb-0 fw-bold">Senin</h5>
+                                            </div>
+                                            <div class="schedule-items">
+                                                <div class="d-md-flex align-items-start mb-3">
+                                                    <div class="time-col me-md-4 mb-2 mb-md-0" style="min-width: 180px;">
+                                                        <span class="badge bg-primary rounded-pill px-3 py-2">
+                                                            <i class="fas fa-sun me-1"></i> 07:00 Pagi
+                                                        </span>
+                                                    </div>
+                                                    <div class="flex-fill">
+                                                        <ul class="list-unstyled mb-0">
+                                                            <li class="mb-2"><i class="fas fa-book text-primary me-2"></i>Alfiyah</li>
+                                                            <li class="mb-2"><i class="fas fa-book text-primary me-2"></i>Fathul Muin</li>
+                                                            <li class="mb-2"><i class="fas fa-book text-primary me-2"></i>Asybah wanadzoir</li>
+                                                            <li><i class="fas fa-book text-primary me-2"></i>Bajuri</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="d-md-flex align-items-start mb-3">
+                                                    <div class="time-col me-md-4 mb-2 mb-md-0" style="min-width: 180px;">
+                                                        <span class="badge bg-info rounded-pill px-3 py-2">
+                                                            <i class="fas fa-cloud-sun me-1"></i> 15:00 Siang
+                                                        </span>
+                                                    </div>
+                                                    <div class="flex-fill">
+                                                        <ul class="list-unstyled mb-0">
+                                                            <li class="mb-2"><i class="fas fa-book text-info me-2"></i>Tafsir Munir</li>
+                                                            <li><i class="fas fa-book text-info me-2"></i>Tanwirul Qulub</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="d-md-flex align-items-start">
+                                                    <div class="time-col me-md-4 mb-2 mb-md-0" style="min-width: 180px;">
+                                                        <span class="badge bg-dark rounded-pill px-3 py-2">
+                                                            <i class="fas fa-moon me-1"></i> 20:00 Malam
+                                                        </span>
+                                                    </div>
+                                                    <div class="flex-fill">
+                                                        <ul class="list-unstyled mb-0">
+                                                            <li class="mb-2"><i class="fas fa-book text-dark me-2"></i>Kifayatul Awam</li>
+                                                            <li class="mb-2"><i class="fas fa-book text-dark me-2"></i>Al Luma</li>
+                                                            <li><i class="fas fa-book text-dark me-2"></i>Waladiyah</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    <!-- Selasa -->
+                                    <tr class="day-block" data-day="selasa" id="selasa">
+                                        <td class="py-4 px-4" colspan="3">
+                                            <div class="d-flex align-items-center mb-3">
+                                                <div class="day-icon rounded-circle bg-info bg-opacity-10 p-3 me-3">
+                                                    <i class="fas fa-cloud-sun text-info"></i>
+                                                </div>
+                                                <h5 class="mb-0 fw-bold">Selasa</h5>
+                                            </div>
+                                            <div class="schedule-items">
+                                                <div class="d-md-flex align-items-start mb-3">
+                                                    <div class="time-col me-md-4 mb-2 mb-md-0" style="min-width: 180px;">
+                                                        <span class="badge bg-primary rounded-pill px-3 py-2">
+                                                            <i class="fas fa-sun me-1"></i> 07:00 Pagi
+                                                        </span>
+                                                    </div>
+                                                    <div class="flex-fill">
+                                                        <ul class="list-unstyled mb-0">
+                                                            <li class="mb-2"><i class="fas fa-book text-primary me-2"></i>Alfiyah</li>
+                                                            <li class="mb-2"><i class="fas fa-book text-primary me-2"></i>Fathul Muin</li>
+                                                            <li class="mb-2"><i class="fas fa-book text-primary me-2"></i>Asybah wanadzoir</li>
+                                                            <li><i class="fas fa-book text-primary me-2"></i>Bajuri</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="d-md-flex align-items-start mb-3">
+                                                    <div class="time-col me-md-4 mb-2 mb-md-0" style="min-width: 180px;">
+                                                        <span class="badge bg-info rounded-pill px-3 py-2">
+                                                            <i class="fas fa-cloud-sun me-1"></i> 15:00 Siang
+                                                        </span>
+                                                    </div>
+                                                    <div class="flex-fill">
+                                                        <ul class="list-unstyled mb-0">
+                                                            <li class="mb-2"><i class="fas fa-book text-info me-2"></i>Tafsir Munir</li>
+                                                            <li><i class="fas fa-book text-info me-2"></i>Tanwirul Qulub</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="d-md-flex align-items-start">
+                                                    <div class="time-col me-md-4 mb-2 mb-md-0" style="min-width: 180px;">
+                                                        <span class="badge bg-dark rounded-pill px-3 py-2">
+                                                            <i class="fas fa-moon me-1"></i> 20:00 Malam
+                                                        </span>
+                                                    </div>
+                                                    <div class="flex-fill">
+                                                        <ul class="list-unstyled mb-0">
+                                                            <li class="mb-2"><i class="fas fa-book text-dark me-2"></i>Kifayatul Awam</li>
+                                                            <li class="mb-2"><i class="fas fa-book text-dark me-2"></i>Al Luma</li>
+                                                            <li><i class="fas fa-book text-dark me-2"></i>Waladiyah</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    <!-- Rabu -->
+                                    <tr class="day-block" data-day="rabu" id="rabu">
+                                        <td class="py-4 px-4" colspan="3">
+                                            <div class="d-flex align-items-center mb-3">
+                                                <div class="day-icon rounded-circle bg-warning bg-opacity-10 p-3 me-3">
+                                                    <i class="fas fa-cloud text-warning"></i>
+                                                </div>
+                                                <h5 class="mb-0 fw-bold">Rabu</h5>
+                                            </div>
+                                            <div class="schedule-items">
+                                                <div class="d-md-flex align-items-start mb-3">
+                                                    <div class="time-col me-md-4 mb-2 mb-md-0" style="min-width: 180px;">
+                                                        <span class="badge bg-primary rounded-pill px-3 py-2">
+                                                            <i class="fas fa-sun me-1"></i> 07:00 Pagi
+                                                        </span>
+                                                    </div>
+                                                    <div class="flex-fill">
+                                                        <ul class="list-unstyled mb-0">
+                                                            <li class="mb-2"><i class="fas fa-book text-primary me-2"></i>Alfiyah</li>
+                                                            <li class="mb-2"><i class="fas fa-book text-primary me-2"></i>Fathul Muin</li>
+                                                            <li class="mb-2"><i class="fas fa-book text-primary me-2"></i>Asybah wanadzoir</li>
+                                                            <li><i class="fas fa-book text-primary me-2"></i>Bajuri</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="d-md-flex align-items-start mb-3">
+                                                    <div class="time-col me-md-4 mb-2 mb-md-0" style="min-width: 180px;">
+                                                        <span class="badge bg-info rounded-pill px-3 py-2">
+                                                            <i class="fas fa-cloud-sun me-1"></i> 15:00 Siang
+                                                        </span>
+                                                    </div>
+                                                    <div class="flex-fill">
+                                                        <ul class="list-unstyled mb-0">
+                                                            <li class="mb-2"><i class="fas fa-book text-info me-2"></i>Tafsir Munir</li>
+                                                            <li><i class="fas fa-book text-info me-2"></i>Tanwirul Qulub</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="d-md-flex align-items-start">
+                                                    <div class="time-col me-md-4 mb-2 mb-md-0" style="min-width: 180px;">
+                                                        <span class="badge bg-dark rounded-pill px-3 py-2">
+                                                            <i class="fas fa-moon me-1"></i> 20:00 Malam
+                                                        </span>
+                                                    </div>
+                                                    <div class="flex-fill">
+                                                        <ul class="list-unstyled mb-0">
+                                                            <li class="mb-2"><i class="fas fa-book text-dark me-2"></i>Kifayatul Awam</li>
+                                                            <li class="mb-2"><i class="fas fa-book text-dark me-2"></i>Al Luma</li>
+                                                            <li><i class="fas fa-book text-dark me-2"></i>Waladiyah</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    <!-- Kamis -->
+                                    <tr class="day-block" data-day="kamis" id="kamis">
+                                        <td class="py-4 px-4" colspan="3">
+                                            <div class="d-flex align-items-center mb-3">
+                                                <div class="day-icon rounded-circle bg-danger bg-opacity-10 p-3 me-3">
+                                                    <i class="fas fa-cloud-showers-heavy text-danger"></i>
+                                                </div>
+                                                <h5 class="mb-0 fw-bold">Kamis</h5>
+                                            </div>
+                                            <div class="schedule-items">
+                                                <div class="d-md-flex align-items-start mb-3">
+                                                    <div class="time-col me-md-4 mb-2 mb-md-0" style="min-width: 180px;">
+                                                        <span class="badge bg-primary rounded-pill px-3 py-2">
+                                                            <i class="fas fa-sun me-1"></i> 07:00 Pagi
+                                                        </span>
+                                                    </div>
+                                                    <div class="flex-fill">
+                                                        <ul class="list-unstyled mb-0">
+                                                            <li class="mb-2"><i class="fas fa-book text-primary me-2"></i>Alfiyah</li>
+                                                            <li class="mb-2"><i class="fas fa-book text-primary me-2"></i>Fathul Muin</li>
+                                                            <li class="mb-2"><i class="fas fa-book text-primary me-2"></i>Asybah wanadzoir</li>
+                                                            <li><i class="fas fa-book text-primary me-2"></i>Bajuri</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="d-md-flex align-items-start mb-3">
+                                                    <div class="time-col me-md-4 mb-2 mb-md-0" style="min-width: 180px;">
+                                                        <span class="badge bg-info rounded-pill px-3 py-2">
+                                                            <i class="fas fa-cloud-sun me-1"></i> 15:00 Siang
+                                                        </span>
+                                                    </div>
+                                                    <div class="flex-fill">
+                                                        <ul class="list-unstyled mb-0">
+                                                            <li class="mb-2"><i class="fas fa-book text-info me-2"></i>Tafsir Munir</li>
+                                                            <li><i class="fas fa-book text-info me-2"></i>Tanwirul Qulub</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="d-md-flex align-items-start">
+                                                    <div class="time-col me-md-4 mb-2 mb-md-0" style="min-width: 180px;">
+                                                        <span class="badge bg-dark rounded-pill px-3 py-2">
+                                                            <i class="fas fa-moon me-1"></i> 20:00 Malam
+                                                        </span>
+                                                    </div>
+                                                    <div class="flex-fill">
+                                                        <ul class="list-unstyled mb-0">
+                                                            <li class="mb-2"><i class="fas fa-book text-dark me-2"></i>Kifayatul Awam</li>
+                                                            <li class="mb-2"><i class="fas fa-book text-dark me-2"></i>Al Luma</li>
+                                                            <li><i class="fas fa-book text-dark me-2"></i>Waladiyah</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    <!-- Jumat -->
+                                    <tr class="day-block" data-day="jumat" id="jumat">
+                                        <td class="py-4 px-4" colspan="3">
+                                            <div class="d-flex align-items-center mb-3">
+                                                <div class="day-icon rounded-circle bg-success bg-opacity-10 p-3 me-3">
+                                                    <i class="fas fa-mosque text-success"></i>
+                                                </div>
+                                                <h5 class="mb-0 fw-bold">Jumat</h5>
+                                            </div>
+                                            <div class="schedule-items">
+                                                <div class="d-md-flex align-items-start mb-3">
+                                                    <div class="time-col me-md-4 mb-2 mb-md-0" style="min-width: 180px;">
+                                                        <span class="badge bg-primary rounded-pill px-3 py-2">
+                                                            <i class="fas fa-sun me-1"></i> 07:00 Pagi
+                                                        </span>
+                                                    </div>
+                                                    <div class="flex-fill">
+                                                        <ul class="list-unstyled mb-0">
+                                                            <li class="mb-2"><i class="fas fa-book text-primary me-2"></i>Alfiyah</li>
+                                                            <li class="mb-2"><i class="fas fa-book text-primary me-2"></i>Fathul Muin</li>
+                                                            <li class="mb-2"><i class="fas fa-book text-primary me-2"></i>Asybah wanadzoir</li>
+                                                            <li><i class="fas fa-book text-primary me-2"></i>Bajuri</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="d-md-flex align-items-start mb-3">
+                                                    <div class="time-col me-md-4 mb-2 mb-md-0" style="min-width: 180px;">
+                                                        <span class="badge bg-info rounded-pill px-3 py-2">
+                                                            <i class="fas fa-cloud-sun me-1"></i> 15:00 Siang
+                                                        </span>
+                                                    </div>
+                                                    <div class="flex-fill">
+                                                        <ul class="list-unstyled mb-0">
+                                                            <li class="mb-2"><i class="fas fa-book text-info me-2"></i>Tafsir Munir</li>
+                                                            <li><i class="fas fa-book text-info me-2"></i>Tanwirul Qulub</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="d-md-flex align-items-start">
+                                                    <div class="time-col me-md-4 mb-2 mb-md-0" style="min-width: 180px;">
+                                                        <span class="badge bg-dark rounded-pill px-3 py-2">
+                                                            <i class="fas fa-moon me-1"></i> 20:00 Malam
+                                                        </span>
+                                                    </div>
+                                                    <div class="flex-fill">
+                                                        <ul class="list-unstyled mb-0">
+                                                            <li class="mb-2"><i class="fas fa-book text-dark me-2"></i>Kifayatul Awam</li>
+                                                            <li class="mb-2"><i class="fas fa-book text-dark me-2"></i>Al Luma</li>
+                                                            <li><i class="fas fa-book text-dark me-2"></i>Waladiyah</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    <!-- Sabtu -->
+                                    <tr class="day-block" data-day="sabtu" id="sabtu">
+                                        <td class="py-4 px-4" colspan="3">
+                                            <div class="d-flex align-items-center mb-3">
+                                                <div class="day-icon rounded-circle bg-primary bg-opacity-10 p-3 me-3">
+                                                    <i class="fas fa-umbrella-beach text-primary"></i>
+                                                </div>
+                                                <h5 class="mb-0 fw-bold">Sabtu</h5>
+                                            </div>
+                                            <div class="schedule-items">
+                                                <div class="d-md-flex align-items-start mb-3">
+                                                    <div class="time-col me-md-4 mb-2 mb-md-0" style="min-width: 180px;">
+                                                        <span class="badge bg-primary rounded-pill px-3 py-2">
+                                                            <i class="fas fa-sun me-1"></i> 07:00 Pagi
+                                                        </span>
+                                                    </div>
+                                                    <div class="flex-fill">
+                                                        <ul class="list-unstyled mb-0">
+                                                            <li class="mb-2"><i class="fas fa-book text-primary me-2"></i>Alfiyah</li>
+                                                            <li class="mb-2"><i class="fas fa-book text-primary me-2"></i>Fathul Muin</li>
+                                                            <li class="mb-2"><i class="fas fa-book text-primary me-2"></i>Asybah wanadzoir</li>
+                                                            <li><i class="fas fa-book text-primary me-2"></i>Bajuri</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="d-md-flex align-items-start mb-3">
+                                                    <div class="time-col me-md-4 mb-2 mb-md-0" style="min-width: 180px;">
+                                                        <span class="badge bg-info rounded-pill px-3 py-2">
+                                                            <i class="fas fa-cloud-sun me-1"></i> 15:00 Siang
+                                                        </span>
+                                                    </div>
+                                                    <div class="flex-fill">
+                                                        <ul class="list-unstyled mb-0">
+                                                            <li class="mb-2"><i class="fas fa-book text-info me-2"></i>Tafsir Munir</li>
+                                                            <li><i class="fas fa-book text-info me-2"></i>Tanwirul Qulub</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="d-md-flex align-items-start">
+                                                    <div class="time-col me-md-4 mb-2 mb-md-0" style="min-width: 180px;">
+                                                        <span class="badge bg-dark rounded-pill px-3 py-2">
+                                                            <i class="fas fa-moon me-1"></i> 20:00 Malam
+                                                        </span>
+                                                    </div>
+                                                    <div class="flex-fill">
+                                                        <ul class="list-unstyled mb-0">
+                                                            <li class="mb-2"><i class="fas fa-book text-dark me-2"></i>Kifayatul Awam</li>
+                                                            <li class="mb-2"><i class="fas fa-book text-dark me-2"></i>Al Luma</li>
+                                                            <li><i class="fas fa-book text-dark me-2"></i>Waladiyah</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                    <!-- Minggu -->
+                                    <tr class="day-block" data-day="minggu" id="minggu">
+                                        <td class="py-4 px-4" colspan="3">
+                                            <div class="d-flex align-items-center mb-3">
+                                                <div class="day-icon rounded-circle bg-warning bg-opacity-10 p-3 me-3">
+                                                    <i class="fas fa-sun text-warning"></i>
+                                                </div>
+                                                <h5 class="mb-0 fw-bold">Minggu</h5>
+                                            </div>
+                                            <div class="schedule-items">
+                                                <div class="d-md-flex align-items-start mb-3">
+                                                    <div class="time-col me-md-4 mb-2 mb-md-0" style="min-width: 180px;">
+                                                        <span class="badge bg-primary rounded-pill px-3 py-2">
+                                                            <i class="fas fa-sun me-1"></i> 07:00 Pagi
+                                                        </span>
+                                                    </div>
+                                                    <div class="flex-fill">
+                                                        <ul class="list-unstyled mb-0">
+                                                            <li class="mb-2"><i class="fas fa-book text-primary me-2"></i>Alfiyah</li>
+                                                            <li class="mb-2"><i class="fas fa-book text-primary me-2"></i>Fathul Muin</li>
+                                                            <li class="mb-2"><i class="fas fa-book text-primary me-2"></i>Asybah wanadzoir</li>
+                                                            <li><i class="fas fa-book text-primary me-2"></i>Bajuri</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="d-md-flex align-items-start mb-3">
+                                                    <div class="time-col me-md-4 mb-2 mb-md-0" style="min-width: 180px;">
+                                                        <span class="badge bg-info rounded-pill px-3 py-2">
+                                                            <i class="fas fa-cloud-sun me-1"></i> 15:00 Siang
+                                                        </span>
+                                                    </div>
+                                                    <div class="flex-fill">
+                                                        <ul class="list-unstyled mb-0">
+                                                            <li class="mb-2"><i class="fas fa-book text-info me-2"></i>Tafsir Munir</li>
+                                                            <li><i class="fas fa-book text-info me-2"></i>Tanwirul Qulub</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="d-md-flex align-items-start">
+                                                    <div class="time-col me-md-4 mb-2 mb-md-0" style="min-width: 180px;">
+                                                        <span class="badge bg-dark rounded-pill px-3 py-2">
+                                                            <i class="fas fa-moon me-1"></i> 20:00 Malam
+                                                        </span>
+                                                    </div>
+                                                    <div class="flex-fill">
+                                                        <ul class="list-unstyled mb-0">
+                                                            <li class="mb-2"><i class="fas fa-book text-dark me-2"></i>Kifayatul Awam</li>
+                                                            <li class="mb-2"><i class="fas fa-book text-dark me-2"></i>Al Luma</li>
+                                                            <li><i class="fas fa-book text-dark me-2"></i>Waladiyah</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </section>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" aria-label="Kembali ke atas"><i class="fas fa-arrow-up"></i></button>
+
+    <!-- Scripts -->
+    <!-- Local scripts only to avoid external aborted requests -->
+    <script src="assets/js/bootstrap.bundle.min.js" defer></script>
+    <script src="assets/js/jadwal-enhanced.js" defer></script>
+    <!-- Program Tambahan -->
+<section id="program-tambahan" class="py-5 bg-light">
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col-12 text-center" data-aos="fade-up">
+                <h2 class="section-title mb-2">Program Tambahan</h2>
+                <p class="section-subtitle mb-0">Kegiatan rutin untuk penguatan kemampuan, spiritual, dan kesehatan santri.</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="card h-100 program-card">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center mb-3">
+                            <span class="icon-circle bg-warning text-white me-3">
+                                <i class="fas fa-microphone-alt"></i>
+                            </span>
+                            <h4 class="card-title text-warning mb-0">Muhadhoroh</h4>
+                        </div>
+                        <p class="card-text">Kegiatan latihan pidato dan ceramah yang melatih santri untuk berani berbicara di depan umum dengan bahasa yang baik dan benar.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="card h-100 program-card">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center mb-3">
+                            <span class="icon-circle bg-info text-white me-3">
+                                <i class="fas fa-pray"></i>
+                            </span>
+                            <h4 class="card-title text-info mb-0">Ratiban al attos & Marhaban</h4>
+                        </div>
+                        <p class="card-text">Kegiatan rutin pembacaan dzikir, doa, dan shalawat Nabi Muhammad SAW untuk menumbuhkan kecintaan kepada Rasulullah serta memperkuat spiritualitas santri.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300">
+                <div class="card h-100 program-card">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center mb-3">
+                            <span class="icon-circle bg-danger text-white me-3">
+                                <i class="fas fa-running"></i>
+                            </span>
+                            <h4 class="card-title text-danger mb-0">Olahraga</h4>
+                        </div>
+                        <p class="card-text">Kegiatan olahraga rutin untuk menjaga kesehatan dan kebugaran santri, sekaligus mempererat ukhuwah melalui permainan bersama.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+    <!-- Footer -->
+    <footer id="footer" class="footer footer-black">
+        <div class="container-fluid px-0">
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="footer-content">
+                        <div class="footer-label"><i class="fas fa-leaf"></i><span>PESANTREN</span></div>
+                        <h5 class="mb-4"><i class="fas fa-mosque me-2"></i>Pondok Pesantren Assalafi Al Aulia</h5>
+                        <p class="mb-3">
+                            <i class="fas fa-map-marker-alt me-2"></i>Kp. Bojong Kawung RT03/RW05, Desa Mekar Maju, Pasirjambu, Kec. Pasirjambu, Kabupaten Bandung, Jawa Barat 40972
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="footer-content">
+                        <div class="footer-label"><i class="fas fa-phone"></i><span>KONTAK</span></div>
+                        <h5 class="mb-4"><i class="fas fa-envelope me-2"></i>Kontak Kami</h5>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><i class="fas fa-phone me-2"></i>Telepon: (021) 12345678</li>
+                            <li class="mb-2"><i class="fas fa-envelope me-2"></i>Email: info@alaulia.ac.id</li>
+                            <li class="mb-2"><i class="fab fa-whatsapp me-2"></i>WhatsApp: +62 812 3456 7890</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-12" data-aos="fade-up" data-aos-delay="300">
+                    <div class="footer-content">
+                        <div class="footer-label"><i class="fas fa-share"></i><span>SOSIAL</span></div>
+                        <h5 class="mb-4"><i class="fas fa-share-alt me-2"></i>Media Sosial</h5>
+                        <div class="social-links mb-4">
+                            <a href="#" class="me-2" aria-label="Facebook">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="me-2" aria-label="Twitter">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="me-2" aria-label="Instagram">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" class="me-2" aria-label="Youtube">
+                                <i class="fab fa-youtube"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4" style="border-color: rgba(255,255,255,0.1);">
+            <div class="row">
+                <div class="col-12 text-center">
+                    <p class="mb-0">&copy; <span id="current-year">2024</span> Pondok Pesantren Assalafi Al Aulia. All Rights Reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to top button -->
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="fas fa-arrow-up"></i></a>
+
+    <script src="assets/js/bootstrap.bundle.min.js" defer></script>
+    <script src="assets/js/custom.js" defer></script>
+    <!-- Removed external Bootstrap and AOS JS to prevent aborted requests -->
+    <script src="assets/js/animations.js" defer></script>
+    <script>
+        if (window.AOS && typeof AOS.init === 'function') {
+            AOS.init({
+                duration: 800,
+                easing: 'ease-out-cubic',
+                once: true,
+                offset: 100
+            });
+        }
+    </script>
+    <script>
+        // Highlight current day and add interactive features
+        document.addEventListener('DOMContentLoaded', function() {
+            // Highlight current day
+            const days = ['minggu', 'senin', 'selasa', 'rabu', 'kamis', 'jumat', 'sabtu'];
+            const today = new Date().getDay();
+            const currentDay = days[today];
+            
+            // Add hover effects to table rows
+            const dayRows = document.querySelectorAll('.day-row');
+            dayRows.forEach(row => {
+                if(row.getAttribute('data-day') === currentDay) {
+                    row.classList.add('current-day');
+                    
+                    // Animate the current day icon
+                    const icon = row.querySelector('.day-icon i');
+                    if(icon) {
+                        icon.classList.add('animate__animated', 'animate__pulse', 'animate__infinite');
+                    }
+                }
+                
+                // Add hover effect to all rows
+                row.addEventListener('mouseenter', function() {
+                    this.style.backgroundColor = 'rgba(25, 135, 84, 0.05)';
+                    
+                    // Scale up the icon
+                    const icon = this.querySelector('.day-icon');
+                    if(icon) {
+                        icon.style.transform = 'scale(1.2)';
+                    }
+                    
+                    // Highlight the book icons
+                    const bookIcons = this.querySelectorAll('.fa-book');
+                    bookIcons.forEach(icon => {
+                        icon.classList.add('animate__animated', 'animate__fadeIn');
+                    });
+                });
+                
+                row.addEventListener('mouseleave', function() {
+                    if(this.getAttribute('data-day') !== currentDay) {
+                        this.style.backgroundColor = '';
+                    }
+                    
+                    // Reset the icon
+                    const icon = this.querySelector('.day-icon');
+                    if(icon) {
+                        icon.style.transform = '';
+                    }
+                    
+                    // Remove highlight from book icons
+                    const bookIcons = this.querySelectorAll('.fa-book');
+                    bookIcons.forEach(icon => {
+                        icon.classList.remove('animate__animated', 'animate__fadeIn');
+                    });
+                });
+            });
+            
+            // Add pulse animation to time badges on hover
+            const timeBadges = document.querySelectorAll('.badge');
+            timeBadges.forEach(badge => {
+                badge.addEventListener('mouseenter', function() {
+                    this.classList.add('animate__animated', 'animate__pulse');
+                });
+                
+                badge.addEventListener('mouseleave', function() {
+                    this.classList.remove('animate__animated', 'animate__pulse');
+                });
+            });
+            
+            // Add smooth scroll to schedule section
+            const scheduleLinks = document.querySelectorAll('a[href="#jadwal"]');
+            scheduleLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    document.querySelector('.py-5.bg-light').scrollIntoView({ 
+                        behavior: 'smooth' 
+                    });
+                });
+            });
+        });
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,199 @@
+/* Shared Footer Styles - modern, readable, consistent */
+.footer {
+  position: relative;
+  background: linear-gradient(180deg, #0e1a13, #122017);
+  color: #eaf5ee;
+  padding: 48px 0 28px;
+  border-top: 3px solid #28a745; /* brand green */
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.05);
+}
+.footer a { color: rgba(234, 245, 238, 0.85); text-decoration: none; }
+.footer a:hover { color: #ffc107; }
+.footer .footer-content h5 { color: #ffffff; }
+.footer .footer-content p,
+.footer .footer-content li { color: rgba(234, 245, 238, 0.75); }
+.footer hr { border-color: rgba(255,255,255,0.08) !important; }
+
+/* Social links as soft pills */
+.footer .social-links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px; height: 44px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.08);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.12);
+  transition: transform .2s ease, box-shadow .2s ease, background-color .2s ease, color .2s ease;
+}
+.footer .social-links a:hover {
+  transform: translateY(-3px);
+  background: #28a745;
+  box-shadow: 0 8px 18px rgba(40,167,69,0.25);
+}
+
+/* Reveal animation on scroll (default visible; enable by adding .footer-animated) */
+.footer .footer-content {
+  opacity: 1;
+  transform: none;
+  transition: opacity .35s ease, transform .35s ease;
+}
+.footer.footer-animated .footer-content {
+  opacity: 0;
+  transform: translateY(8px);
+}
+.footer.footer-animated.footer-visible .footer-content {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Optional ripple styling for social icon clicks */
+.footer .social-links a { position: relative; overflow: hidden; }
+.footer .social-links a .ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.6);
+  transform: scale(0);
+  animation: footer-ripple .6s linear;
+  pointer-events: none;
+  width: 20px; height: 20px;
+}
+@keyframes footer-ripple { to { transform: scale(4); opacity: 0; } }
+
+/* Light variant for brighter design */
+.footer.footer-light {
+  background: linear-gradient(180deg, #f8fbf9, #eef8f1);
+  color: #1f2937;
+  border-top-color: #28a745;
+  box-shadow: inset 0 1px 0 rgba(0,0,0,0.04);
+}
+.footer.footer-light a { color: #2f6d44; }
+.footer.footer-light a:hover { color: #28a745; }
+.footer.footer-light .footer-content h5 { color: #0f172a; }
+.footer.footer-light .footer-content p,
+.footer.footer-light .footer-content li { color: #475569; }
+.footer.footer-light hr { border-color: rgba(0,0,0,0.08) !important; }
+.footer.footer-light .social-links a {
+  background: rgba(40,167,69,0.08);
+  color: #0f172a;
+  border-color: rgba(40,167,69,0.18);
+}
+.footer.footer-light .social-links a:hover {
+  background: #28a745;
+  color: #fff;
+  box-shadow: 0 8px 18px rgba(40,167,69,0.25);
+}
+/* Solid black variant for footer background */
+.footer.footer-black {
+  background: #000 !important;
+  color: #eaeaea;
+  border-top-color: #28a745;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.05);
+  overflow: hidden; /* enable overlay visuals */
+}
+.footer.footer-black a { color: rgba(255,255,255,0.85); }
+.footer.footer-black a:hover { color: #ffc107; }
+.footer.footer-black .footer-content h5 { color: #ffffff; }
+.footer.footer-black .footer-content p,
+.footer.footer-black .footer-content li { color: rgba(255,255,255,0.75); }
+.footer.footer-black hr { border-color: rgba(255,255,255,0.08) !important; }
+.footer.footer-black .social-links a {
+  background: rgba(255,255,255,0.08);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.12);
+}
+.footer.footer-black .social-links a:hover {
+  transform: translateY(-3px);
+  background: #28a745;
+  box-shadow: 0 8px 18px rgba(40,167,69,0.25);
+}
+.footer.footer-black .footer-label {
+  background: rgba(255,255,255,0.08);
+  color: #eaf5ee;
+  border-color: rgba(255,255,255,0.16);
+}
+/* Footer label chip (seen in jadwal.html markup) */
+.footer .footer-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 6px 12px;
+  border-radius: 9999px;
+  background: rgba(255,255,255,0.08);
+  color: #eaf5ee;
+  border: 1px solid rgba(255,255,255,0.16);
+}
+.footer .footer-label i { opacity: 0.9; }
+.footer.footer-light .footer-label {
+  background: rgba(40,167,69,0.08);
+  color: #1f2937;
+  border-color: rgba(40,167,69,0.18);
+}
+
+/* Link polish: subtle underline grow on hover (exclude social pills) */
+.footer .footer-content a {
+  text-decoration: none;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 2px;
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  transition: color .2s ease, background-size .2s ease;
+}
+.footer .social-links a { background-image: none; }
+.footer .footer-content a:hover { background-size: 100% 2px; }
+
+/* Headings and copy refinement */
+.footer .footer-content h5 { letter-spacing: .01em; text-shadow: 0 1px 6px rgba(0,0,0,0.08); }
+.footer.footer-light .footer-content h5 { text-shadow: none; }
+.footer .footer-content p { line-height: 1.7; }
+
+/* Accessibility: focus-visible ring for social icons */
+.footer .social-links a:focus-visible {
+  outline: 2px solid #28a745;
+  outline-offset: 2px;
+}
+
+/* Responsive alignment tweaks */
+@media (max-width: 768px) {
+  .footer .footer-content { text-align: center; }
+  .footer .social-links { justify-content: center; }
+}
+.footer.footer-black::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  /* Interactive sheen using CSS variables updated via JS */
+  background:
+    radial-gradient(600px circle at var(--sheenX, 50%) var(--sheenY, 50%), rgba(40,167,69,0.12), transparent 60%),
+    linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0));
+}
+
+/* Gradient text for footer label to add subtle premium feel */
+.footer .footer-label span {
+  background: linear-gradient(135deg, #28a745, #ffc107);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Glow pulse on social icons */
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 0 rgba(40,167,69,0); }
+  50% { box-shadow: 0 0 24px rgba(40,167,69,0.35); }
+}
+.footer .social-links a:hover {
+  animation: pulseGlow 1.6s ease-in-out infinite;
+}
+
+/* Subtle lift on footer cards */
+.footer .footer-content {
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.footer .footer-content:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.18);
+}

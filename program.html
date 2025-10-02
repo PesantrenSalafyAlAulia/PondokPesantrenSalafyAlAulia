@@ -1,0 +1,1225 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Program Pendidikan - Pondok Pesantren Assalafi Al Aulia</title>
+    <meta name="description" content="Program pendidikan unggulan Pondok Pesantren Assalafi Al Aulia meliputi Tahfidz Al-Qur'an, Kitab Kuning, dan Bahasa Arab">
+    <meta name="keywords" content="program pesantren, tahfidz quran, kitab kuning, bahasa arab, pendidikan islam">
+    
+    <!-- Bootstrap CSS (local for consistency) -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="assets/css/fontawesome.min.css">
+    <link rel="stylesheet" href="assets/css/fontawesome-fonts.css">
+    <!-- CDN fallback -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="none" onload="if(media!='all')media='all'">
+    <!-- Base site styles for consistency (load earlier to be overridden by theme) -->
+    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/custom.css" />
+    <!-- Program page enhancements -->
+    <link rel="stylesheet" href="assets/css/program-enhanced.css">
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Site theme overrides (place last to ensure consistent footer design) -->
+    <link rel="stylesheet" href="assets/css/enhanced-home.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="foto/aulia1.png" type="image/png" />
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Tambahkan efek hover pada elemen dengan class hover-madrasah
+        const hoverElements = document.querySelectorAll('.hover-madrasah');
+        hoverElements.forEach(element => {
+            element.addEventListener('mouseenter', function() {
+                this.style.transition = 'all 0.3s ease';
+                this.style.backgroundColor = 'rgba(25, 135, 84, 0.1)';
+                this.style.transform = 'translateX(5px)';
+            });
+            element.addEventListener('mouseleave', function() {
+                this.style.backgroundColor = 'transparent';
+                this.style.transform = 'translateX(0)';
+            });
+        });
+    });
+    </script>
+
+    <!-- Animate.css dihapus; gunakan AOS untuk konsistensi animasi -->
+    <style>
+        /* Additional hover effects */
+        .hover-card {
+            transition: all 0.3s ease;
+            transform: translateY(0);
+        }
+        .hover-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 128, 0, 0.1) !important;
+        }
+        .kitab-item {
+            transition: all 0.3s ease;
+            padding: 8px 12px;
+            border-radius: 5px;
+            font-size: 0.95rem;
+        }
+        .kitab-item:hover {
+            background-color: rgba(40, 167, 69, 0.1);
+            transform: translateX(5px);
+        }
+        .card {
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+        }
+        .hover-effect {
+            transition: all 0.3s ease;
+        }
+        .hover-effect:hover {
+            transform: scale(1.05);
+        }
+    </style>
+    <!-- Hapus animasi heartBeat; semua animasi menggunakan AOS -->
+</head>
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="spinner-border text-success" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <img src="foto/logo.jpg" alt="Logo Pondok Pesantren Assalafi Al Aulia" class="me-2" style="height: 45px;" />
+                <span class="fw-bold">Pondok Pesantren Assalafi Al Aulia</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html"><i class="fas fa-home me-1"></i> Beranda</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="profil.html"><i class="fas fa-info-circle me-1"></i> Profil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="program.html"><i class="fas fa-book-open me-1"></i> Program</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="jadwal.html"><i class="fas fa-calendar-alt me-1"></i> Jadwal</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="galeri.html"><i class="fas fa-images me-1"></i> Galeri</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="kontak.html"><i class="fas fa-envelope me-1"></i> Kontak</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+</nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section text-center text-white d-flex align-items-center justify-content-center" style="background: url('foto/aulia1.png') center/cover no-repeat; height: 100vh; position: relative;">
+        <div class="container position-relative hero-content" data-aos="fade-up">
+            <div class="row">
+                <div class="col-lg-10 mx-auto">
+                    <h1 class="display-3 fw-bold mb-3">Program Pendidikan</h1>
+                    <div class="mx-auto mb-4" style="width:60px;height:3px;background:linear-gradient(90deg,transparent,#28a745,transparent);"></div>
+                    <div class="hero-chips d-flex justify-content-center flex-wrap gap-2 mb-4">
+                        <span class="badge bg-success rounded-pill"><i class="fas fa-quran me-1"></i> Tahfidz</span>
+                        <span class="badge bg-success rounded-pill"><i class="fas fa-book me-1"></i> Kitab Kuning</span>
+                        <span class="badge bg-success rounded-pill"><i class="fas fa-language me-1"></i> Bahasa Arab</span>
+                    </div>
+                    <p class="lead mb-5">Mengenal berbagai program pendidikan berkualitas di Pondok Pesantren Assalafi Al Aulia dengan kurikulum yang komprehensif dan berorientasi pada pembentukan karakter Islami.</p>
+                    <div class="mt-5">
+                        <a href="#program-section" class="btn btn-light hero-btn me-3 mb-3 mb-md-0">
+                            <i class="fas fa-book-open me-2"></i>Lihat Program
+                        </a>
+                        <a href="kontak.html" class="btn btn-outline-light hero-btn">
+                            <i class="fas fa-envelope me-2"></i>Hubungi Kami
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll down indicator -->
+        <div class="scroll-down">
+            <a href="#program-section" class="text-white">
+                <i class="fas fa-chevron-down fa-2x"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Program Pendidikan -->
+    <section class="py-5" id="program-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center mb-5" data-aos="fade-up">
+                    <h2 class="section-title">Program Pendidikan Utama</h2>
+                    <div class="section-title-line mx-auto"></div>
+                    <p class="lead">Pondok Pesantren Assalafi Al Aulia menyelenggarakan berbagai program pendidikan dengan fokus utama pada pengajaran kitab kuning dan hafalan Al-Qur'an</p>
+                </div>
+            </div>
+            
+            <!-- Quote Section -->
+            <div class="row mb-5">
+                <div class="col-12">
+                    <div class="card bg-light" data-aos="fade-up" data-aos-delay="100">
+                        <div class="card-body text-center">
+                            <i class="fas fa-quote-left fa-2x text-success mb-3"></i>
+                            <p class="arabic-text mb-2" style="font-size: 1.5rem;">بَرَكَةُ الْأُصُولِ لَيْسَ الْفُرُوعَ</p>
+                            <p class="mb-0 fst-italic">"Keberkahan itu ada pada pokok (dasar), bukan pada cabang"</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-11 mb-5 bg-white rounded-3 p-3" data-aos="fade-right" data-aos-delay="250">
+                    <div class="card h-110 program-card card-soft shadow-none border-0">
+                         <div class="card-body bg-white"> 
+                        <div class="d-flex align-items-center justify-content-center mb-3">
+    <span class="icon-circle bg-success text-white me-3">
+        <i class="fas fa-school"></i>
+    </span>
+    <h3 class="card-title text-success mb-">Pondok Pesantren </h3>
+</div>
+<p class="card-text">Program pendidikan formal yang mengajarkan ilmu-ilmu agama Islam dengan kurikulum yang terstruktur.</p>
+
+<div class="alert alert-light border-start border-success border-4 mb-4 shadow-sm">
+    <p class="mb-0">
+        <i class="fas fa-lightbulb text-success me-2 fa-beat-fade"></i>
+        Santri akan mempelajari berbagai disiplin ilmu agama melalui kitab-kitab klasik 
+    </p>
+</div>
+
+<h5 class="mt-4 mb-3 text-success"><i class="fas fa-book-open text-success me-2"></i>Fan-Fan Ilmu yang Dipelajari:</h5>
+
+ <div class="row mb-4 bg-white rounded-2 p-3" data-aos="fade-up" data-aos-delay="100"> 
+    <div class="col-md-6">
+        <ul class="list-group kitab-list">
+            <li class="list-group-item bg-transparent border-start border-success border-3 mb-2 shadow-sm hover-madrasah">
+                <strong class="text-success">Tauhid</strong>  Keesaan Allah dan dasar-dasar aqidah Islam
+            </li>
+            <li class="list-group-item bg-transparent border-start border-success border-3 mb-2 shadow-sm hover-madrasah">
+                <strong class="text-success">Fiqih</strong>  Hukum syariat dalam ibadah dan muamalah
+            </li>
+            <li class="list-group-item bg-transparent border-start border-success border-3 mb-2 shadow-sm hover-madrasah">
+                <strong class="text-success">Ushul Fiqih</strong>  Kaidah-kaidah dalam menetapkan hukum syariat
+            </li>
+            <li class="list-group-item bg-transparent border-start border-success border-3 mb-2 shadow-sm hover-madrasah">
+                <strong class="text-success">Tafsir</strong>  Penafsiran Al-Qur'an
+            </li>
+            <li class="list-group-item bg-transparent border-start border-success border-3 mb-2 shadow-sm hover-madrasah">
+                <strong class="text-success">Hadits</strong>  Kajian sabda dan sunnah Nabi ?
+            </li>
+            <li class="list-group-item bg-transparent border-start border-success border-3 mb-2 shadow-sm hover-madrasah">
+                <strong class="text-success">Mustholah Hadits</strong>  Istilah dan kaidah dalam memahami hadits
+            </li>
+            <li class="list-group-item bg-transparent border-start border-success border-3 mb-2 shadow-sm hover-madrasah">
+                <strong class="text-success">Akhlak & Tasawuf</strong>  Pembinaan adab dan pembersihan hati
+            </li>
+        </ul>
+    </div>
+    <div class="col-md-6">
+        <ul class="list-group kitab-list">
+            <li class="list-group-item bg-transparent border-start border-success border-3 mb-2 shadow-sm hover-madrasah">
+                <strong class="text-success">Nahwu</strong>  Tata bahasa Arab
+            </li>
+            <li class="list-group-item bg-transparent border-start border-success border-3 mb-2 shadow-sm hover-madrasah">
+                <strong class="text-success">Shorof</strong>  Perubahan bentuk kata dalam bahasa Arab
+            </li>
+            <li class="list-group-item bg-transparent border-start border-success border-3 mb-2 shadow-sm hover-madrasah">
+                <strong class="text-success">Balaghah</strong>  Seni dan keindahan bahasa Arab
+            </li>
+            <li class="list-group-item bg-transparent border-start border-success border-3 mb-2 shadow-sm hover-madrasah">
+                <strong class="text-success">Mantiq</strong>  Ilmu logika untuk mengatur pola pikir
+            </li>
+            <li class="list-group-item bg-transparent border-start border-success border-3 mb-2 shadow-sm hover-madrasah">
+                <strong class="text-success">Tarikh Islam</strong>  Sejarah perkembangan Islam
+            </li>
+            <li class="list-group-item bg-transparent border-start border-success border-3 mb-2 shadow-sm hover-madrasah">
+                <strong class="text-success">Tajwid</strong>  Tata cara membaca Al-Qur'an dengan benar
+            </li>
+            <li class="list-group-item bg-transparent border-start border-success border-3 mb-2 shadow-sm hover-madrasah">
+                <strong class="text-success">Munadzarah & Insya'</strong>  Debat dan menulis dalam bahasa Arab
+            </li>
+        </ul>
+    </div>
+</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+    <!-- Fokus Kitab Kuning -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 text-center mb-5" data-aos="fade-up">
+                    <h2 class="section-title">Fokus Pengajaran Kitab Kuning</h2>
+                    <div class="section-title-line mx-auto"></div>
+                    <p class="lead mt-4">Sebagai pesantren salafiyah Ahlusunah wal Jamaah, kami memberikan perhatian khusus pada pengajaran kitab kuning sebagai sumber ilmu agama Islam yang otentik.</p>
+                    
+                    <!-- Filter Buttons -->
+                    <div class="kitab-filter mt-4 mb-5">
+                        <button class="btn btn-sm btn-success active mx-1 filter-btn" data-filter="all">Semua</button>
+                        <button class="btn btn-sm btn-outline-success mx-1 filter-btn" data-filter="dasar">Dasar</button>
+                        <button class="btn btn-sm btn-outline-success mx-1 filter-btn" data-filter="menengah">Menengah</button>
+                        <button class="btn btn-sm btn-outline-success mx-1 filter-btn" data-filter="lanjutan">Lanjutan</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row kitab-cards">
+                <!-- Fiqih -->
+                <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100" data-category="all dasar menengah lanjutan">
+                    <div class="card h-100 shadow-sm" style="border-radius: 15px; overflow: hidden; transition: all 0.3s ease; border: none;">
+                        <div class="card-header bg-success text-white p-3" style="position: relative; overflow: hidden;">
+                            <div class="d-flex align-items-center position-relative" style="z-index: 2;">
+                                <div style="width: 45px; height: 45px; border-radius: 50%; background: rgba(255,255,255,0.9); display: flex; align-items: center; justify-content: center; margin-right: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+                                    <i class="fas fa-book text-success" style="font-size: 1.2rem;"></i>
+                                </div>
+                                <h4 class="card-title mb-0 fw-bold">Fiqih</h4>
+                            </div>
+                            <div style="position: absolute; top: -20px; right: -20px; width: 100px; height: 100px; background: rgba(255,255,255,0.1); border-radius: 50%;"></div>
+                            <div style="position: absolute; bottom: -30px; left: -30px; width: 120px; height: 120px; background: rgba(255,255,255,0.05); border-radius: 50%;"></div>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="p-3 bg-light" style="border-bottom: 1px solid rgba(0,0,0,0.05);">
+                                <p class="small text-muted mb-0">Ilmu tentang hukum-hukum syariat dalam ibadah dan muamalah</p>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item d-flex justify-content-between align-items-center p-3 border-0 border-bottom">
+                                    <div class="d-flex align-items-center">
+                                        <span class="badge bg-success rounded-circle me-2" style="width: 8px; height: 8px; padding: 0;"></span>
+                                        <span>Safinatun Najah</span>
+                                    </div>
+                                    <span class="badge bg-success rounded-pill px-3">Dasar</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center p-3 border-0 border-bottom">
+                                    <div class="d-flex align-items-center">
+                                        <span class="badge bg-info rounded-circle me-2" style="width: 8px; height: 8px; padding: 0;"></span>
+                                        <span>Fathul Qorib</span>
+                                    </div>
+                                    <span class="badge bg-info rounded-pill px-3">Menengah</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center p-3 border-0 border-bottom">
+                                    <div class="d-flex align-items-center">
+                                        <span class="badge bg-info rounded-circle me-2" style="width: 8px; height: 8px; padding: 0;"></span>
+                                        <span>Tanwirul Qulub</span>
+                                    </div>
+                                    <span class="badge bg-info rounded-pill px-3">Menengah</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center p-3 border-0 border-bottom">
+                                    <div class="d-flex align-items-center">
+                                        <span class="badge bg-secondary rounded-circle me-2" style="width: 8px; height: 8px; padding: 0;"></span>
+                                        <span>Nihayatul Zain</span>
+                                    </div>
+                                    <span class="badge bg-secondary rounded-pill px-3">Lanjutan</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center p-3 border-0">
+                                    <div class="d-flex align-items-center">
+                                        <span class="badge bg-secondary rounded-circle me-2" style="width: 8px; height: 8px; padding: 0;"></span>
+                                        <span>Bajuri</span>
+                                    </div>
+                                    <span class="badge bg-secondary rounded-pill px-3">Lanjutan</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center p-3 border-0">
+                                    <div class="d-flex align-items-center">
+                                        <span class="badge bg-secondary rounded-circle me-2" style="width: 8px; height: 8px; padding: 0;"></span>
+                                        <span>Fathul Wahab</span>
+                                    </div>
+                                    <span class="badge bg-secondary rounded-pill px-3">Lanjutan</span>
+                                </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ushul Fiqih -->
+    <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200" data-category="all">
+        <div class="card h-100 shadow-sm" style="border-radius: 15px; overflow: hidden; transition: transform 0.3s; border: none;">
+            <div class="card-header bg-success text-white p-3" style="position: relative; overflow: hidden;">
+                <div class="d-flex align-items-center position-relative" style="z-index: 2;">
+                    <div style="width: 45px; height: 45px; border-radius: 50%; background: rgba(255,255,255,0.9); display: flex; align-items: center; justify-content: center; margin-right: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+                        <i class="fas fa-balance-scale text-success" style="font-size: 1.2rem;"></i>
+                    </div>
+                    <h4 class="card-title mb-0 fw-bold">Ushul Fiqih</h4>
+                </div>
+                <div style="position: absolute; top: -20px; right: -20px; width: 100px; height: 100px; background: rgba(255,255,255,0.1); border-radius: 50%;"></div>
+                <div style="position: absolute; bottom: -30px; left: -30px; width: 120px; height: 120px; background: rgba(255,255,255,0.05); border-radius: 50%;"></div>
+            </div>
+            <div class="card-body p-0">
+                <div class="p-3 bg-light" style="border-bottom: 1px solid rgba(0,0,0,0.05);">
+                    <p class="small text-muted mb-0">Metodologi penetapan hukum Islam dari sumber-sumbernya</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item d-flex justify-content-between align-items-center p-3 border-0 border-bottom">
+                        <div class="d-flex align-items-center">
+                            <span class="badge bg-primary rounded-circle me-2" style="width: 8px; height: 8px; padding: 0;"></span>
+                            <span>Al-Waraqat</span>
+                        </div>
+                        <span class="badge bg-primary rounded-pill px-3">Dasar</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center p-3 border-0 border-bottom">
+                        <div class="d-flex align-items-center">
+                            <span class="badge bg-info rounded-circle me-2" style="width: 8px; height: 8px; padding: 0;"></span>
+                            <span>Luma' (Al-Luma')</span>
+                        </div>
+                        <span class="badge bg-info rounded-pill px-3">Menengah</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center p-3 border-0 border-bottom">
+                        <div class="d-flex align-items-center">
+                            <span class="badge bg-info rounded-circle me-2" style="width: 8px; height: 8px; padding: 0;"></span>
+                            <span>Tanwirul Qulub</span>
+                        </div>
+                        <span class="badge bg-info rounded-pill px-3">Menengah</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center p-3 border-0">
+                        <div class="d-flex align-items-center">
+                            <span class="badge bg-secondary rounded-circle me-2" style="width: 8px; height: 8px; padding: 0;"></span>
+                            <span>Jam'ul Jawami'</span>
+                        </div>
+                        <span class="badge bg-secondary rounded-pill px-3">Lanjutan</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tauhid -->
+    <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300" data-category="all">
+        <div class="card h-100 shadow-sm" style="border-radius: 15px; overflow: hidden; transition: transform 0.3s; border: none;">
+            <div class="card-header bg-info text-white p-3" style="position: relative; overflow: hidden;">
+                <div class="d-flex align-items-center position-relative" style="z-index: 2;">
+                    <div style="width: 45px; height: 45px; border-radius: 50%; background: rgba(255,255,255,0.9); display: flex; align-items: center; justify-content: center; margin-right: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+                        <i class="fas fa-star-and-crescent text-info" style="font-size: 1.2rem;"></i>
+                    </div>
+                    <h4 class="card-title mb-0 fw-bold">Tauhid</h4>
+                </div>
+                <div style="position: absolute; top: -20px; right: -20px; width: 100px; height: 100px; background: rgba(255,255,255,0.1); border-radius: 50%;"></div>
+                <div style="position: absolute; bottom: -30px; left: -30px; width: 120px; height: 120px; background: rgba(255,255,255,0.05); border-radius: 50%;"></div>
+            </div>
+            <div class="card-body p-0">
+                <div class="p-3 bg-light" style="border-bottom: 1px solid rgba(0,0,0,0.05);">
+                    <p class="small text-muted mb-0">Ilmu tentang keesaan Allah dan sifat-sifat-Nya</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item d-flex justify-content-between align-items-center p-3 border-0 border-bottom">
+                        <div class="d-flex align-items-center">
+                            <span class="badge bg-primary rounded-circle me-2" style="font-size: 8px;"></span>
+                            <span>Aqidatul Awam</span>
+                        </div>
+                        <span class="badge bg-primary rounded-pill px-3">Dasar</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center p-3 border-0 border-bottom">
+                        <div class="d-flex align-items-center">
+                            <span class="badge bg-info rounded-circle me-2" style="font-size: 8px;"></span>
+                            <span>Kifayatul Awam</span>
+                        </div>
+                        <span class="badge bg-info rounded-pill px-3">Menengah</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center p-3 border-0 border-bottom">
+                        <div class="d-flex align-items-center">
+                            <span class="badge bg-info rounded-circle me-2" style="font-size: 8px;"></span>
+                            <span>Jawharatut Tauhid</span>
+                        </div>
+                        <span class="badge bg-info rounded-pill px-3">Menengah</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center p-3 border-0">
+                        <div class="d-flex align-items-center">
+                            <span class="badge bg-secondary rounded-circle me-2" style="font-size: 8px;"></span>
+                            <span>Ummul Barahin</span>
+                        </div>
+                        <span class="badge bg-secondary rounded-pill px-3">Lanjutan</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Akhlak & Tasawuf -->
+    <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="400" data-category="all">
+        <div class="card h-100 shadow-sm" style="border-radius: 15px; overflow: hidden; transition: transform 0.3s; border: none;">
+            <div class="card-header bg-warning text-white p-3" style="position: relative; overflow: hidden;">
+                <div class="d-flex align-items-center position-relative" style="z-index: 2;">
+                    <div style="width: 45px; height: 45px; border-radius: 50%; background: rgba(255,255,255,0.9); display: flex; align-items: center; justify-content: center; margin-right: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+                        <i class="fas fa-heart text-warning" style="font-size: 1.2rem;"></i>
+                    </div>
+                    <h4 class="card-title mb-0 fw-bold">Akhlak & Tasawuf</h4>
+                </div>
+                <div style="position: absolute; top: -20px; right: -20px; width: 100px; height: 100px; background: rgba(255,255,255,0.1); border-radius: 50%;"></div>
+                <div style="position: absolute; bottom: -30px; left: -30px; width: 120px; height: 120px; background: rgba(255,255,255,0.05); border-radius: 50%;"></div>
+            </div>
+            <div class="card-body p-0">
+                <div class="p-3 bg-light" style="border-bottom: 1px solid rgba(0,0,0,0.05);">
+                    <p class="small text-muted mb-0">Ilmu tentang etika dan spiritualitas dalam Islam</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item d-flex justify-content-between align-items-center p-3 border-0 border-bottom">
+                        <div class="d-flex align-items-center">
+                            <span class="badge bg-primary rounded-circle me-2" style="width: 8px; height: 8px; padding: 0;"></span>
+                            <span>Ta'limul Muta'allim</span>
+                        </div>
+                        <span class="badge bg-primary rounded-pill px-3">Dasar</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center p-3 border-0 border-bottom">
+                        <div class="d-flex align-items-center">
+                            <span class="badge bg-primary rounded-circle me-2" style="width: 8px; height: 8px; padding: 0;"></span>
+                            <span>Akhlaqul Banin</span>
+                        </div>
+                        <span class="badge bg-primary rounded-pill px-3">Dasar</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center p-3 border-0 border-bottom">
+                        <div class="d-flex align-items-center">
+                            <span class="badge bg-info rounded-circle me-2" style="width: 8px; height: 8px; padding: 0;"></span>
+                            <span>Bidayatul Hidayah</span>
+                        </div>
+                        <span class="badge bg-info rounded-pill px-3">Menengah</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center p-3 border-0">
+                        <div class="d-flex align-items-center">
+                            <span class="badge bg-secondary rounded-circle me-2" style="width: 8px; height: 8px; padding: 0;"></span>
+                            <span>Ihya' Ulumuddin</span>
+                        </div>
+                        <span class="badge bg-secondary rounded-pill px-3">Lanjutan</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Nahwu -->
+    <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="500" data-category="all">
+        <div class="card h-100 shadow-sm" style="border-radius: 15px; overflow: hidden; transition: transform 0.3s; border: none;">
+            <div class="card-header bg-danger text-white p-3" style="position: relative; overflow: hidden;">
+                <div class="d-flex align-items-center position-relative" style="z-index: 2;">
+                    <div style="width: 45px; height: 45px; border-radius: 50%; background: rgba(255,255,255,0.9); display: flex; align-items: center; justify-content: center; margin-right: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+                        <i class="fas fa-language text-danger" style="font-size: 1.2rem;"></i>
+                    </div>
+                    <h4 class="card-title mb-0 fw-bold">Nahwu</h4>
+                </div>
+                <div style="position: absolute; top: -20px; right: -20px; width: 100px; height: 100px; background: rgba(255,255,255,0.1); border-radius: 50%;"></div>
+                <div style="position: absolute; bottom: -30px; left: -30px; width: 120px; height: 120px; background: rgba(255,255,255,0.05); border-radius: 50%;"></div>
+            </div>
+            <div class="card-body p-0">
+                <div class="p-3 bg-light" style="border-bottom: 1px solid rgba(0,0,0,0.05);">
+                    <p class="small text-muted mb-0">Ilmu tentang tata bahasa Arab dan sintaksis</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item d-flex justify-content-between align-items-center p-3 border-0 border-bottom">
+                        <div class="d-flex align-items-center">
+                            <span class="badge bg-primary rounded-circle me-2" style="width: 8px; height: 8px; padding: 0;"></span>
+                            <span>Jurumiyah</span>
+                        </div>
+                        <span class="badge bg-primary rounded-pill px-3">Dasar</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center p-3 border-0 border-bottom">
+                        <div class="d-flex align-items-center">
+                            <span class="badge bg-info rounded-circle me-2" style="width: 8px; height: 8px; padding: 0;"></span>
+                            <span>Imrithi</span>
+                        </div>
+                        <span class="badge bg-info rounded-pill px-3">Menengah</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center p-3 border-0 border-bottom">
+                        <div class="d-flex align-items-center">
+                            <span class="badge bg-info rounded-circle me-2" style="width: 8px; height: 8px; padding: 0;"></span>
+                            <span>Mutammimah</span>
+                        </div>
+                        <span class="badge bg-info rounded-pill px-3">Menengah</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center p-3 border-0">
+                        <div class="d-flex align-items-center">
+                            <span class="badge bg-secondary rounded-circle me-2" style="width: 8px; height: 8px; padding: 0;"></span>
+                            <span>Alfiyah</span>
+                        </div>
+                        <span class="badge bg-secondary rounded-pill px-3">Lanjutan</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+        <!-- Shorof -->
+    <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200" data-category="all">
+        <div class="card h-100 shadow-sm" style="border-radius: 15px; overflow: hidden; transition: transform 0.3s; border: none;">
+            <div class="card-header bg-success text-white p-3" style="position: relative; overflow: hidden;">
+                <div class="d-flex align-items-center position-relative" style="z-index: 2;">
+                    <div style="width: 45px; height: 45px; border-radius: 50%; background: rgba(255,255,255,0.9); display: flex; align-items: center; justify-content: center; margin-right: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+                        <i class="fas fa-book-open text-success" style="font-size: 1.2rem;"></i>
+                    </div>
+                    <h4 class="card-title mb-0 fw-bold">Shorof</h4>
+                </div>
+                <div style="position: absolute; top: -20px; right: -20px; width: 100px; height: 100px; background: rgba(255,255,255,0.1); border-radius: 50%;"></div>
+                <div style="position: absolute; bottom: -30px; left: -30px; width: 120px; height: 120px; background: rgba(255,255,255,0.05); border-radius: 50%;"></div>
+            </div>
+            <div class="card-body p-0">
+                <div class="p-3 bg-light" style="border-bottom: 1px solid rgba(0,0,0,0.05);">
+                    <p class="small text-muted mb-0">Ilmu tentang perubahan kata dan morfologi bahasa Arab</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item d-flex justify-content-between align-items-center p-3 border-0 border-bottom">
+                        <div class="d-flex align-items-center">
+                            <span class="badge bg-primary rounded-circle me-2" style="width: 8px; height: 8px; padding: 0;"></span>
+                            <span>Amtsilat Tashrifiyah</span>
+                        </div>
+                        <span class="badge bg-primary rounded-pill px-3">Dasar</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center p-3 border-0 border-bottom">
+                        <div class="d-flex align-items-center">
+                            <span class="badge bg-primary rounded-circle me-2" style="width: 8px; height: 8px; padding: 0;"></span>
+                            <span>Matan Bina</span>
+                        </div>
+                        <span class="badge bg-primary rounded-pill px-3">Dasar</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center p-3 border-0 border-bottom">
+                        <div class="d-flex align-items-center">
+                            <span class="badge bg-info rounded-circle me-2" style="width: 8px; height: 8px; padding: 0;"></span>
+                            <span>Kailani</span>
+                        </div>
+                        <span class="badge bg-info rounded-pill px-3">Menengah</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center p-3 border-0">
+                        <div class="d-flex align-items-center">
+                            <span class="badge bg-secondary rounded-circle me-2" style="width: 8px; height: 8px; padding: 0;"></span>
+                            <span>Lamiyatul Af'al</span>
+                        </div>
+                        <span class="badge bg-secondary rounded-pill px-3">Lanjutan</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hadits -->
+    <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300" data-category="all">
+        <div class="card h-100 shadow-sm" style="border-radius: 15px; overflow: hidden; transition: transform 0.3s; border: none;">
+            <div class="card-header bg-primary text-white p-3" style="position: relative; overflow: hidden;">
+                <div class="d-flex align-items-center position-relative" style="z-index: 2;">
+                    <div style="width: 45px; height: 45px; border-radius: 50%; background: rgba(255,255,255,0.9); display: flex; align-items: center; justify-content: center; margin-right: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+                        <i class="fas fa-scroll text-primary" style="font-size: 1.2rem;"></i>
+                    </div>
+                    <h4 class="card-title mb-0 fw-bold">Hadits</h4>
+                </div>
+                <div style="position: absolute; top: -20px; right: -20px; width: 100px; height: 100px; background: rgba(255,255,255,0.1); border-radius: 50%;"></div>
+                <div style="position: absolute; bottom: -30px; left: -30px; width: 120px; height: 120px; background: rgba(255,255,255,0.05); border-radius: 50%;"></div>
+            </div>
+            <div class="card-body p-0">
+                <div class="p-3 bg-light" style="border-bottom: 1px solid rgba(0,0,0,0.05);">
+                    <p class="small text-muted mb-0">Perkataan, perbuatan, dan ketetapan Nabi Muhammad SAW</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item d-flex justify-content-between align-items-center p-3 border-0 border-bottom">
+                        <div class="d-flex align-items-center">
+                            <span class="badge bg-primary rounded-circle me-2" style="width: 8px; height: 8px; padding: 0;"></span>
+                            <span>Arba'in Nawawi</span>
+                        </div>
+                        <span class="badge bg-primary rounded-pill px-3">Dasar</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center p-3 border-0 border-bottom">
+                        <div class="d-flex align-items-center">
+                            <span class="badge bg-info rounded-circle me-2" style="width: 8px; height: 8px; padding: 0;"></span>
+                            <span>Bulughul Maram</span>
+                        </div>
+                        <span class="badge bg-info rounded-pill px-3">Menengah</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center p-3 border-0 border-bottom">
+                        <div class="d-flex align-items-center">
+                            <span class="badge bg-info rounded-circle me-2" style="width: 8px; height: 8px; padding: 0;"></span>
+                            <span>Riyadhus Shalihin</span>
+                        </div>
+                        <span class="badge bg-info rounded-pill px-3">Menengah</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center p-3 border-0">
+                        <div class="d-flex align-items-center">
+                            <span class="badge bg-secondary rounded-circle me-2" style="width: 8px; height: 8px; padding: 0;"></span>
+                            <span>Shahih Bukhari & Muslim</span>
+                        </div>
+                        <span class="badge bg-secondary rounded-pill px-3">Lanjutan</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mustholah Hadits -->
+    <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="400" data-category="all">
+        <div class="card h-100 shadow-sm" style="border-radius: 15px; overflow: hidden; transition: transform 0.3s; border: none;">
+            <div class="card-header bg-info text-white p-3" style="position: relative; overflow: hidden;">
+                <div class="d-flex align-items-center position-relative" style="z-index: 2;">
+                    <div style="width: 45px; height: 45px; border-radius: 50%; background: rgba(255,255,255,0.9); display: flex; align-items: center; justify-content: center; margin-right: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+                        <i class="fas fa-search text-info" style="font-size: 1.2rem;"></i>
+                    </div>
+                    <h4 class="card-title mb-0 fw-bold">Mustholah Hadits</h4>
+                </div>
+                <div style="position: absolute; top: -20px; right: -20px; width: 100px; height: 100px; background: rgba(255,255,255,0.1); border-radius: 50%;"></div>
+                <div style="position: absolute; bottom: -30px; left: -30px; width: 120px; height: 120px; background: rgba(255,255,255,0.05); border-radius: 50%;"></div>
+            </div>
+            <div class="card-body p-0">
+                <div class="p-3 bg-light" style="border-bottom: 1px solid rgba(0,0,0,0.05);">
+                    <p class="small text-muted mb-0">Ilmu tentang kaidah dan metodologi penelitian hadits</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item d-flex justify-content-between align-items-center p-3 border-0 border-bottom">
+                        <div class="d-flex align-items-center">
+                            <span class="badge bg-info rounded-circle me-2" style="width: 8px; height: 8px; padding: 0;"></span>
+                            <span>Nukhbatul Fikar</span>
+                        </div>
+                        <span class="badge bg-info rounded-pill px-3">Menengah</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center p-3 border-0">
+                        <div class="d-flex align-items-center">
+                            <span class="badge bg-secondary rounded-circle me-2" style="width: 8px; height: 8px; padding: 0;"></span>
+                            <span>Tadribul Rawi</span>
+                        </div>
+                        <span class="badge bg-secondary rounded-pill px-3">Lanjutan</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tafsir -->
+    <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="500" data-category="all">
+        <div class="card h-100 shadow-sm" style="border-radius: 15px; overflow: hidden; transition: transform 0.3s; border: none;">
+            <div class="card-header bg-warning text-dark p-3" style="position: relative; overflow: hidden;">
+                <div class="d-flex align-items-center position-relative" style="z-index: 2;">
+                    <div style="width: 45px; height: 45px; border-radius: 50%; background: rgba(255,255,255,0.9); display: flex; align-items: center; justify-content: center; margin-right: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+                        <i class="fas fa-book text-warning" style="font-size: 1.2rem;"></i>
+                    </div>
+                    <h4 class="card-title mb-0 fw-bold">Tafsir</h4>
+                </div>
+                <div style="position: absolute; top: -20px; right: -20px; width: 100px; height: 100px; background: rgba(255,255,255,0.1); border-radius: 50%;"></div>
+                <div style="position: absolute; bottom: -30px; left: -30px; width: 120px; height: 120px; background: rgba(255,255,255,0.05); border-radius: 50%;"></div>
+            </div>
+            <div class="card-body p-0">
+                <div class="p-3 bg-light" style="border-bottom: 1px solid rgba(0,0,0,0.05);">
+                    <p class="small text-muted mb-0">Ilmu tentang penjelasan dan penafsiran Al-Qur'an</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item d-flex justify-content-between align-items-center p-3 border-0 border-bottom">
+                        <div class="d-flex align-items-center">
+                            <span class="badge bg-info rounded-circle me-2" style="width: 8px; height: 8px; padding: 0;"></span>
+                            <span>Tafsir Jalalain</span>
+                        </div>
+                        <span class="badge bg-info rounded-pill px-3">Menengah</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center p-3 border-0">
+                        <div class="d-flex align-items-center">
+                            <span class="badge bg-secondary rounded-circle me-2" style="width: 8px; height: 8px; padding: 0;"></span>
+                            <span>Tafsir Munir</span>
+                        </div>
+                        <span class="badge bg-secondary rounded-pill px-3">Lanjutan</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+        <!-- Mantiq -->
+    <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300" data-category="all">
+        <div class="card h-100 shadow-sm" style="border-radius: 15px; overflow: hidden; transition: transform 0.3s; border: none;">
+            <div class="card-header bg-secondary text-white p-3" style="position: relative; overflow: hidden;">
+                <div class="d-flex align-items-center position-relative" style="z-index: 2;">
+                    <div style="width: 45px; height: 45px; border-radius: 50%; background: rgba(255,255,255,0.9); display: flex; align-items: center; justify-content: center; margin-right: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+                        <i class="fas fa-brain text-secondary" style="font-size: 1.2rem;"></i>
+                    </div>
+                    <h4 class="card-title mb-0 fw-bold">Mantiq</h4>
+                </div>
+                <div style="position: absolute; top: -20px; right: -20px; width: 100px; height: 100px; background: rgba(255,255,255,0.1); border-radius: 50%;"></div>
+                <div style="position: absolute; bottom: -30px; left: -30px; width: 120px; height: 120px; background: rgba(255,255,255,0.05); border-radius: 50%;"></div>
+            </div>
+            <div class="card-body p-0">
+                <div class="p-3 bg-light" style="border-bottom: 1px solid rgba(0,0,0,0.05);">
+                    <p class="small text-muted mb-0">Ilmu logika untuk mengasah kemampuan berpikir sistematis dan argumentasi</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item d-flex justify-content-between align-items-center p-3 border-0">
+                        <div class="d-flex align-items-center">
+                            <span class="badge bg-info rounded-circle me-2" style="width: 8px; height: 8px; padding: 0;"></span>
+                            <span>Sullam al-Munawraq</span>
+                        </div>
+                        <span class="badge bg-info rounded-pill px-3">Menengah</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+        <!-- Balaghah -->
+    <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="400" data-category="all">
+        <div class="card h-100 shadow-sm" style="border-radius: 15px; overflow: hidden; transition: transform 0.3s; border: none;">
+            <div class="card-header bg-purple text-white p-3" style="position: relative; overflow: hidden; background-color: #6f42c1;">
+                <div class="d-flex align-items-center position-relative" style="z-index: 2;">
+                    <div style="width: 45px; height: 45px; border-radius: 50%; background: rgba(255,255,255,0.9); display: flex; align-items: center; justify-content: center; margin-right: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+                        <i class="fas fa-feather-alt text-purple" style="font-size: 1.2rem; color: #6f42c1;"></i>
+                    </div>
+                    <h4 class="card-title mb-0 fw-bold">Balaghah</h4>
+                </div>
+                <div style="position: absolute; top: -20px; right: -20px; width: 100px; height: 100px; background: rgba(255,255,255,0.1); border-radius: 50%;"></div>
+                <div style="position: absolute; bottom: -30px; left: -30px; width: 120px; height: 120px; background: rgba(255,255,255,0.05); border-radius: 50%;"></div>
+            </div>
+            <div class="card-body p-0">
+                <div class="p-3 bg-light" style="border-bottom: 1px solid rgba(0,0,0,0.05);">
+                    <p class="small text-muted mb-0">Ilmu sastra Arab untuk memahami keindahan bahasa Al-Qur'an dan Hadits</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item d-flex justify-content-between align-items-center p-3 border-0">
+                        <div class="d-flex align-items-center">
+                            <span class="badge bg-info rounded-circle me-2" style="width: 8px; height: 8px; padding: 0;"></span>
+                            <span>Jauharul Maknun</span>
+                        </div>
+                        <span class="badge bg-info rounded-pill px-3">Menengah</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+        <!-- Munadzoroh -->
+    <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="500" data-category="all">
+        <div class="card h-100 shadow-sm" style="border-radius: 15px; overflow: hidden; transition: transform 0.3s; border: none;">
+            <div class="card-header bg-teal text-white p-3" style="position: relative; overflow: hidden; background-color: #20c997;">
+                <div class="d-flex align-items-center position-relative" style="z-index: 2;">
+                    <div style="width: 45px; height: 45px; border-radius: 50%; background: rgba(255,255,255,0.9); display: flex; align-items: center; justify-content: center; margin-right: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+                        <i class="fas fa-comments text-teal" style="font-size: 1.2rem; color: #20c997;"></i>
+                    </div>
+                    <h4 class="card-title mb-0 fw-bold">Munadzoroh</h4>
+                </div>
+                <div style="position: absolute; top: -20px; right: -20px; width: 100px; height: 100px; background: rgba(255,255,255,0.1); border-radius: 50%;"></div>
+                <div style="position: absolute; bottom: -30px; left: -30px; width: 120px; height: 120px; background: rgba(255,255,255,0.05); border-radius: 50%;"></div>
+            </div>
+            <div class="card-body p-0">
+                <div class="p-3 bg-light" style="border-bottom: 1px solid rgba(0,0,0,0.05);">
+                    <p class="small text-muted mb-0">Ilmu debat dan diskusi untuk mengembangkan kemampuan berargumentasi</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item d-flex justify-content-between align-items-center p-3 border-0 border-bottom">
+                        <div class="d-flex align-items-center">
+                            <span class="badge bg-info rounded-circle me-2" style="width: 8px; height: 8px; padding: 0;"></span>
+                            <span>Kitab Waladiyah</span>
+                        </div>
+                        <span class="badge bg-info rounded-pill px-3">Menengah</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center p-3 border-0">
+                        <div class="d-flex align-items-center">
+                            <span class="badge bg-info rounded-circle me-2" style="width: 8px; height: 8px; padding: 0;"></span>
+                            <span>Adabul Bahts wal Munadzoroh</span>
+                        </div>
+                        <span class="badge bg-info rounded-pill px-3">Menengah</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+
+<!-- Metode Pengajaran -->
+<section class="py-5 bg-light" id="metode-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 text-center mb-5" data-aos="fade-up">
+                <h2 class="section-title">Metode Pengajaran</h2>
+                <p class="lead">
+                    Sebagai pesantren salafiyah, kami menggunakan metode pengajaran tradisional.
+                    Salah satunya dengan menggunakan metode <strong>logat Jawa (makna gandul/pegon)</strong>
+                    sebagai alat bantu memahami teks kitab, sehingga santri lebih mudah menangkap
+                    arti dan maksud dari setiap lafadz dalam bahasa Arab.
+                </p>
+            </div>
+        </div>
+        <div class="row">
+            <!-- Bandongan -->
+            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="card h-100 border-0 shadow-sm rounded-3" style="background: white; border: 1px solid rgba(0,0,0,0.1);">
+                    <div class="card-body text-center p-4">
+                        <div class="rounded-circle bg-success bg-opacity-10 p-3 d-inline-flex mb-3" style="background: rgba(40, 167, 69, 0.1) !important;">
+                            <i class="fas fa-users text-success fa-2x"></i>
+                        </div>
+                        <h4 class="card-title mb-3 text-success">Bandongan</h4>
+                        <p class="card-text text-dark">
+                            Kyai atau ustadz membacakan kitab, menjelaskan makna dan isi kandungannya,
+                            sementara para santri menyimak dan memberi catatan pada kitab masing-masing.
+                            Metode ini efektif untuk menyampaikan pelajaran kepada banyak santri sekaligus.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sorogan -->
+            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="card h-100 border-0 shadow-sm rounded-3" style="background: white; border: 1px solid rgba(0,0,0,0.1);">
+                    <div class="card-body text-center p-4">
+                        <div class="rounded-circle bg-success bg-opacity-10 p-3 d-inline-flex mb-3" style="background: rgba(40, 167, 69, 0.1) !important;">
+                            <i class="fas fa-user-graduate text-success fa-2x"></i>
+                        </div>
+                        <h4 class="card-title mb-3 text-success">Sorogan</h4>
+                        <p class="card-text text-dark">
+                            Santri secara bergiliran maju menghadap kyai atau ustadz dengan membawa kitab.
+                            Santri membaca dan menerangkan isi kitab, lalu kyai menyimak, meluruskan,
+                            dan memberikan penjelasan tambahan. Metode ini melatih kedisiplinan dan ketelitian santri.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Halaqah -->
+            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="300">
+                <div class="card h-100 border-0 shadow-sm rounded-3" style="background: white; border: 1px solid rgba(0,0,0,0.1);">
+                    <div class="card-body text-center p-4">
+                        <div class="rounded-circle bg-success bg-opacity-10 p-3 d-inline-flex mb-3" style="background: rgba(40, 167, 69, 0.1) !important;">
+                            <i class="fas fa-circle text-success fa-2x"></i>
+                        </div>
+                        <h4 class="card-title mb-3 text-success">Halaqah</h4>
+                        <p class="card-text text-dark">
+                            Metode pembelajaran berbentuk diskusi kelompok kecil yang dipimpin santri.
+                            Para santri membahas suatu persoalan atau topik tertentu, sehingga dapat
+                            mengasah kemampuan berpikir kritis, logis, dan terarah.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bahtsul Masa'il -->
+            <div class="col-md-4 mb-4" data-aos="fade-up" data-aos-delay="400">
+                <div class="card h-100 border-0 shadow-sm rounded-3" style="background: white; border: 1px solid rgba(0,0,0,0.1);">
+                    <div class="card-body text-center p-4">
+                        <div class="rounded-circle bg-success bg-opacity-10 p-3 d-inline-flex mb-3" style="background: rgba(40, 167, 69, 0.1) !important;">
+                            <i class="fas fa-book-reader text-success fa-2x"></i>
+                        </div>
+                        <h4 class="card-title mb-3 text-success">Bahtsul Masa'il</h4>
+                        <p class="card-text text-dark">
+                            Forum resmi santri untuk mendiskusikan dan mencari solusi berbagai persoalan
+                            agama dengan merujuk kepada kitab-kitab klasik. Metode ini melatih santri
+                            menghubungkan ilmu dengan praktik kehidupan sehari-hari.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CSS untuk memperbaiki tampilan -->
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+<style>
+    /* Perbaikan font */
+    .arabic-text {
+        font-family: 'Amiri', serif;
+        direction: rtl;
+    }
+    
+    /* Perbaikan tata letak pinggir */
+    .container {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    
+    @media (min-width: 992px) {
+        .container {
+            padding-left: 30px;
+            padding-right: 30px;
+        }
+    }
+    
+    /* Animasi tambahan */
+    .card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+    }
+    
+    /* Perbaikan responsivitas */
+    @media (max-width: 768px) {
+        .section-title {
+            font-size: 1.8rem;
+        }
+        
+        .lead {
+            font-size: 1rem;
+        }
+        
+        .card-title {
+            font-size: 1.2rem;
+        }
+    }
+</style>
+<link rel="stylesheet" href="assets/css/hero.css">
+
+<!-- JS untuk memperbaiki interaksi -->
+<script>
+    // Perbaikan animasi scroll
+    document.addEventListener('DOMContentLoaded', function() {
+        // Tambahkan class active pada menu yang aktif
+        const currentLocation = location.pathname;
+        const menuItems = document.querySelectorAll('.navbar-nav .nav-link');
+        
+        menuItems.forEach(item => {
+            if(item.getAttribute('href') === currentLocation) {
+                item.classList.add('active');
+            }
+        });
+        
+        // Smooth scroll untuk anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    });
+</script>
+
+
+    <!-- Back to top button -->
+    <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="fas fa-arrow-up"></i></a>
+
+    <script src="assets/js/bootstrap.bundle.min.js" defer></script>
+    <script src="assets/js/custom.js" defer></script>
+    <!-- Removed external Bootstrap and AOS JS to prevent aborted requests -->
+    <script src="assets/js/animations.js" defer></script>
+    <script>
+        if (window.AOS && typeof AOS.init === 'function') {
+            AOS.init({
+                duration: 800,
+                easing: 'ease-out-cubic',
+                once: true,
+                offset: 100
+            });
+        }
+    </script>
+    <script>
+        // Highlight current day and add interactive features
+        document.addEventListener('DOMContentLoaded', function() {
+            // Highlight current day
+            const days = ['minggu', 'senin', 'selasa', 'rabu', 'kamis', 'jumat', 'sabtu'];
+            const today = new Date().getDay();
+            const currentDay = days[today];
+            
+            // Add hover effects to table rows
+            const dayRows = document.querySelectorAll('.day-row');
+            dayRows.forEach(row => {
+                if(row.getAttribute('data-day') === currentDay) {
+                    row.classList.add('current-day');
+                    
+                    // Animate the current day icon
+                    const icon = row.querySelector('.day-icon i');
+                    if(icon) {
+                        icon.classList.add('animate__animated', 'animate__pulse', 'animate__infinite');
+                    }
+                }
+                
+                // Add hover effect to all rows
+                row.addEventListener('mouseenter', function() {
+                    this.style.backgroundColor = 'rgba(25, 135, 84, 0.05)';
+                    
+                    // Scale up the icon
+                    const icon = this.querySelector('.day-icon');
+                    if(icon) {
+                        icon.style.transform = 'scale(1.2)';
+                    }
+                    
+                    // Highlight the book icons
+                    const bookIcons = this.querySelectorAll('.fa-book');
+                    bookIcons.forEach(icon => {
+                        icon.classList.add('animate__animated', 'animate__fadeIn');
+                    });
+                });
+                
+                row.addEventListener('mouseleave', function() {
+                    if(this.getAttribute('data-day') !== currentDay) {
+                        this.style.backgroundColor = '';
+                    }
+                    
+                    // Reset the icon
+                    const icon = this.querySelector('.day-icon');
+                    if(icon) {
+                        icon.style.transform = '';
+                    }
+                    
+                    // Remove highlight from book icons
+                    const bookIcons = this.querySelectorAll('.fa-book');
+                    bookIcons.forEach(icon => {
+                        icon.classList.remove('animate__animated', 'animate__fadeIn');
+                    });
+                });
+            });
+            
+            // Add pulse animation to time badges on hover
+            const timeBadges = document.querySelectorAll('.badge');
+            timeBadges.forEach(badge => {
+                badge.addEventListener('mouseenter', function() {
+                    this.classList.add('animate__animated', 'animate__pulse');
+                });
+                
+                badge.addEventListener('mouseleave', function() {
+                    this.classList.remove('animate__animated', 'animate__pulse');
+                });
+            });
+            
+            // Add smooth scroll to schedule section
+            const scheduleLinks = document.querySelectorAll('a[href="#jadwal"]');
+            scheduleLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    document.querySelector('.py-5.bg-light').scrollIntoView({ 
+                        behavior: 'smooth' 
+                    });
+                });
+            });
+        });
+    </script>
+    <!-- Back to Top Button -->
+    <button id="backToTop" aria-label="Kembali ke atas">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Floating WhatsApp Contact -->
+    <a class="floating-contact" href="https://wa.me/6281234567890" target="_blank" rel="noopener" aria-label="WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            easing: 'ease-out-cubic',
+            once: true,
+            offset: 100
+        });
+
+        // Preloader
+        window.addEventListener('load', function() {
+            const preloader = document.getElementById('preloader');
+            if (preloader) {
+                preloader.style.opacity = '0';
+                setTimeout(() => {
+                    preloader.style.display = 'none';
+                }, 500);
+            }
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(255, 255, 255, 0.98)';
+                navbar.style.boxShadow = '0 2px 20px rgba(0,0,0,0.1)';
+            } else {
+                navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+                navbar.style.boxShadow = 'none';
+            }
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Update current year
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // Footer reveal on scroll
+        (function() {
+            const footer = document.querySelector('.footer');
+            if (!footer || typeof IntersectionObserver === 'undefined') return;
+            const io = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        footer.classList.add('footer-visible');
+                        const cards = footer.querySelectorAll('.footer-content');
+                        cards.forEach((card, i) => {
+                            card.style.transitionDelay = `${i * 120}ms`;
+                        });
+                        io.disconnect();
+                    }
+                });
+            }, { threshold: 0.2 });
+            io.observe(footer);
+        })();
+
+        // Ripple effect for social icons
+        document.addEventListener('DOMContentLoaded', function () {
+            document.querySelectorAll('.footer .social-links a').forEach(link => {
+                link.addEventListener('click', function (e) {
+                    const rect = this.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const ripple = document.createElement('span');
+                    ripple.className = 'ripple';
+                    ripple.style.left = x + 'px';
+                    ripple.style.top = y + 'px';
+                    this.appendChild(ripple);
+                    setTimeout(() => ripple.remove(), 600);
+                });
+            });
+        });
+
+        // Back to top button
+        (function() {
+            const btn = document.getElementById('backToTop');
+            if (!btn) return;
+            const toggle = () => {
+                if (window.scrollY > 300) {
+                    btn.classList.add('show');
+                } else {
+                    btn.classList.remove('show');
+                }
+            };
+            window.addEventListener('scroll', toggle);
+            toggle();
+            btn.addEventListener('click', function() {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        })();
+
+        // Scroll progress bar width update
+        (function() {
+            const bar = document.getElementById('scrollProgress');
+            if (!bar) return;
+            const update = () => {
+                const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+                const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const progress = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
+                bar.style.width = progress + '%';
+            };
+            window.addEventListener('scroll', update);
+            window.addEventListener('resize', update);
+            update();
+        })();
+    </script>
+</body>
+</html>
+
+
+
+
+
+
