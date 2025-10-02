@@ -1075,3 +1075,56 @@ p {
 .footer-wave path {
     fill: var(--gray-900);
 }
+
+/* ===================== Responsive Enhancements ===================== */
+/* Global media elements scale to container width */
+img, video, canvas, svg {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+iframe {
+    max-width: 100%;
+}
+
+/* Utility to mimic Bootstrap img-fluid where missing */
+.img-fluid {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Make primary action buttons friendlier on small screens */
+@media (max-width: 576px) {
+    .hero-btn { width: 100%; }
+    .navbar .container { padding-left: 1rem; padding-right: 1rem; }
+    .section-title { font-size: 1.5rem; }
+    .lead { font-size: 1rem; }
+}
+
+/* Tighter spacing and safer image scaling on tablets */
+@media (max-width: 768px) {
+    .feature-box { padding: 0.75rem 1rem; }
+    .program-card { margin-bottom: 1rem; }
+    .gallery-item img { width: 100%; height: auto; }
+}
+
+/* Ensure videos fit within cards/containers */
+video {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-md);
+}
+
+/* Prevent horizontal overflow on tables or long content */
+.table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Responsive grid fallback for non-Bootstrap elements */
+.grid-responsive {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1rem;
+}
