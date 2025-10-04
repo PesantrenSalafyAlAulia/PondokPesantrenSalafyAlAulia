@@ -121,9 +121,9 @@
 }
 .day-block.hidden { display: none !important; }
 
-/* Hapus tampilan header hari (ikon + judul) */
-.day-block > td > .d-flex.align-items-center.mb-3 { display: none !important; }
-.day-block .day-icon { display: none !important; }
+/* Tampilkan header hari (ikon + judul) pada semua ukuran layar */
+.day-block > td > .d-flex.align-items-center.mb-3 { display: flex !important; }
+.day-block .day-icon { display: inline-flex !important; }
 
 /* Hilangkan label hari pada tampilan mobile */
 @media (max-width: 768px) {
