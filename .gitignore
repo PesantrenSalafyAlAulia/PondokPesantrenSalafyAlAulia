@@ -17,3 +17,29 @@ build/
 
 # Cache
 .cache/
+
+# Secrets & private data
+.env
+.env.*
+secrets/
+*.key
+*.pem
+*.p12
+*.crt
+*.cer
+*.der
+*.jks
+
+# System auth artifacts
+.ssh/
+id_* 
+
+# Temporary archives/binaries
+*.zip
+*.7z
+*.rar
+*.tar
+*.gz
+*.bz2
+*.xz
+*.bin
