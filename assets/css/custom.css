@@ -806,7 +806,11 @@ p {
     }
     
     .navbar-brand span {
-        display: none;
+        display: inline;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 60vw;
     }
     
     .gallery-item img {

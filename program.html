@@ -120,6 +120,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="kontak.html"><i class="fas fa-envelope me-1"></i> Kontak</a>
                     </li>
+                    <li class="nav-item d-none d-lg-flex align-items-center ms-2">
+                        <a class="nav-link p-0 d-flex align-items-center" href="https://nu.or.id/" target="_blank" rel="noopener" aria-label="Website Nahdlatul Ulama">
+                            <img src="foto/NU.png" alt="Logo NU" class="d-inline-block align-middle" style="height: 24px; width: auto; opacity: 0.95;" loading="lazy" decoding="async" />
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -133,9 +138,8 @@
                     <h1 class="display-3 fw-bold mb-3">Program Pendidikan</h1>
                     <div class="mx-auto mb-4" style="width:60px;height:3px;background:linear-gradient(90deg,transparent,#28a745,transparent);"></div>
                     <div class="hero-chips d-flex justify-content-center flex-wrap gap-2 mb-4">
-                        <span class="badge bg-success rounded-pill"><i class="fas fa-quran me-1"></i> Tahfidz</span>
-                        <span class="badge bg-success rounded-pill"><i class="fas fa-book me-1"></i> Kitab Kuning</span>
-                        <span class="badge bg-success rounded-pill"><i class="fas fa-language me-1"></i> Bahasa Arab</span>
+                        <span class="badge rounded-pill bg-transparent border border-success text-success"><i class="fas fa-book me-1"></i> Kitab Kuning</span>
+                        <span class="badge rounded-pill bg-transparent border border-success text-success"><i class="fas fa-heart me-1"></i> Akhlak</span>
                     </div>
                     <p class="lead mb-5">Mengenal berbagai program pendidikan berkualitas di Pondok Pesantren Assalafi Al Aulia dengan kurikulum yang komprehensif dan berorientasi pada pembentukan karakter Islami.</p>
                     <div class="mt-5">
@@ -1143,8 +1147,11 @@
             });
         });
 
-        // Update current year
-        document.getElementById('current-year').textContent = new Date().getFullYear();
+        // Update current year (safe if element exists)
+        const cy = document.getElementById('current-year');
+        if (cy) {
+            cy.textContent = new Date().getFullYear();
+        }
 
         // Footer reveal on scroll
         (function() {
