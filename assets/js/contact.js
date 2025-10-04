@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const subjek = document.getElementById('subjek');
   const pesan = document.getElementById('pesan');
 
-  const targetWaNumber = '6281234567890'; // gunakan nomor WA yang aktif
+  const targetWaNumber = '6282116959078'; // gunakan nomor WA yang aktif
 
   // Real-time validation for message field
   if (pesan) {
