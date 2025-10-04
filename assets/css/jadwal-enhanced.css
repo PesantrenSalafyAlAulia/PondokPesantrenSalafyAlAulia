@@ -11,6 +11,31 @@
   --font-heading: 'Montserrat', 'Poppins', system-ui, -apple-system, 'Segoe UI', sans-serif;
 }
 
+/* Mobile fallback: keep table semantics and enable horizontal scroll
+   to avoid broken layout on small phones. Overrides inline styles safely. */
+@media (max-width: 600px) {
+  /* Ensure native table layout instead of cardifying rows */
+  #jadwal-section .table thead { display: table-header-group !important; }
+  #jadwal-section .table tbody { display: table-row-group !important; }
+  #jadwal-section .table tr { display: table-row !important; }
+  #jadwal-section .table td,
+  #jadwal-section .table th { display: table-cell !important; white-space: nowrap; }
+
+  /* Let table scroll horizontally inside its wrapper */
+  #jadwal-section .table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  /* Relax fixed layout and give minimum width so columns keep structure */
+  #jadwal-section .table { table-layout: auto !important; min-width: 520px; }
+
+  /* Compact UI tweaks for small screens */
+  #jadwal-section .day-icon { width: 36px; height: 36px; }
+  #jadwal-section .badge { font-size: 0.85rem; }
+  #jadwal-section .list-unstyled li { margin-bottom: 4px; }
+  #jadwal-section .time-col { min-width: 150px; border-left: none; padding-left: 0; }
+}
+
 /* Hero refinements */
 .hero-section {
   position: relative;
