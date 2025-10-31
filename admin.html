@@ -1,0 +1,2018 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Admin Panel - Kelola Galeri Pondok Pesantren Assalafi Al Aulia">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Admin Panel - Pondok Pesantren Assalafi Al Aulia</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="foto/logo.jpg" type="image/jpeg">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" onerror="this.onerror=null; this.src='https://unpkg.com/@supabase/supabase-js@2'"></script>
+    <script>
+      window.SUPABASE_URL = 'https://avtatuxrcjostwpwopol.supabase.co';
+      window.SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF2dGF0dXhyY2pvc3R3cHdvcG9sIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjEzOTE2NjMsImV4cCI6MjA3Njk2NzY2M30.WIwgtWZjdN08sgPFijhbfk603NXCkSbBYutSj_0HJDg';
+
+      // Loader Supabase JS dengan fallback dan timeout
+      window.loadSupabaseLib = function(timeoutMs = 5000) {
+        return new Promise((resolve, reject) => {
+          if (window.supabase && typeof window.supabase.createClient === 'function') return resolve();
+          const cdn1 = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';
+          const cdn2 = 'https://unpkg.com/@supabase/supabase-js@2';
+          let settled = false;
+          const done = () => { if (!settled) { settled = true; resolve(); } };
+          const fail = (err) => { if (!settled) { settled = true; reject(err); } };
+          const s1 = document.createElement('script');
+          s1.src = cdn1;
+          s1.async = true;
+          s1.onload = () => done();
+          s1.onerror = () => {
+            const s2 = document.createElement('script');
+            s2.src = cdn2;
+            s2.async = true;
+            s2.onload = () => done();
+            s2.onerror = (e) => fail(new Error('Gagal memuat Supabase JS dari CDN'));
+            document.head.appendChild(s2);
+          };
+          document.head.appendChild(s1);
+          setTimeout(() => {
+            if (!window.supabase) fail(new Error('Timeout memuat Supabase JS'));
+          }, timeoutMs);
+        });
+      };
+
+      window.initSupabaseClient = async function() {
+        try {
+          await window.loadSupabaseLib();
+          const { createClient } = window.supabase;
+          if (!window.SUPABASE_URL || !window.SUPABASE_ANON_KEY) {
+            console.warn('SUPABASE_URL/ANON_KEY belum disetel');
+            return null;
+          }
+          window.supabaseClient = createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY);
+          return window.supabaseClient;
+        } catch (e) {
+          console.error('Error initializing Supabase:', e);
+          return null;
+        }
+      };
+
+      // Inisialisasi awal non-blocking
+      window.initSupabaseClient();
+
+      // Buat objek auth global yang memastikan client siap
+      window.auth = {
+        signIn: async (email, password) => {
+          const client = await window.initSupabaseClient();
+          if (!client) return { data: null, error: new Error('Supabase belum dikonfigurasi') };
+          try {
+            return await client.auth.signInWithPassword({ email, password });
+          } catch (error) {
+            return { data: null, error };
+          }
+        },
+        signInWithPassword: async (email, password) => {
+          const client = await window.initSupabaseClient();
+          if (!client) return { data: null, error: new Error('Supabase belum dikonfigurasi') };
+          try {
+            return await client.auth.signInWithPassword({ email, password });
+          } catch (error) {
+            return { data: null, error };
+          }
+        }
+      };
+    </script>
+    
+    <!-- React & Babel -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js" onerror="this.onerror=null; this.src='https://cdn.jsdelivr.net/npm/react@18/umd/react.development.js'"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" onerror="this.onerror=null; this.src='https://cdn.jsdelivr.net/npm/react-dom@18/umd/react-dom.development.js'"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js" onerror="this.onerror=null; this.src='https://cdn.jsdelivr.net/npm/@babel/standalone/babel.min.js'"></script>
+    
+    <!-- Definisi Komponen Admin -->
+    <script type="text/babel">
+        // Definisikan AdminDashboard terlebih dahulu
+        const AdminDashboard = ({ user, onLogout }) => {
+            return (
+                <div className="bg-white shadow-sm border-b border-gray-200">
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div className="flex justify-between items-center py-4">
+                            <div className="flex items-center">
+                                <img src="foto/logo.jpg" alt="Logo" className="h-10 w-10 rounded-full object-cover mr-3" />
+                                <div>
+                                    <h1 className="text-xl font-semibold text-gray-900">Admin Panel</h1>
+                                    <p className="text-sm text-gray-500">Kelola Galeri Pesantren</p>
+                                </div>
+                            </div>
+                            <div className="flex items-center space-x-4">
+                                <span className="text-sm text-gray-600">{user?.email}</span>
+                                <button
+                                    onClick={onLogout}
+                                    className="px-4 py-2 text-sm font-medium text-red-700 bg-red-50 rounded-lg hover:bg-red-100 transition-colors"
+                                >
+                                    <i className="fas fa-sign-out-alt mr-2"></i>
+                                    Keluar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+        
+        // Definisikan AdminDashboardWrapped (modernized)
+        const AdminDashboardWrapped = ({ user, onLogout }) => {
+            const [stats, setStats] = React.useState({ total: 0, categories: 0, recent: 0 });
+            React.useEffect(() => {
+                const client = window.supabaseClient;
+                if (!client) return;
+                (async () => {
+                    try {
+                        const { data, count, error } = await client
+                            .from('gallery')
+                            .select('id, category, upload_date', { count: 'exact' })
+                            .order('upload_date', { ascending: false })
+                            .limit(500);
+                        if (error) throw error;
+                        const total = typeof count === 'number' ? count : (data?.length || 0);
+                        const catSet = new Set((data || []).map(r => (r.category || '').trim()).filter(Boolean));
+                        const now = new Date();
+                        const y = now.getFullYear();
+                        const m = now.getMonth();
+                        const recent = (data || []).filter(r => {
+                            const d = r.upload_date ? new Date(r.upload_date) : null;
+                            return d && d.getFullYear() === y && d.getMonth() === m;
+                        }).length;
+                        setStats({ total, categories: catSet.size, recent });
+                    } catch (e) {
+                        console.warn('Gagal memuat statistik:', e);
+                    }
+                })();
+            }, []);
+
+            return (
+                <div className="min-h-screen bg-gradient-to-br from-gray-50 via-green-50 to-blue-50">
+                    <AdminDashboard user={user} onLogout={onLogout} />
+                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                        {/* Stats cards */}
+                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                            <div className="bg-white/80 backdrop-blur rounded-xl shadow p-6 ring-1 ring-white/50">
+                                <div className="flex items-center">
+                                    <div className="w-10 h-10 rounded-lg bg-green-100 text-green-600 flex items-center justify-center mr-4">
+                                        <i className="fas fa-images"></i>
+                                    </div>
+                                    <div>
+                                        <div className="text-sm text-gray-500">Total Foto</div>
+                                        <div className="text-2xl font-semibold text-gray-900">{stats.total}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="bg-white/80 backdrop-blur rounded-xl shadow p-6 ring-1 ring-white/50">
+                                <div className="flex items-center">
+                                    <div className="w-10 h-10 rounded-lg bg-blue-100 text-blue-600 flex items-center justify-center mr-4">
+                                        <i className="fas fa-tags"></i>
+                                    </div>
+                                    <div>
+                                        <div className="text-sm text-gray-500">Kategori</div>
+                                        <div className="text-2xl font-semibold text-gray-900">{stats.categories}</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="bg-white/80 backdrop-blur rounded-xl shadow p-6 ring-1 ring-white/50">
+                                <div className="flex items-center">
+                                    <div className="w-10 h-10 rounded-lg bg-emerald-100 text-emerald-600 flex items-center justify-center mr-4">
+                                        <i className="fas fa-calendar"></i>
+                                    </div>
+                                    <div>
+                                        <div className="text-sm text-gray-500">Unggahan Bulan Ini</div>
+                                        <div className="text-2xl font-semibold text-gray-900">{stats.recent}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Welcome and quick actions */}
+                        <div className="bg-white/80 backdrop-blur rounded-xl shadow p-6 ring-1 ring-white/50">
+                            <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between">
+                                <div className="mb-6 lg:mb-0">
+                                    <h2 className="text-2xl font-bold text-gray-900">Selamat Datang di Admin Panel</h2>
+                                    <p className="text-gray-600 mt-2">Kelola galeri foto pesantren, upload gambar baru, dan atur kategori.</p>
+                                </div>
+                                <div className="flex items-center gap-3">
+                                    <a href="galeri.html" target="_blank" className="inline-flex items-center px-4 py-2 rounded-lg bg-green-600 text-white hover:bg-green-700">
+                                        <i className="fas fa-external-link-alt mr-2"></i>
+                                        Lihat Galeri Publik
+                                    </a>
+                                    <a href="#" className="inline-flex items-center px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700">
+                                        <i className="fas fa-upload mr-2"></i>
+                                        Upload Foto
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+    </script>
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        :root {
+            --primary: #2563eb; /* blue-600 */
+            --primary-700: #1d4ed8;
+            --accent: #10b981; /* emerald-500 */
+            --bg: #f8fafc; /* slate-50 */
+            --text: #0f172a; /* slate-900 */
+        }
+        .card {
+            border-radius: 0.75rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            border: 1px solid #e5e7eb;
+            background: #fff;
+        }
+        .btn-primary {
+            background: var(--primary);
+            color: #fff;
+        }
+        .btn-primary:hover { background: var(--primary-700); }
+        .table-header {
+            background: #f1f5f9;
+        }
+        .table-row:hover { background: #f8fafc; }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 3px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        
+        /* Loading animation */
+        .animate-pulse {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+            }
+            50% {
+                opacity: .5;
+            }
+        }
+        
+        /* Mobile optimizations */
+        @media (max-width: 768px) {
+            .mobile-optimized {
+                touch-action: manipulation;
+            }
+        }
+        
+        /* Drag and drop styles */
+        .drag-active {
+            border-color: #3b82f6 !important;
+            background-color: #eff6ff !important;
+        }
+        
+        /* Image preview styles */
+        .image-preview {
+            transition: transform 0.2s ease-in-out;
+        }
+        
+        .image-preview:hover {
+            transform: scale(1.02);
+        }
+        
+        /* Notification animations */
+        .notification-enter {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+        
+        .notification-enter-active {
+            transform: translateX(0);
+            opacity: 1;
+            transition: all 0.3s ease-out;
+        }
+        
+        .notification-exit {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        
+        .notification-exit-active {
+            transform: translateX(100%);
+            opacity: 0;
+            transition: all 0.3s ease-in;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 mobile-optimized">
+    <!-- App Container -->
+    <div id="admin-app"></div>
+    
+    <!-- Loading Fallback -->
+     <div id="loading-fallback" class="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 flex items-center justify-center" style="display:none">
+         <div class="text-center">
+             <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-green-500 mx-auto mb-4"></div>
+             <p class="text-gray-600">Memuat admin panel...</p>
+         </div>
+     </div>
+     <script>
+       // Immediate fallback: hapus loading setelah DOM ready (tidak bergantung Babel)
+       document.addEventListener('DOMContentLoaded', () => {
+         setTimeout(() => {
+           const lf = document.getElementById('loading-fallback');
+           if (lf && lf.style.display !== 'none') {
+             lf.style.display = 'none';
+             console.log('Loading fallback dihapus setelah DOM ready');
+           }
+         }, 1000);
+       });
+       
+       // Safety timeout: jika library dari CDN gagal, hentikan spinner agar tidak memuat terus
+       setTimeout(() => {
+         const libsReady = !!(window.React && window.ReactDOM && window.Babel);
+         if (!libsReady) {
+           const lf = document.getElementById('loading-fallback');
+           if (lf) lf.style.display = 'none';
+           console.warn('CDN libraries belum termuat. Periksa koneksi atau firewall ke unpkg/jsDelivr.');
+           // Beri tahu pengguna secara sederhana
+           alert('Gagal memuat library dari CDN. Coba hard reload (Ctrl+Shift+R) atau pastikan koneksi ke unpkg/jsDelivr tidak diblokir.');
+         }
+       }, 5000);
+     </script>
+    <!-- Scripts -->
+    <script type="text/babel">
+        // Global error capture for diagnostics
+        window.__errors = [];
+        window.addEventListener('error', (e) => {
+            window.__errors.push({ type: 'error', message: e.message, source: e.filename, line: e.lineno, col: e.colno });
+            console.error('Global error:', e.message);
+        });
+        window.addEventListener('unhandledrejection', (e) => {
+            window.__errors.push({ type: 'unhandledrejection', message: e.reason?.message || String(e.reason) });
+            console.error('Unhandled rejection:', e.reason);
+        });
+
+        // Reload guard: throttle reload calls to prevent infinite loops
+        (() => {
+            const originalReload = typeof window.location.reload === 'function' ? window.location.reload.bind(window.location) : null;
+            let lastReload = 0;
+            // Jangan override properti read-only reload; gunakan helper aman
+            window.__safeReload = (...args) => {
+                const now = Date.now();
+                if (now - lastReload < 5000) {
+                    console.warn('Reload diblokir: terlalu sering.');
+                    return;
+                }
+                lastReload = now;
+                if (originalReload) originalReload(...args);
+            };
+        })();
+    
+        const { useState, useEffect } = React;
+    
+        // Dev mode: bypass login when ?dev=1 is in URL
+        const DEV_MODE = new URLSearchParams(window.location.search).get('dev') === '1';
+    
+        // Supabase Client Configuration (safe init)
+        const supabaseUrl = window.SUPABASE_URL || 'YOUR_SUPABASE_URL';
+        const supabaseAnonKey = window.SUPABASE_ANON_KEY || 'YOUR_SUPABASE_ANON_KEY';
+    
+        const isValidSupabaseConfig = (url, key) => {
+            return typeof url === 'string' &&
+              url.startsWith('https://') &&
+              url.includes('.supabase.co') &&
+              typeof key === 'string' && key.length > 20 &&
+              !/YOUR_SUPABASE/i.test(url) && !/YOUR_SUPABASE/i.test(key);
+        };
+    
+        let supabase = null;
+        try {
+            const hasSupabaseLib = typeof window !== 'undefined' && window.supabase && typeof window.supabase.createClient === 'function';
+            if (hasSupabaseLib && isValidSupabaseConfig(supabaseUrl, supabaseAnonKey)) {
+                supabase = window.supabase.createClient(supabaseUrl, supabaseAnonKey, {
+                    auth: { autoRefreshToken: true, persistSession: true, detectSessionInUrl: true },
+                });
+            } else {
+                if (!hasSupabaseLib) {
+                    console.warn('Library Supabase belum dimuat. Pastikan CDN @supabase/supabase-js@2 telah ter-load sebelum script utama.');
+                } else {
+                    console.warn('Supabase belum dikonfigurasi dengan benar. Fitur login/storage dinonaktifkan sementara.');
+                }
+            }
+        } catch (e) {
+            console.error('Gagal inisialisasi Supabase:', e);
+            supabase = null;
+        }
+    
+        // Timeout helper to prevent hanging requests - optimized for faster response (max 2 seconds)
+        const withTimeout = (promise, ms = 2000, name = 'operation') => {
+            return Promise.race([
+                promise,
+                new Promise((_, reject) => setTimeout(() => reject(new Error(`Timeout ${name} setelah ${ms}ms`)), ms)),
+            ]);
+        };
+    
+        // Map Supabase errors to user-friendly messages
+        const mapSupabaseError = (error) => {
+            const msg = error?.message || String(error);
+            if (/Invalid login credentials/i.test(msg)) return 'Email atau password salah. Periksa kembali email dan password Anda.';
+            if (/FetchError|NetworkError|Failed to fetch|timeout/i.test(msg)) return 'Koneksi ke server gagal. Periksa koneksi internet Anda atau coba lagi dalam beberapa saat.';
+            if (/permission|not authorized|Unauthorized|Forbidden/i.test(msg)) return 'Akses tidak diizinkan. Akun Anda mungkin tidak memiliki izin yang cukup.';
+            if (/timeout/i.test(msg)) return 'Server tidak merespons dalam waktu yang diharapkan. Silakan coba lagi.';
+            return msg;
+        };
+    
+        const STORAGE_BUCKET = 'galeri-pesantren';
+    
+        // Auth helpers (guard when supabase not configured)
+        const ensureSupabaseClient = () => {
+          // Return immediately if a client already exists
+          if (window.supabaseClient && window.supabaseClient.auth) return window.supabaseClient;
+          try {
+            // Guard against null/undefined global `supabase`
+            if (typeof supabase !== 'undefined' && supabase && typeof supabase.createClient === 'function' && window.SUPABASE_URL && window.SUPABASE_ANON_KEY) {
+              window.supabaseClient = supabase.createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY);
+            }
+          } catch (e) {
+            console.warn('Failed to (re)create Supabase client:', e);
+          }
+          return window.supabaseClient || null;
+        };
+    
+        const auth = {
+          signIn: async (email, password) => {
+            const client = ensureSupabaseClient();
+            if (!client) return { data: null, error: new Error('Supabase belum dikonfigurasi') };
+            try {
+              const signInPromise = client.auth?.signInWithPassword
+                ? client.auth.signInWithPassword({ email, password })
+                : client.auth?.signIn
+                  ? client.auth.signIn({ email, password })
+                  : Promise.reject(new Error('Auth API tidak tersedia'));
+              const { data, error } = await withTimeout(signInPromise, 2000, 'signIn');
+              return { data, error };
+            } catch (error) {
+              return { data: null, error };
+            }
+          },
+          // Backward-compatible alias: some older code may call auth.signInWithPassword
+          signInWithPassword: async (email, password) => {
+            const client = ensureSupabaseClient();
+            if (!client) return { data: null, error: new Error('Supabase belum dikonfigurasi') };
+            try {
+              const signInPromise = client.auth?.signInWithPassword
+                ? client.auth.signInWithPassword({ email, password })
+                : client.auth?.signIn
+                  ? client.auth.signIn({ email, password })
+                  : Promise.reject(new Error('Auth API tidak tersedia'));
+              const { data, error } = await withTimeout(signInPromise, 2000, 'signIn');
+              return { data, error };
+            } catch (error) {
+              return { data: null, error };
+            }
+          },
+          signOut: async () => {
+            const client = ensureSupabaseClient();
+            if (!client) return { error: null };
+            try {
+              const { error } = await withTimeout(client.auth.signOut(), 2000, 'signOut');
+              return { error };
+            } catch (error) {
+              return { error };
+            }
+          },
+          getCurrentUser: async () => {
+            const client = ensureSupabaseClient();
+            if (!client) return { user: null, error: null };
+            try {
+              if (client.auth.getUser) {
+                const { data: { user }, error } = await withTimeout(client.auth.getUser(), 2000, 'getUser');
+                return { user, error };
+              } else {
+                const user = typeof client.auth.user === 'function' ? client.auth.user() : null;
+                return { user, error: null };
+              }
+            } catch (error) {
+              return { user: null, error };
+            }
+          },
+        };
+    
+        // Expose auth globally for legacy code
+        window.auth = auth;
+    
+        // Storage helpers (guard when supabase not configured)
+        const storage = {
+            uploadImage: async (file, fileName) => {
+                if (!supabase) return { data: null, error: new Error('Supabase belum dikonfigurasi') };
+                try {
+                    const { data, error } = await withTimeout(
+                        supabase.storage.from(STORAGE_BUCKET).upload(fileName, file, { cacheControl: '3600', upsert: false }),
+                        15000,
+                        'uploadImage'
+                    );
+                    return { data, error };
+                } catch (error) {
+                    return { data: null, error };
+                }
+            },
+            deleteImage: async (fileName) => {
+                if (!supabase) return { data: null, error: new Error('Supabase belum dikonfigurasi') };
+                try {
+                    const { data, error } = await withTimeout(
+                        supabase.storage.from(STORAGE_BUCKET).remove([fileName]),
+                        10000,
+                        'deleteImage'
+                    );
+                    return { data, error };
+                } catch (error) {
+                    return { data: null, error };
+                }
+            },
+            getPublicUrl: (fileName) => {
+                if (!supabase) return '';
+                const { data } = supabase.storage.from(STORAGE_BUCKET).getPublicUrl(fileName);
+                return data.publicUrl;
+            },
+            listImages: async () => {
+                if (!supabase) return { data: [], error: null };
+                try {
+                    const { data, error } = await withTimeout(
+                        supabase.storage.from(STORAGE_BUCKET).list('', { limit: 100, offset: 0, sortBy: { column: 'created_at', order: 'desc' } }),
+                        10000,
+                        'listImages'
+                    );
+                    return { data, error };
+                } catch (error) {
+                    return { data: null, error };
+                }
+            },
+        };
+    
+        // Admin App
+        const AdminApp = () => {
+            const [currentUser, setCurrentUser] = useState(null);
+            const [isLoading, setIsLoading] = useState(false);
+            const [showLogin, setShowLogin] = useState(true);
+    
+            // Bypass login sepenuhnya saat dev mode diaktifkan
+            if (DEV_MODE) {
+                return <AdminDashboardWrapped user={{ email: 'alaulia' }} onLogout={() => {}} />;
+            }
+    
+            useEffect(() => {
+                checkAuthStatus();
+            }, []);
+    
+            const checkAuthStatus = async () => {
+                try {
+                    const { user } = await auth.getCurrentUser();
+                    if (user) {
+                        setCurrentUser(user);
+                        setShowLogin(false);
+                    } else {
+                        setShowLogin(true);
+                    }
+                } catch (error) {
+                    console.error('Auth check error:', error);
+                    setShowLogin(true);
+                } finally {
+                    setIsLoading(false);
+                }
+            };
+    
+            const handleLogin = async (email, password) => {
+                const { data, error } = await auth.signIn(email, password);
+                if (data?.user && !error) {
+                    setCurrentUser(data.user);
+                    setShowLogin(false);
+                    return { success: true };
+                }
+                return { success: false, error: error?.message || 'Login gagal' };
+            };
+    
+            const handleLogout = async () => {
+                await auth.signOut();
+                setCurrentUser(null);
+                setShowLogin(true);
+            };
+    
+            if (showLogin) {
+                return <LoginComponent onLogin={handleLogin} />;
+            }
+    
+            // Ganti penggunaan AdminDashboard dengan AdminDashboardWrapped di AdminApp
+            return <AdminDashboardWrapped user={currentUser} onLogout={handleLogout} />;
+        };
+    
+        // Login Component (modernized UI)
+        const LoginComponent = ({ onLogin }) => {
+            const [email, setEmail] = useState('');
+            const [password, setPassword] = useState('');
+            const [showPassword, setShowPassword] = useState(false);
+            const [isLoading, setIsLoading] = useState(false);
+            const [error, setError] = useState('');
+            const [creating, setCreating] = useState(false);
+            const [createMsg, setCreateMsg] = useState('');
+
+            const isSupabaseConfigured = !!supabase;
+
+            const handleSubmit = async (e) => {
+                e.preventDefault();
+                setIsLoading(true);
+                setError('');
+                const result = await onLogin(email, password);
+                if (!result.success) setError(mapSupabaseError({ message: result.error }));
+                setIsLoading(false);
+            };
+
+            return (
+                <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-white to-blue-50 flex items-center justify-center p-4 relative overflow-hidden">
+                    {/* decorative backdrop */}
+                    <div className="absolute -top-20 -left-20 w-72 h-72 bg-emerald-200 rounded-full blur-3xl opacity-30"></div>
+                    <div className="absolute -bottom-24 -right-24 w-80 h-80 bg-blue-200 rounded-full blur-3xl opacity-30"></div>
+
+                    <div className="max-w-md w-full relative">
+                        <div className="bg-white/80 backdrop-blur-xl rounded-2xl shadow-xl p-8 ring-1 ring-white/50">
+                            <div className="text-center mb-8">
+                                <img src="foto/logo.jpg" alt="Logo" className="mx-auto h-16 w-16 rounded-full object-cover mb-4 shadow-md" />
+                                <h2 className="text-3xl font-bold text-gray-900 mb-1">Admin Panel</h2>
+                                <p className="text-gray-600">Masuk untuk mengelola galeri pesantren</p>
+                            </div>
+
+                            {!isSupabaseConfigured && (
+                                <div className="mb-6 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+                                    <div className="flex items-start">
+                                        <i className="fas fa-exclamation-triangle text-yellow-600 mr-2 mt-0.5"></i>
+                                        <div>
+                                            <span className="text-yellow-700 text-sm">
+                                                Supabase belum dikonfigurasi. Update URL dan anon key di file <code>supabaseClient.js</code> atau langsung pada admin.html.
+                                            </span>
+                                            <div className="mt-3 text-xs text-yellow-700">
+                                                <div className="font-semibold">Contoh konfigurasi cepat (tempel sebelum script utama):</div>
+                                                <pre className="mt-1 p-2 bg-yellow-100 rounded">{'<script>\nwindow.SUPABASE_URL = \'https://YOUR-PROJECT.supabase.co\';\nwindow.SUPABASE_ANON_KEY = \'YOUR_ANON_KEY\';\n<\\/script>'}</pre>
+                                                <div className="mt-2">Pastikan URL valid dan anon key aktif (Settings → API di Supabase).</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+
+                            {error && (
+                                <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
+                                    <div className="flex items-center">
+                                        <i className="fas fa-exclamation-circle text-red-500 mr-2"></i>
+                                        <span className="text-red-700 text-sm">{error}</span>
+                                    </div>
+                                </div>
+                            )}
+
+                            <form onSubmit={handleSubmit} className="space-y-6">
+                                <div>
+                                    <label className="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                                    <div className="relative">
+                                        <i className="fas fa-envelope absolute left-3 top-3 text-gray-400"></i>
+                                        <input
+                                            type="email"
+                                            value={email}
+                                            onChange={(e) => setEmail(e.target.value)}
+                                            className={`w-full pl-10 pr-4 py-3 border ${!email || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) ? 'border-gray-300' : 'border-red-300'} rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent`}
+                                            placeholder="Masukkan email Anda"
+                                            required
+                                            disabled={isLoading}
+                                        />
+                                    </div>
+                                    {email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) && (
+                                        <p className="mt-1 text-sm text-red-600">Format email tidak valid</p>
+                                    )}
+                                </div>
+                                <div>
+                                    <label className="block text-sm font-medium text-gray-700 mb-2">Password</label>
+                                    <div className="relative">
+                                        <i className="fas fa-lock absolute left-3 top-3 text-gray-400"></i>
+                                        <input
+                                            type={showPassword ? 'text' : 'password'}
+                                            value={password}
+                                            onChange={(e) => setPassword(e.target.value)}
+                                            className={`w-full pl-10 pr-12 py-3 border ${!password || password.length >= 6 ? 'border-gray-300' : 'border-red-300'} rounded-lg focus:ring-2 focus:ring-emerald-500 focus:border-transparent`}
+                                            placeholder="Masukkan password Anda"
+                                            required
+                                            disabled={isLoading}
+                                        />
+                                        <button type="button" onClick={() => setShowPassword(!showPassword)}
+                                            className="absolute right-3 top-2.5 text-gray-500 hover:text-gray-700">
+                                            <i className={showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'}></i>
+                                        </button>
+                                    </div>
+                                    {password && password.length < 6 && (
+                                        <p className="mt-1 text-sm text-red-600">Password minimal 6 karakter</p>
+                                    )}
+                                </div>
+
+                                <div className="flex items-center justify-between text-sm">
+                                    <label className="inline-flex items-center">
+                                        <input type="checkbox" className="rounded mr-2" /> Ingat saya
+                                    </label>
+                                    <button type="button" className="text-emerald-600 hover:text-emerald-700"
+                                        onClick={() => alert('Fitur lupa password akan segera tersedia')}>Lupa password?</button>
+                                </div>
+
+                                <button
+                                    type="submit"
+                                    disabled={isLoading || (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) || (password && password.length < 6)}
+                                    className="w-full py-3 px-4 rounded-lg font-medium text-white bg-emerald-600 hover:bg-emerald-700 focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                                >
+                                    {isLoading ? (
+                                        <div className="flex items-center justify-center">
+                                            <svg className="animate-spin -ml-1 mr-2 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                            </svg>
+                                            Memproses...
+                                        </div>
+                                    ) : (
+                                        <div className="flex items-center justify-center">
+                                            <i className="fas fa-sign-in-alt mr-2"></i>
+                                            Masuk
+                                        </div>
+                                    )}
+                                </button>
+                            </form>
+
+                            <div className="mt-6">
+                                <div className="p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                                    <div className="flex items-start">
+                                        <i className="fas fa-user-plus text-blue-600 mr-2 mt-0.5"></i>
+                                        <div className="text-sm text-blue-800">
+                                            <div className="font-semibold mb-1">Buat Akun Admin Otomatis</div>
+                                            <p className="mb-3">Klik tombol di bawah untuk membuat akun admin dengan kredensial default:</p>
+                                            <div className="mb-2">
+                                                <code className="bg-white px-2 py-1 rounded border border-blue-200">admin@pesantren.com</code>
+                                                <span className="mx-2">/</span>
+                                                <code className="bg-white px-2 py-1 rounded border border-blue-200">AdminPesantren2024!</code>
+                                            </div>
+                                            <button
+                                                type="button"
+                                                className="mt-2 inline-flex items-center px-3 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+                                                disabled={creating || !supabase}
+                                                onClick={async () => {
+                                                    if (!supabase) { setCreateMsg('Supabase belum dikonfigurasi'); return; }
+                                                    setCreating(true); setCreateMsg('');
+                                                    try {
+                                                        const { data, error } = await supabase.auth.signUp({
+                                                            email: 'admin@pesantren.com',
+                                                            password: 'AdminPesantren2024!'
+                                                        });
+                                                        if (error) {
+                                                            if (error.message.includes('already registered')) {
+                                                                setCreateMsg('Akun sudah ada. Silakan login.');
+                                                            } else {
+                                                                setCreateMsg('Gagal membuat akun: ' + error.message);
+                                                            }
+                                                        } else {
+                                                            setCreateMsg('Akun admin berhasil dibuat. Cek email untuk konfirmasi jika diperlukan.');
+                                                            setEmail('admin@pesantren.com');
+                                                            setPassword('AdminPesantren2024!');
+                                                        }
+                                                    } catch (e) {
+                                                        setCreateMsg('Terjadi kesalahan jaringan.');
+                                                    } finally {
+                                                        setCreating(false);
+                                                    }
+                                                }}
+                                            >
+                                                {creating ? (
+                                                    <>
+                                                        <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                                                        Membuat akun...
+                                                    </>
+                                                ) : (
+                                                    <>
+                                                        <i className="fas fa-user-plus mr-2"></i>
+                                                        Buat Akun Admin
+                                                    </>
+                                                )}
+                                            </button>
+                                            {createMsg && (
+                                                <div className="mt-3 p-2 bg-white border border-blue-200 rounded text-blue-800">{createMsg}</div>
+                                            )}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+    
+        // Gallery List Component with CRUD functionality
+        const GalleryList = () => {
+            const [photos, setPhotos] = React.useState([]);
+            const [loading, setLoading] = React.useState(true);
+            const [error, setError] = React.useState(null);
+            const [editingPhoto, setEditingPhoto] = React.useState(null);
+            const [editCategory, setEditCategory] = React.useState('');
+            const [deleteConfirm, setDeleteConfirm] = React.useState(null);
+            
+            // Fetch photos from Supabase
+            const fetchPhotos = async () => {
+                try {
+                    setLoading(true);
+                    const supabase = window.supabaseClient;
+                    if (!supabase) throw new Error('Supabase client tidak tersedia');
+                    
+                    const { data, error } = await supabase.rpc('get_gallery_photos');
+                    
+                    if (error) throw error;
+                    setPhotos(data || []);
+                } catch (err) {
+                    console.error('Error fetching photos:', err);
+                    setError(err.message);
+                } finally {
+                    setLoading(false);
+                }
+            };
+            
+            // Delete photo
+            const deletePhoto = async (id, photoUrl) => {
+                try {
+                    const supabase = window.supabaseClient;
+                    if (!supabase) throw new Error('Supabase client tidak tersedia');
+                    
+                    // Extract file path from URL
+                    const urlParts = photoUrl.split('/');
+                    const filePath = urlParts.slice(urlParts.indexOf(BUCKET_NAME) + 1).join('/');
+                    
+                    // Delete from storage
+                    const { error: storageError } = await supabase.storage
+                        .from(BUCKET_NAME)
+                        .remove([filePath]);
+                        
+                    if (storageError) throw storageError;
+                    
+                    // Delete from database
+                    const { error: dbError } = await supabase
+                        .from('gallery')
+                        .delete()
+                        .eq('id', id);
+                        
+                    if (dbError) throw dbError;
+                    
+                    // Update local state
+                    setPhotos(photos.filter(photo => photo.id !== id));
+                    setDeleteConfirm(null);
+                    
+                    // Show success notification
+                    alert('Foto berhasil dihapus');
+                } catch (err) {
+                    console.error('Error deleting photo:', err);
+                    alert(`Gagal menghapus foto: ${err.message}`);
+                }
+            };
+            
+            // Update photo category
+            const updatePhotoCategory = async (id) => {
+                try {
+                    const supabase = window.supabaseClient;
+                    if (!supabase) throw new Error('Supabase client tidak tersedia');
+                    
+                    const { error } = await supabase
+                        .from('gallery')
+                        .update({ category: editCategory })
+                        .eq('id', id);
+                        
+                    if (error) throw error;
+                    
+                    // Update local state
+                    setPhotos(photos.map(photo => 
+                        photo.id === id ? {...photo, category: editCategory} : photo
+                    ));
+                    
+                    setEditingPhoto(null);
+                    setEditCategory('');
+                    
+                    // Show success notification
+                    alert('Kategori foto berhasil diperbarui');
+                } catch (err) {
+                    console.error('Error updating photo:', err);
+                    alert(`Gagal memperbarui foto: ${err.message}`);
+                }
+            };
+            
+            // Load photos on component mount
+            React.useEffect(() => {
+                fetchPhotos();
+            }, []);
+            
+            // Format date
+            const formatDate = (dateString) => {
+                const date = new Date(dateString);
+                return date.toLocaleDateString('id-ID', {
+                    day: 'numeric',
+                    month: 'long',
+                    year: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+            };
+            
+            if (loading) return (
+                <div className="text-center py-8">
+                    <i className="fas fa-spinner fa-spin text-blue-500 text-2xl"></i>
+                    <p className="mt-2 text-gray-600">Memuat data galeri...</p>
+                </div>
+            );
+            
+            if (error) return (
+                <div className="bg-red-50 border border-red-200 text-red-700 p-4 rounded-lg">
+                    <p className="font-medium">Error: {error}</p>
+                    <button 
+                        onClick={fetchPhotos}
+                        className="mt-2 px-3 py-1 bg-red-600 text-white rounded text-sm"
+                    >
+                        Coba Lagi
+                    </button>
+                </div>
+            );
+            
+            return (
+                <div className="bg-white rounded-lg shadow-md p-6 mt-6">
+                    <div className="flex justify-between items-center mb-6">
+                        <h3 className="text-xl font-semibold">Daftar Foto Galeri</h3>
+                        <button 
+                            onClick={fetchPhotos}
+                            className="px-3 py-1 bg-blue-600 text-white rounded text-sm flex items-center"
+                        >
+                            <i className="fas fa-sync-alt mr-2"></i> Refresh
+                        </button>
+                    </div>
+                    
+                    {photos.length === 0 ? (
+                        <div className="text-center py-8 bg-gray-50 rounded-lg">
+                            <i className="fas fa-images text-gray-400 text-4xl mb-2"></i>
+                            <p className="text-gray-500">Belum ada foto di galeri</p>
+                            <p className="text-sm text-gray-400 mt-1">Upload foto baru menggunakan form di atas</p>
+                        </div>
+                    ) : (
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                            {photos.map(photo => (
+                                <div key={photo.id} className="border rounded-lg overflow-hidden bg-white shadow-sm hover:shadow-md transition-shadow">
+                                    <div className="h-48 overflow-hidden bg-gray-100">
+                                        <img 
+                                            src={photo.photo_url} 
+                                            alt={`Foto ${photo.id}`}
+                                            className="w-full h-full object-cover"
+                                            onError={(e) => {
+                                                e.target.onerror = null;
+                                                e.target.src = "foto/logo.jpg";
+                                            }}
+                                        />
+                                    </div>
+                                    
+                                    <div className="p-4">
+                                        {editingPhoto === photo.id ? (
+                                            <div className="mb-3">
+                                                <label className="block text-sm font-medium text-gray-700 mb-1">
+                                                    Edit Kategori:
+                                                </label>
+                                                <div className="flex">
+                                                    <input 
+                                                        type="text"
+                                                        value={editCategory}
+                                                        onChange={(e) => setEditCategory(e.target.value)}
+                                                        className="flex-1 px-3 py-2 border rounded-l text-sm"
+                                                        placeholder="Kategori baru"
+                                                    />
+                                                    <button
+                                                        onClick={() => updatePhotoCategory(photo.id)}
+                                                        className="px-3 py-2 bg-green-600 text-white rounded-r text-sm"
+                                                    >
+                                                        <i className="fas fa-check"></i>
+                                                    </button>
+                                                </div>
+                                                <button
+                                                    onClick={() => {
+                                                        setEditingPhoto(null);
+                                                        setEditCategory('');
+                                                    }}
+                                                    className="mt-2 px-3 py-1 text-sm text-gray-600 hover:text-gray-800"
+                                                >
+                                                    Batal
+                                                </button>
+                                            </div>
+                                        ) : (
+                                            <>
+                                                <div className="flex items-center mb-2">
+                                                    <span className="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">
+                                                        {photo.category || 'Umum'}
+                                                    </span>
+                                                    <span className="ml-auto text-xs text-gray-500">
+                                                        ID: {photo.id}
+                                                    </span>
+                                                </div>
+                                                
+                                                <div className="text-xs text-gray-500 mb-3">
+                                                    <div><i className="fas fa-user mr-1"></i> {photo.uploaded_by || 'Admin'}</div>
+                                                    <div><i className="fas fa-calendar mr-1"></i> {formatDate(photo.upload_date)}</div>
+                                                </div>
+                                            </>
+                                        )}
+                                        
+                                        {deleteConfirm === photo.id ? (
+                                            <div className="border-t pt-3 mt-2">
+                                                <p className="text-sm text-red-600 mb-2">Yakin ingin menghapus foto ini?</p>
+                                                <div className="flex space-x-2">
+                                                    <button
+                                                        onClick={() => deletePhoto(photo.id, photo.photo_url)}
+                                                        className="flex-1 px-3 py-1 bg-red-600 text-white rounded text-sm"
+                                                    >
+                                                        Ya, Hapus
+                                                    </button>
+                                                    <button
+                                                        onClick={() => setDeleteConfirm(null)}
+                                                        className="flex-1 px-3 py-1 bg-gray-200 text-gray-800 rounded text-sm"
+                                                    >
+                                                        Batal
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        ) : (
+                                            <div className="flex justify-between border-t pt-3 mt-2">
+                                                <button
+                                                    onClick={() => {
+                                                        setEditingPhoto(photo.id);
+                                                        setEditCategory(photo.category || '');
+                                                    }}
+                                                    className="px-3 py-1 bg-blue-50 text-blue-700 rounded text-sm hover:bg-blue-100"
+                                                >
+                                                    <i className="fas fa-edit mr-1"></i> Edit
+                                                </button>
+                                                <button
+                                                    onClick={() => setDeleteConfirm(photo.id)}
+                                                    className="px-3 py-1 bg-red-50 text-red-700 rounded text-sm hover:bg-red-100"
+                                                >
+                                                    <i className="fas fa-trash-alt mr-1"></i> Hapus
+                                                </button>
+                                            </div>
+                                        )}
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    )}
+                </div>
+            );
+        };
+
+        // Simple Admin Dashboard
+        const AdminDashboard = ({ user, onLogout }) => {
+            return (
+                <div className="min-h-screen bg-gray-50">
+                    <div className="bg-white shadow-sm border-b border-gray-200">
+                        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                            <div className="flex justify-between items-center py-4">
+                                <div className="flex items-center">
+                                    <img src="foto/logo.jpg" alt="Logo" className="h-10 w-10 rounded-full object-cover mr-3" />
+                                    <div>
+                                        <h1 className="text-xl font-semibold text-gray-900">Admin Panel</h1>
+                                        <p className="text-sm text-gray-500">Kelola Galeri Pesantren</p>
+                                    </div>
+                                </div>
+                                <div className="flex items-center space-x-4">
+                                    <span className="text-sm text-gray-600">{user?.email}</span>
+                                    <button
+                                        onClick={onLogout}
+                                        className="px-4 py-2 text-sm font-medium text-red-700 bg-red-50 rounded-lg hover:bg-red-100 transition-colors"
+                                    >
+                                        <i className="fas fa-sign-out-alt mr-2"></i>
+                                        Keluar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                </div>
+            );
+        };
+        
+        // Render the app
+        const container = document.getElementById('admin-app');
+        const root = ReactDOM.createRoot(container);
+        
+        // Hide loading fallback robustly
+        (() => {
+          const lf = document.getElementById('loading-fallback');
+          if (lf) {
+            lf.style.display = 'none';
+            lf.remove();
+          }
+        })();
+        
+        root.render(<AdminApp />);
+        
+        // Double-ensure fallback gone after render
+        setTimeout(() => {
+          const lf2 = document.getElementById('loading-fallback');
+          if (lf2) lf2.remove();
+        }, 0);
+    
+    </script>
+
+    <script type="text/babel">
+    // =====================
+    // File Upload Manager
+    // =====================
+    // Menggunakan Supabase storage langsung, bukan API lokal
+    const BUCKET_NAME = 'galeri-pesantren';
+    
+    const allowedExts = ['jpg','jpeg','png','gif','webp'];
+    const allowedMimes = [
+      'image/jpeg',
+      'image/png',
+      'image/gif',
+      'image/webp'
+    ];
+    
+    const MAX_IMAGE_SIZE = 5 * 1024 * 1024; // 5MB
+    
+    const compressImage = async (file, { maxWidth = 1920, maxHeight = 1920, quality = 0.82 } = {}) => {
+      try {
+        if (!file.type.startsWith('image/')) return file;
+        // Fallback jika createImageBitmap tidak tersedia (Safari/older browsers)
+        const getBitmap = async () => {
+          if ('createImageBitmap' in window) return await createImageBitmap(file);
+          return new Promise((resolve, reject) => {
+            const img = new Image();
+            img.onload = () => resolve(img);
+            img.onerror = reject;
+            img.src = URL.createObjectURL(file);
+          });
+        };
+        const bitmap = await getBitmap();
+        const bw = bitmap.width || bitmap.naturalWidth;
+        const bh = bitmap.height || bitmap.naturalHeight;
+        const ratio = Math.min(maxWidth / bw, maxHeight / bh, 1);
+        const width = Math.round(bw * ratio);
+        const height = Math.round(bh * ratio);
+        const canvas = document.createElement('canvas');
+        canvas.width = width; canvas.height = height;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(bitmap, 0, 0, width, height);
+        const blob = await new Promise((resolve) => canvas.toBlob(resolve, 'image/jpeg', quality));
+        if (!blob) return file;
+        const newName = file.name.replace(/\.(png|gif|webp|jpeg|jpg)$/i, '') + '-compressed.jpg';
+        return new File([blob], newName, { type: 'image/jpeg' });
+      } catch {
+        return file;
+      }
+    };
+    
+    const humanSize = (bytes) => {
+      if (bytes === 0) return '0 Bytes';
+      const k = 1024; const sizes = ['Bytes','KB','MB','GB'];
+      const i = Math.floor(Math.log(bytes)/Math.log(k));
+      return `${(bytes/Math.pow(k,i)).toFixed(2)} ${sizes[i]}`;
+    };
+    
+    const getExt = (name) => (name.split('.').pop() || '').toLowerCase();
+    
+        const FileUploadManager = () => {
+      const [files, setFiles] = React.useState([]);
+      const [category, setCategory] = React.useState('kegiatan');
+      const [uploading, setUploading] = React.useState(false);
+      const [notifications, setNotifications] = React.useState([]);
+    
+      const addNotification = (type, message) => {
+        setNotifications((prev) => [...prev, { id: Date.now(), type, message }]);
+        setTimeout(() => setNotifications((prev) => prev.slice(1)), 5000);
+      };
+    
+      const validateFile = (file) => {
+        const ext = getExt(file.name);
+        const mime = file.type || '';
+        if (!allowedExts.includes(ext)) return 'Ekstensi tidak diperbolehkan';
+        if (!allowedMimes.includes(mime)) return 'MIME type tidak valid';
+        if (file.size > 10 * 1024 * 1024) return 'Ukuran file melebihi 10MB';
+        return null;
+      };
+    
+      const onSelectFiles = (e) => {
+        const list = Array.from(e.target.files || []);
+        const entries = list.map(f => ({
+          file: f,
+          id: `${Date.now()}-${Math.random().toString(36).slice(2)}`,
+          error: validateFile(f),
+          progress: 0,
+          status: 'pending',
+          uploadId: null,
+          safeName: null,
+          speed: 0,
+          eta: null,
+          controller: null,
+        }));
+        setFiles(prev => [...prev, ...entries]);
+        // Mulai upload otomatis untuk file valid
+        setTimeout(() => {
+          entries.forEach(entry => {
+            if (entry.error) {
+              addNotification('error', `${entry.file.name}: ${entry.error}`);
+            } else {
+              startUpload(entry);
+            }
+          });
+        }, 50);
+      };
+    
+      const onDrop = (e) => {
+        e.preventDefault();
+        const list = Array.from(e.dataTransfer.files || []);
+        const entries = list.map(f => ({
+          file: f,
+          id: `${Date.now()}-${Math.random().toString(36).slice(2)}`,
+          error: validateFile(f),
+          progress: 0,
+          status: 'pending',
+          uploadId: null,
+          safeName: null,
+          speed: 0,
+          eta: null,
+          controller: null,
+        }));
+        setFiles(prev => [...prev, ...entries]);
+        // Mulai upload otomatis untuk file valid setelah drop
+        setTimeout(() => {
+          entries.forEach(entry => {
+            if (entry.error) {
+              addNotification('error', `${entry.file.name}: ${entry.error}`);
+            } else {
+              startUpload(entry);
+            }
+          });
+        }, 50);
+      };
+    
+      const prevent = (e) => e.preventDefault();
+    
+      const uploadToSupabase = async (entry) => {
+        try {
+          // Pastikan client Supabase tersedia
+          const supabase = window.supabaseClient;
+          if (!supabase) throw new Error('Supabase client tidak tersedia');
+          
+          const file = entry.file;
+          const timestamp = new Date().getTime();
+          const fileExt = getExt(file.name);
+          const safeName = `${timestamp}-${Math.random().toString(36).slice(2)}.${fileExt}`;
+          const filePath = `${category}/${safeName}`;
+          
+          // Upload file ke Supabase Storage
+          const { data, error } = await supabase.storage
+            .from(BUCKET_NAME)
+            .upload(filePath, file, {
+              cacheControl: '3600',
+              upsert: false,
+              contentType: file.type
+            });
+            
+          if (error) throw error;
+          
+          // Dapatkan URL publik
+          const { data: urlData } = supabase.storage
+            .from(BUCKET_NAME)
+            .getPublicUrl(filePath);
+            
+          const publicUrl = urlData.publicUrl;
+          
+          // Simpan metadata ke database menggunakan RPC (parameter sesuai definisi SQL)
+          const { data: rpcData, error: rpcError } = await supabase.rpc('insert_gallery_photo', {
+            p_photo_url: publicUrl,
+            p_description: null,
+            p_category: category
+          });
+          
+          if (rpcError) {
+            console.error('Metadata RPC error:', rpcError);
+            // Tetap lanjutkan meskipun RPC gagal
+          }
+          
+          // Simulasi progress untuk UI
+          const updateProgress = (progress) => {
+            setFiles(prev => prev.map(f => f.id === entry.id ? {
+              ...f,
+              progress,
+              speed: 0,
+              eta: 0
+            } : f));
+          };
+          
+          // Simulasi progress upload (25%, 50%, 75%, 100%)
+          updateProgress(25);
+          await new Promise(r => setTimeout(r, 300));
+          updateProgress(50);
+          await new Promise(r => setTimeout(r, 300));
+          updateProgress(75);
+          await new Promise(r => setTimeout(r, 300));
+          updateProgress(100);
+          
+          return {
+            ok: true,
+            publicUrl,
+            filePath,
+            metadata: rpcData
+          };
+        } catch (error) {
+          console.error('Upload error:', error);
+          throw error;
+        }
+      };
+    
+      const startUpload = async (entry) => {
+        try {
+          setUploading(true);
+          setFiles(prev => prev.map(f => f.id === entry.id ? { ...f, status: 'uploading' } : f));
+          // Auto compress if large image (>5MB)
+          let fileToUpload = entry.file;
+          if (fileToUpload.type.startsWith('image/') && fileToUpload.size > MAX_IMAGE_SIZE) {
+            addNotification('success', 'Mengompresi gambar besar sebelum upload...');
+            fileToUpload = await compressImage(fileToUpload);
+            // update entry
+            setFiles(prev => prev.map(f => f.id === entry.id ? { ...f, file: fileToUpload } : f));
+          }
+          
+          // Upload ke Supabase storage
+          const result = await uploadToSupabase({ ...entry, file: fileToUpload });
+          
+          setFiles(prev => prev.map(f => f.id === entry.id ? { 
+            ...f, 
+            status: 'done', 
+            progress: 100,
+            publicUrl: result.publicUrl,
+            filePath: result.filePath
+          } : f));
+          
+          addNotification('success', `Upload sukses: ${fileToUpload.name} (${humanSize(fileToUpload.size)})`);
+        } catch (e) {
+          setFiles(prev => prev.map(f => f.id === entry.id ? { ...f, status: 'error' } : f));
+          addNotification('error', `Upload gagal: ${e.message}`);
+        } finally {
+          setUploading(false);
+        }
+      };
+    
+      const pauseUpload = async (entry) => {
+        setFiles(prev => prev.map(f => f.id === entry.id ? { ...f, status: 'paused' } : f));
+      };
+    
+      const resumeUpload = async (entry) => {
+        setFiles(prev => prev.map(f => f.id === entry.id ? { ...f, status: 'uploading' } : f));
+        // Resume by re-uploading from scratch
+        await startUpload(entry);
+      };
+    
+      const cancelUpload = async (entry) => {
+        setFiles(prev => prev.map(f => f.id === entry.id ? { ...f, status: 'canceled' } : f));
+        // Tidak perlu menghapus file dari Supabase karena upload belum selesai
+      };
+    
+      const removeEntry = (entry) => {
+        setFiles(prev => prev.filter(f => f.id !== entry.id));
+      };
+    
+      return (
+        <div className="bg-white rounded-lg shadow-md p-6">
+          <h3 className="text-xl font-semibold mb-4">Upload File</h3>
+    
+          {/* Kategori dihapus dari UI upload sesuai permintaan */}
+    
+          <div onDragOver={prevent} onDragEnter={prevent} onDrop={onDrop} className="border-2 border-dashed rounded-lg p-6 text-center mb-4 hover:border-blue-400">
+            <p className="text-gray-600 mb-2">Tarik & letakkan file ke sini</p>
+            <p className="text-sm text-gray-500">Atau</p>
+            <label className="mt-2 inline-block px-4 py-2 bg-blue-600 text-white rounded cursor-pointer">
+              Pilih File
+              <input type="file" multiple className="hidden" onChange={onSelectFiles} accept="image/*" />
+            </label>
+          </div>
+    
+          {files.length > 0 && (
+            <div>
+              <h4 className="font-semibold mb-2">Daftar file</h4>
+              <ul className="space-y-3">
+                {files.map((f) => (
+                  <li key={f.id} className="border rounded p-3">
+                    <div className="flex justify-between items-center">
+                      <div>
+                        <div className="font-medium">{f.file.name}</div>
+                        <div className="text-sm text-gray-500">{f.file.type} • {humanSize(f.file.size)} {f.error ? `• Error: ${f.error}` : ''}</div>
+                      </div>
+                      <div className="space-x-2">
+                        {f.status === 'pending' && !f.error && (
+                          <button className="px-3 py-2 bg-green-600 text-white rounded" onClick={() => startUpload(f)} disabled={uploading}>Upload</button>
+                        )}
+                        {(f.status === 'uploading') && (
+                          <>
+                            <button className="px-3 py-2 bg-yellow-600 text-white rounded" onClick={() => pauseUpload(f)}>Pause</button>
+                            <button className="px-3 py-2 bg-red-600 text-white rounded" onClick={() => cancelUpload(f)}>Cancel</button>
+                          </>
+                        )}
+                        {f.status === 'paused' && (
+                          <button className="px-3 py-2 bg-blue-600 text-white rounded" onClick={() => resumeUpload(f)}>Resume</button>
+                        )}
+                        {(f.status === 'done' || f.status === 'error' || f.status === 'canceled') && (
+                          <button className="px-3 py-2 bg-gray-600 text-white rounded" onClick={() => removeEntry(f)}>Hapus</button>
+                        )}
+                      </div>
+                    </div>
+                    <div className="mt-3">
+                      {f.file.type.startsWith('image/') && (
+                        <img src={URL.createObjectURL(f.file)} alt={f.file.name} className="max-h-40 rounded mb-2 image-preview" />
+                      )}
+                      <div className="w-full bg-gray-200 rounded h-2">
+                        <div className="bg-blue-600 h-2 rounded" style={{ width: `${f.progress}%` }}></div>
+                      </div>
+                      {f.status === 'uploading' && (
+                        <div className="text-sm text-gray-600 mt-1">Kecepatan ~{(f.speed/1024).toFixed(0)} KB/s • ETA ~{f.eta}s</div>
+                      )}
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+    
+          {notifications.length > 0 && (
+            <div className="mt-4 space-y-2">
+              {notifications.map(n => (
+                <div key={n.id} className={`p-3 rounded ${n.type==='success'?'bg-green-50 border border-green-200':'bg-red-50 border border-red-200'}`}>
+                  <div className="flex items-center">
+                    <i className={`fas ${n.type==='success'?'fa-check-circle text-green-600':'fa-exclamation-circle text-red-600'} mr-2`}></i>
+                    <span className={n.type==='success'? 'text-green-700':'text-red-700'}>{n.message}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      );
+        };
+
+        // =====================
+        // Gallery Table (CRUD + Filter/Sort + Pagination + Bulk)
+        // =====================
+        const GalleryTable = () => {
+          const [photos, setPhotos] = React.useState([]);
+          const [loading, setLoading] = React.useState(true);
+          const [error, setError] = React.useState('');
+          const [search, setSearch] = React.useState('');
+          const [categoryFilter, setCategoryFilter] = React.useState('');
+          const [sortBy, setSortBy] = React.useState('date'); // 'date' | 'name'
+          const [sortOrder, setSortOrder] = React.useState('desc'); // 'asc' | 'desc'
+          const [selected, setSelected] = React.useState([]); // id[]
+          const [page, setPage] = React.useState(1);
+          const [pageSize, setPageSize] = React.useState(9);
+          const [confirmDeleteId, setConfirmDeleteId] = React.useState(null);
+          const [confirmBulk, setConfirmBulk] = React.useState(false);
+
+          const supabase = window.supabaseClient;
+          if (!supabase) {
+            console.warn('Supabase client tidak tersedia');
+          }
+
+          const fetchPhotos = async () => {
+            try {
+              setLoading(true);
+              setError('');
+              let q = supabase
+                .from('gallery')
+                .select('id, photo_url, upload_date, description, category, uploaded_by, created_at');
+              if (categoryFilter) {
+                q = q.eq('category', categoryFilter);
+              }
+              q = q.order('upload_date', { ascending: false });
+              const { data, error } = await q;
+              if (error) throw error;
+              setPhotos(data || []);
+            } catch (e) {
+              setError(e.message || 'Gagal memuat galeri');
+            } finally {
+              setLoading(false);
+            }
+          };
+
+          React.useEffect(() => { fetchPhotos(); }, []);
+
+          const uniqueCategories = React.useMemo(() => {
+            const s = new Set((photos || []).map(p => p.category || ''));
+            return Array.from(s).filter(Boolean);
+          }, [photos]);
+
+          const filtered = React.useMemo(() => {
+            let list = photos || [];
+            if (search) list = list.filter(p => (p.photo_url || '').toLowerCase().includes(search.toLowerCase()));
+            if (categoryFilter) list = list.filter(p => (p.category || '') === categoryFilter);
+            list = [...list].sort((a, b) => {
+              if (sortBy === 'name') {
+                const an = (a.photo_url || '').split('/').pop().toLowerCase();
+                const bn = (b.photo_url || '').split('/').pop().toLowerCase();
+                return sortOrder === 'asc' ? an.localeCompare(bn) : bn.localeCompare(an);
+              } else {
+                const ad = new Date(a.upload_date || a.created_at || 0).getTime();
+                const bd = new Date(b.upload_date || b.created_at || 0).getTime();
+                return sortOrder === 'asc' ? ad - bd : bd - ad;
+              }
+            });
+            return list;
+          }, [photos, search, categoryFilter, sortBy, sortOrder]);
+
+          const totalPages = Math.max(1, Math.ceil(filtered.length / pageSize));
+          const pageItems = React.useMemo(() => {
+            const start = (page - 1) * pageSize;
+            return filtered.slice(start, start + pageSize);
+          }, [filtered, page, pageSize]);
+
+          const toggleSelectAll = (checked) => {
+            setSelected(checked ? pageItems.map(p => p.id) : []);
+          };
+          const toggleSelectOne = (id) => {
+            setSelected(prev => prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id]);
+          };
+
+          const updateCategory = async (id, newCategory) => {
+            const allowed = ['kegiatan','fasilitas','prestasi'];
+            if (!allowed.includes((newCategory || '').trim())) {
+              alert('Kategori tidak valid. Pilih: kegiatan, fasilitas, atau prestasi.');
+              return;
+            }
+            try {
+              const { error } = await supabase.from('gallery').update({ category: newCategory }).eq('id', id);
+              if (error) throw error;
+              setPhotos(prev => prev.map(p => p.id === id ? { ...p, category: newCategory } : p));
+            } catch (e) {
+              alert('Gagal memperbarui kategori: ' + (e.message || '')); 
+            }
+          };
+
+          const deleteOne = async (photo) => {
+            try {
+              // Extract storage path from public URL
+              const urlParts = (photo.photo_url || '').split('/');
+              const idx = urlParts.indexOf(BUCKET_NAME);
+              const filePath = idx >= 0 ? urlParts.slice(idx + 1).join('/') : '';
+              if (filePath) {
+                const { error: sErr } = await supabase.storage.from(BUCKET_NAME).remove([filePath]);
+                if (sErr) throw sErr;
+              }
+              const { error: dErr } = await supabase.from('gallery').delete().eq('id', photo.id);
+              if (dErr) throw dErr;
+              setPhotos(prev => prev.filter(p => p.id !== photo.id));
+              setConfirmDeleteId(null);
+            } catch (e) {
+              alert('Gagal menghapus: ' + (e.message || ''));
+            }
+          };
+
+          const bulkDelete = async () => {
+            try {
+              const items = photos.filter(p => selected.includes(p.id));
+              for (const photo of items) {
+                const urlParts = (photo.photo_url || '').split('/');
+                const idx = urlParts.indexOf(BUCKET_NAME);
+                const filePath = idx >= 0 ? urlParts.slice(idx + 1).join('/') : '';
+                if (filePath) await supabase.storage.from(BUCKET_NAME).remove([filePath]);
+              }
+              const { error } = await supabase.from('gallery').delete().in('id', selected);
+              if (error) throw error;
+              setPhotos(prev => prev.filter(p => !selected.includes(p.id)));
+              setSelected([]);
+              setConfirmBulk(false);
+            } catch (e) {
+              alert('Gagal bulk delete: ' + (e.message || ''));
+            }
+          };
+
+          const formatDate = (iso) => {
+            try {
+              const d = new Date(iso);
+              return d.toLocaleString('id-ID', { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+            } catch { return iso || '-'; }
+          };
+
+          return (
+            <div className="card p-6 mt-6">
+              <div className="mb-6">
+                <LatestUploads />
+              </div>
+              <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-4">
+                <h3 className="text-xl font-semibold text-gray-900 flex items-center">
+                  <i className="fas fa-table text-blue-600 mr-2"></i>
+                  Tabel Galeri
+                </h3>
+                <div className="flex flex-col sm:flex-row gap-2 w-full md:w-auto">
+                  <input value={search} onChange={(e)=>{setSearch(e.target.value); setPage(1);}} placeholder="Cari nama gambar" className="px-3 py-2 border rounded w-full sm:w-48"/>
+                  <select value={categoryFilter} onChange={(e)=>{setCategoryFilter(e.target.value); setPage(1);}} className="px-3 py-2 border rounded w-full sm:w-40">
+                    <option value="">Semua Kategori</option>
+                    {uniqueCategories.map(c => <option key={c} value={c}>{c}</option>)}
+                  </select>
+                  <select value={sortBy} onChange={(e)=>setSortBy(e.target.value)} className="px-3 py-2 border rounded w-full sm:w-36">
+                    <option value="date">Urut: Tanggal</option>
+                    <option value="name">Urut: Nama</option>
+                  </select>
+                  <select value={sortOrder} onChange={(e)=>setSortOrder(e.target.value)} className="px-3 py-2 border rounded w-full sm:w-32">
+                    <option value="desc">Desc</option>
+                    <option value="asc">Asc</option>
+                  </select>
+                </div>
+              </div>
+
+              {loading ? (
+                <div className="text-center py-8">
+                  <i className="fas fa-spinner fa-spin text-blue-500 text-2xl"></i>
+                  <p className="mt-2 text-gray-600">Memuat data galeri...</p>
+                </div>
+              ) : error ? (
+                <div className="bg-red-50 border border-red-200 text-red-700 p-4 rounded-lg">
+                  <p className="font-medium">Error: {error}</p>
+                  <button onClick={fetchPhotos} className="mt-2 px-3 py-1 bg-red-600 text-white rounded text-sm">Coba Lagi</button>
+                </div>
+              ) : (
+                <div className="overflow-x-auto">
+                  <table className="min-w-full text-sm">
+                    <thead className="table-header">
+                      <tr className="text-left border-b">
+                        <th className="p-2 w-10">
+                          <input type="checkbox" checked={selected.length===pageItems.length && pageItems.length>0} onChange={(e)=>toggleSelectAll(e.target.checked)} />
+                        </th>
+                        <th className="p-2">Thumbnail</th>
+                        <th className="p-2">Nama</th>
+                        <th className="p-2">Kategori</th>
+                        <th className="p-2">Tanggal</th>
+                        <th className="p-2">Aksi</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {pageItems.map(photo => {
+                        const fileName = (photo.photo_url || '').split('/').pop();
+                        return (
+                          <tr key={photo.id} className="border-b table-row">
+                            <td className="p-2">
+                              <input type="checkbox" checked={selected.includes(photo.id)} onChange={()=>toggleSelectOne(photo.id)} />
+                            </td>
+                            <td className="p-2">
+                              <img src={photo.photo_url} alt={fileName} className="w-14 h-14 object-cover rounded" onError={(e)=>{e.target.src='foto/logo.jpg';}} />
+                            </td>
+                            <td className="p-2">{fileName}</td>
+                            <td className="p-2">
+                              <div className="flex items-center gap-2">
+                                <span className="text-xs px-2 py-1 rounded bg-blue-50 text-blue-700">{photo.category || 'Umum'}</span>
+                                <select
+                                  value={(photo.category || '').toLowerCase()}
+                                  onChange={(e)=>updateCategory(photo.id, e.target.value)}
+                                  className="px-2 py-1 border rounded text-xs bg-white"
+                                >
+                                  <option value="">Pilih</option>
+                                  <option value="kegiatan">Kegiatan</option>
+                                  <option value="fasilitas">Fasilitas</option>
+                                  <option value="prestasi">Prestasi</option>
+                                </select>
+                              </div>
+                            </td>
+                            <td className="p-2">{formatDate(photo.upload_date)}</td>
+                            <td className="p-2 space-x-2">
+                              <a href={photo.photo_url} target="_blank" className="px-2 py-1 bg-gray-100 rounded inline-block"><i className="fas fa-external-link-alt mr-1"></i>Lihat</a>
+                              <a href={photo.photo_url} download={fileName} className="px-2 py-1 bg-green-600 text-white rounded inline-block"><i className="fas fa-download mr-1"></i>Download</a>
+                              {confirmDeleteId === photo.id ? (
+                                <>
+                                  <button onClick={()=>deleteOne(photo)} className="px-2 py-1 bg-red-600 text-white rounded inline-block">Ya</button>
+                                  <button onClick={()=>setConfirmDeleteId(null)} className="px-2 py-1 bg-gray-200 rounded inline-block">Batal</button>
+                                </>
+                              ) : (
+                                <button onClick={()=>setConfirmDeleteId(photo.id)} className="px-2 py-1 bg-red-50 text-red-700 rounded inline-block"><i className="fas fa-trash-alt mr-1"></i>Hapus</button>
+                              )}
+                            </td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
+
+                  {/* Bulk actions & pagination */}
+                  <div className="mt-4 flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+                    <div className="flex items-center gap-2">
+                      <button onClick={()=>setConfirmBulk(true)} disabled={selected.length===0} className="px-3 py-2 bg-red-600 text-white rounded disabled:opacity-50">
+                        <i className="fas fa-trash mr-1"></i>Hapus Terpilih ({selected.length})
+                      </button>
+                      {confirmBulk && (
+                        <div className="flex items-center gap-2">
+                          <span className="text-sm text-red-700">Yakin?</span>
+                          <button onClick={bulkDelete} className="px-2 py-1 bg-red-600 text-white rounded">Ya</button>
+                          <button onClick={()=>setConfirmBulk(false)} className="px-2 py-1 bg-gray-200 rounded">Batal</button>
+                        </div>
+                      )}
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <button onClick={()=>setPage(p=>Math.max(1,p-1))} className="px-3 py-2 bg-gray-100 rounded"><i className="fas fa-chevron-left"></i></button>
+                      <span className="text-sm">Halaman {page} / {totalPages}</span>
+                      <button onClick={()=>setPage(p=>Math.min(totalPages,p+1))} className="px-3 py-2 bg-gray-100 rounded"><i className="fas fa-chevron-right"></i></button>
+                      <select value={pageSize} onChange={(e)=>{setPageSize(parseInt(e.target.value)); setPage(1);}} className="px-2 py-1 border rounded ml-2">
+                        <option value={6}>6</option>
+                        <option value={9}>9</option>
+                        <option value={12}>12</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          );
+        };
+
+        // =====================
+        // Latest Uploads Grid (Admin)
+        // =====================
+        const LatestUploads = () => {
+          const [items, setItems] = React.useState([]);
+          const [loading, setLoading] = React.useState(true);
+          const supabase = window.supabaseClient;
+
+          const isValidImageUrl = (url) => {
+            try {
+              if (!url || typeof url !== 'string') return false;
+              const clean = url.split('?')[0];
+              return /\.(jpe?g|png|gif|webp)$/i.test(clean);
+            } catch { return false; }
+          };
+
+          React.useEffect(() => {
+            (async () => {
+              try {
+                const { data, error } = await supabase
+                  .from('gallery')
+                  .select('id, photo_url, upload_date')
+                  .order('upload_date', { ascending: false })
+                  .limit(12);
+                if (error) throw error;
+                setItems(data || []);
+              } catch (e) {
+                console.warn('Gagal memuat terbaru:', e);
+                setItems([]);
+              } finally {
+                setLoading(false);
+              }
+            })();
+          }, []);
+
+          if (loading) return (
+            <div className="text-sm text-gray-600"><i className="fas fa-spinner fa-spin mr-2"></i>Memuat unggahan terbaru...</div>
+          );
+
+          if (!items.length) return (
+            <div className="text-sm text-gray-500">Belum ada unggahan terbaru.</div>
+          );
+
+          return (
+            <div>
+              <h4 className="text-lg font-semibold mb-3 flex items-center text-gray-900">
+                <i className="fas fa-clock mr-2 text-green-600"></i>
+                Unggahan Terbaru
+              </h4>
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                {items.filter(i => isValidImageUrl(i.photo_url)).map((i) => {
+                  const fname = (i.photo_url || '').split('/').pop();
+                  return (
+                    <div key={i.id} className="relative rounded overflow-hidden bg-gray-100">
+                      <img src={i.photo_url} alt={fname} className="w-full h-32 md:h-40 object-cover" loading="lazy" />
+                      <div className="absolute bottom-2 right-2 flex gap-2">
+                        <a href={i.photo_url} target="_blank" className="px-2 py-1 bg-white/80 rounded text-xs"><i className="fas fa-external-link-alt"></i></a>
+                        <a href={i.photo_url} download={fname} className="px-2 py-1 bg-green-600 text-white rounded text-xs"><i className="fas fa-download"></i></a>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          );
+        };
+
+    // Extend AdminDashboard to include FileUploadManager and FileBrowser
+    const OriginalAdminDashboard = AdminDashboard;
+    const AdminDashboardWrapped = ({ user, onLogout }) => (
+      <div className="bg-gray-50">
+        <OriginalAdminDashboard user={user} onLogout={onLogout} />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+          <div className="card p-6">
+            <div className="flex items-center mb-4">
+              <i className="fas fa-cloud-upload-alt text-green-500 text-2xl mr-3"></i>
+              <h3 className="text-lg font-semibold text-gray-900">Upload Gambar Baru</h3>
+            </div>
+            <FileUploadManager />
+          </div>
+          <GalleryTable />
+        </div>
+      </div>
+    );
+
+    </script>
+    <script type="text/babel">
+    // =====================
+    // Gallery Supabase Components
+    // =====================
+    const GallerySupabase = () => {
+      const [images, setImages] = React.useState([]);
+      const [loading, setLoading] = React.useState(false);
+      const [error, setError] = React.useState('');
+
+      const formatDate = (iso) => {
+        try {
+          const d = new Date(iso);
+          return d.toLocaleString('id-ID', { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+        } catch {
+          return iso || '-';
+        }
+      };
+
+      const refresh = async () => {
+        setLoading(true);
+        setError('');
+        try {
+          const { data, error } = await storage.listImages();
+          if (error) throw error;
+          const items = (data || [])
+            .filter(f => f?.name && f.name !== '.emptyFolderPlaceholder')
+            .map(f => ({
+              name: f.name,
+              created_at: f.created_at || f.updated_at || '',
+              size: (f.metadata && f.metadata.size) || 0,
+              publicUrl: storage.getPublicUrl(f.name)
+            }));
+          setImages(items);
+        } catch (e) {
+          setError(e.message || 'Gagal memuat gambar');
+          setImages([]);
+        } finally {
+          setLoading(false);
+        }
+      };
+
+      React.useEffect(() => { refresh(); }, []);
+
+      const handleDelete = async (name) => {
+        try {
+          const ok = window.confirm(`Hapus gambar '${name}'?`);
+          if (!ok) return;
+          const { error } = await storage.deleteImage(name);
+          if (error) throw error;
+          await refresh();
+        } catch (e) {
+          alert(`Gagal menghapus: ${e.message}`);
+        }
+      };
+
+      return (
+        <div className="mt-10">
+          <h3 className="text-2xl font-bold mb-4">Galeri Supabase</h3>
+          <p className="text-gray-600 mb-6">Upload gambar (JPG/PNG/GIF, ≤2MB) dan kelola galeri.</p>
+          <UploadFormSupabase onUploaded={refresh} />
+          <div className="mt-6">
+            {error && (
+              <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded text-red-700">{error}</div>
+            )}
+            {loading ? (
+              <div className="text-gray-600">Memuat galeri...</div>
+            ) : (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {images.map(img => (
+                  <div key={img.name} className="bg-white rounded-lg shadow border overflow-hidden">
+                    <div className="aspect-[4/3] bg-gray-100">
+                      <img src={img.publicUrl} alt={img.name} className="w-full h-full object-cover" />
+                    </div>
+                    <div className="p-4">
+                      <div className="font-medium truncate" title={img.name}>{img.name}</div>
+                      <div className="text-sm text-gray-500 mt-1">Diunggah: {formatDate(img.created_at)}</div>
+                      <div className="mt-3 flex items-center justify-between">
+                        <a href={img.publicUrl} target="_blank" className="text-blue-600 hover:text-blue-800">Lihat</a>
+                        <button onClick={() => handleDelete(img.name)} className="px-3 py-1.5 bg-red-600 text-white rounded">Delete</button>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+                {images.length === 0 && (
+                  <div className="col-span-3 text-center text-gray-500">Belum ada gambar.</div>
+                )}
+              </div>
+            )}
+          </div>
+        </div>
+      );
+    };
+
+    const UploadFormSupabase = ({ onUploaded }) => {
+      const [uploading, setUploading] = React.useState(false);
+      const [error, setError] = React.useState('');
+      const [success, setSuccess] = React.useState('');
+
+      const validateFile = (file) => {
+        if (!file) return 'Tidak ada file';
+        const allowed = ['image/jpeg','image/png','image/gif'];
+        if (!allowed.includes(file.type)) return 'Format harus JPG, PNG, atau GIF';
+        const max = 2 * 1024 * 1024; // 2MB
+        if (file.size > max) return 'Ukuran maksimum 2MB';
+        return null;
+      };
+
+      const genFileName = (orig) => {
+        const ext = (orig.split('.').pop() || 'jpg').toLowerCase();
+        const base = orig.replace(/\.[^.]+$/, '');
+        return `${Date.now()}_${Math.random().toString(36).slice(2)}.${ext}`;
+      };
+
+      const onChange = async (e) => {
+        setError(''); setSuccess('');
+        const file = e.target.files?.[0];
+        if (!file) return;
+        const err = validateFile(file);
+        if (err) { setError(err); return; }
+        const name = genFileName(file.name);
+        setUploading(true);
+        try {
+          const { error } = await storage.uploadImage(file, name);
+          if (error) throw error;
+          // Dapatkan public URL
+          const { data: pub } = await storage.getPublicUrl(name);
+          const publicUrl = pub?.publicUrl || '';
+          // Simpan metadata ke tabel via RPC
+          if (typeof supabase?.rpc === 'function') {
+            const { error: dbError } = await supabase.rpc('insert_gallery_photo', {
+              p_photo_url: publicUrl,
+              p_description: '',
+              p_category: 'kegiatan'
+            });
+            if (dbError) {
+              // Jika gagal insert, tetap lanjut tetapi tampilkan catatan
+              setSuccess('Upload berhasil, namun gagal simpan metadata: ' + dbError.message);
+            } else {
+              setSuccess('Upload berhasil dan metadata tersimpan');
+            }
+          } else {
+            setSuccess('Upload berhasil');
+          }
+          if (typeof onUploaded === 'function') await onUploaded();
+        } catch (e) {
+          setError(e.message || 'Upload gagal');
+        } finally {
+          setUploading(false);
+          e.target.value = '';
+        }
+      };
+
+      return (
+        <div className="bg-white rounded-lg shadow p-4">
+          <label className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded cursor-pointer">
+            <i className="fas fa-upload mr-2"></i>
+            Pilih Gambar
+            <input type="file" accept="image/jpeg,image/png,image/gif" className="hidden" onChange={onChange} disabled={uploading} />
+          </label>
+          {uploading && <span className="ml-3 text-gray-600">Mengunggah...</span>}
+          {error && (
+            <div className="mt-3 p-2 bg-red-50 border border-red-200 rounded text-red-700 text-sm">{error}</div>
+          )}
+          {success && (
+            <div className="mt-3 p-2 bg-green-50 border border-green-200 rounded text-green-700 text-sm">{success}</div>
+          )}
+        </div>
+      );
+    };
+    </script>
+  </body>
+ </html>

@@ -84,8 +84,34 @@ document.addEventListener('DOMContentLoaded', () => {
       }, 2000);
     }
 
-    // Open WhatsApp with prefilled text
-    window.open(waUrl, '_blank');
+    // Buka WhatsApp dengan pendekatan yang ramah mobile
+    // Coba intent aplikasi terlebih dulu, lalu fallback ke URL web
+    const isMobile = /Android|iPhone|iPad|iPod|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    const intentUrl = `whatsapp://send?phone=${targetWaNumber}&text=${encodedText}`;
+    const webUrl = waUrl; // https://wa.me/...
+
+    if (isMobile) {
+      let switched = false;
+      const onVisibilityChange = () => { switched = document.hidden; };
+      document.addEventListener('visibilitychange', onVisibilityChange, { once: true });
+
+      // Arahkan ke app WhatsApp
+      try {
+        window.location.href = intentUrl;
+      } catch (e) {
+        // abaikan, lanjut fallback
+      }
+
+      // Jika app tidak terbuka, fallback ke web
+      setTimeout(() => {
+        if (!switched) {
+          window.location.href = webUrl;
+        }
+      }, 700);
+    } else {
+      // Desktop: buka tab baru agar tidak mengganggu halaman
+      window.open(webUrl, '_blank');
+    }
 
     // Reset form after opening WA
     form.reset();

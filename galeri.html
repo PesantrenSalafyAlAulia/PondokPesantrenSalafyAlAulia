@@ -14,7 +14,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="galeri.html">
     
-    <title>Galeri - Pesantren Modern</title>
+    <title>Galeri - Pesantren salafy</title>
     
     <!-- Preload critical resources -->
     <link rel="preload" href="assets/css/bootstrap.min.css" as="style">
@@ -386,6 +386,164 @@
         </section>
 
     </main>
+  <!-- Supabase Gallery Section -->
+  <section class="section-padding">
+    <div class="container">
+      <div class="row mb-4">
+        <div class="col-12 text-center">
+          <h2 class="section-title">GALERI ZIARAH </h2>
+          <p class="section-subtitle">KEGIATAN ZIARAH JAWA & MADURA .</p>
+        </div>
+      </div>
+      <div id="supabase-gallery" class="gallery-grid"></div>
+    </div>
+  </section>
+
+  <!-- Supabase Gallery Injection -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    (function() {
+      try {
+        const SUPABASE_URL = window.SUPABASE_URL || 'https://avtatuxrcjostwpwopol.supabase.co';
+        const SUPABASE_ANON_KEY = window.SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImF2dGF0dXhyY2pvc3R3cHdvcG9sIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjEzOTE2NjMsImV4cCI6MjA3Njk2NzY2M30.WIwgtWZjdN08sgPFijhbfk603NXCkSbBYutSj_0HJDg';
+        const STORAGE_BUCKET = 'galeri-pesantren';
+
+        if (!window.supabase || !SUPABASE_URL.includes('.supabase.co')) {
+          console.warn('Supabase tidak dikonfigurasi atau CDN belum dimuat.');
+          return;
+        }
+
+        const client = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        const grid = document.getElementById('supabase-gallery');
+        if (!grid) return;
+
+        const formatDate = (iso) => {
+          try { return new Date(iso).toLocaleString('id-ID', { year:'numeric', month:'short', day:'numeric' }); } catch { return '-'; }
+        };
+
+        const isValidImageUrl = (url) => {
+          try {
+            if (!url || typeof url !== 'string') return false;
+            const clean = url.split('?')[0];
+            return /\.(jpe?g|png|gif|webp)$/i.test(clean);
+          } catch { return false; }
+        };
+
+        const fileNameFromUrl = (url) => {
+          try {
+            const clean = url.split('?')[0];
+            return decodeURIComponent(clean.split('/').pop() || 'download.jpg');
+          } catch { return 'download.jpg'; }
+        };
+
+        const render = (items) => {
+          grid.innerHTML = '';
+          if (!items || !items.length) {
+            grid.innerHTML = '<p class="text-center text-muted">Belum ada unggahan.</p>';
+            return;
+          }
+          items.forEach(it => {
+            if (!isValidImageUrl(it.publicUrl)) return; // skip item yang URL-nya bukan file gambar
+            const card = document.createElement('div');
+            card.className = 'gallery-item';
+            card.setAttribute('data-aos','fade-up');
+            const fname = fileNameFromUrl(it.publicUrl);
+            card.innerHTML = `
+              <div class="gallery-thumb">
+                <img src="${it.publicUrl}" alt="${fname}" loading="lazy"/>
+              </div>
+              <div class="overlay">
+                <div class="ms-auto d-flex gap-2">
+                  <a href="${it.publicUrl}" class="btn btn-light btn-sm btn-view" title="Lihat" data-index="${items.indexOf(it)}">
+                    <i class="fas fa-search-plus"></i>
+                  </a>
+                  <a href="${it.publicUrl}" class="btn btn-success btn-sm" download="${fname}" title="Download">
+                    <i class="fas fa-download"></i>
+                  </a>
+                </div>
+              </div>`;
+            grid.appendChild(card);
+          });
+        };
+
+        // Simple viewer slider (no external lib)
+        let VIEW_ITEMS = [];
+        let CURRENT_INDEX = 0;
+        const ensureViewer = () => {
+          if (document.getElementById('gallery-viewer')) return;
+          const wrap = document.createElement('div');
+          wrap.id = 'gallery-viewer';
+          wrap.style.cssText = 'position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.7);z-index:9999;';
+          wrap.innerHTML = `
+            <div style="position:relative;max-width:90vw;max-height:85vh;">
+              <img id="viewer-img" src="" alt="preview" style="max-width:90vw;max-height:85vh;object-fit:contain;border-radius:8px;box-shadow:0 10px 30px rgba(0,0,0,0.4)" />
+              <button id="viewer-prev" aria-label="Sebelumnya" style="position:absolute;left:-60px;top:50%;transform:translateY(-50%);background:#fff;color:#333;border:none;border-radius:999px;width:42px;height:42px;box-shadow:0 6px 14px rgba(0,0,0,0.25);cursor:pointer"><i class="fas fa-chevron-left"></i></button>
+              <button id="viewer-next" aria-label="Berikutnya" style="position:absolute;right:-60px;top:50%;transform:translateY(-50%);background:#fff;color:#333;border:none;border-radius:999px;width:42px;height:42px;box-shadow:0 6px 14px rgba(0,0,0,0.25);cursor:pointer"><i class="fas fa-chevron-right"></i></button>
+              <button id="viewer-close" aria-label="Tutup" style="position:absolute;right:-60px;top:-60px;background:#fff;color:#333;border:none;border-radius:999px;width:42px;height:42px;box-shadow:0 6px 14px rgba(0,0,0,0.25);cursor:pointer"><i class="fas fa-times"></i></button>
+            </div>`;
+          document.body.appendChild(wrap);
+          const close = () => { wrap.style.display = 'none'; };
+          const show = (idx) => {
+            if (!VIEW_ITEMS.length) return;
+            CURRENT_INDEX = (idx + VIEW_ITEMS.length) % VIEW_ITEMS.length;
+            const src = VIEW_ITEMS[CURRENT_INDEX]?.publicUrl || '';
+            const img = document.getElementById('viewer-img');
+            img.src = src;
+            wrap.style.display = 'flex';
+          };
+          document.getElementById('viewer-prev').onclick = () => show(CURRENT_INDEX - 1);
+          document.getElementById('viewer-next').onclick = () => show(CURRENT_INDEX + 1);
+          document.getElementById('viewer-close').onclick = close;
+          wrap.addEventListener('click', (e) => { if (e.target.id === 'gallery-viewer') close(); });
+          window.__gallery_show = show;
+          window.__gallery_close = close;
+          document.addEventListener('keydown', (e) => {
+            if (wrap.style.display !== 'flex') return;
+            if (e.key === 'Escape') close();
+            if (e.key === 'ArrowLeft') window.__gallery_show(CURRENT_INDEX - 1);
+            if (e.key === 'ArrowRight') window.__gallery_show(CURRENT_INDEX + 1);
+          });
+        };
+
+        const wireViewer = (items) => {
+          VIEW_ITEMS = items;
+          ensureViewer();
+          document.querySelectorAll('#supabase-gallery .btn-view').forEach(btn => {
+            btn.addEventListener('click', (ev) => {
+              ev.preventDefault();
+              const idx = parseInt(btn.getAttribute('data-index') || '0', 10) || 0;
+              window.__gallery_show(idx);
+            });
+          });
+        };
+
+        const load = async () => {
+          try {
+            // Ambil dari tabel 'gallery' agar mencakup file di subfolder
+            const { data, error } = await client
+              .from('gallery')
+              .select('photo_url, upload_date, created_at, category')
+              .order('upload_date', { ascending: false })
+              .limit(400);
+            if (error) throw error;
+            const items = (data || [])
+              .map(row => ({
+                name: row.photo_url?.split('/').pop() || '',
+                created_at: row.upload_date || row.created_at || '',
+                publicUrl: row.photo_url || ''
+              }))
+              .filter(it => isValidImageUrl(it.publicUrl));
+            render(items);
+            wireViewer(items);
+          } catch (e) {
+            console.warn('Gagal memuat galeri:', e);
+          }
+        };
+
+        load();
+      } catch (e) { console.warn('Supabase gallery init error:', e); }
+    })();
+  </script>
 
     <!-- Footer -->
     <footer id="footer" class="footer footer-black">
@@ -433,9 +591,15 @@
                 </div>
             </div>
             <hr class="my-4" style="border-color: rgba(255,255,255,0.1);">
-            <div class="row">
-                <div class="col-12 text-center">
+            <div class="row align-items-center">
+                <div class="col-md-8 text-center text-md-start">
                     <p class="mb-0">&copy; <span id="current-year">2024</span> Pondok Pesantren Assalafi Al Aulia. All Rights Reserved.</p>
+                </div>
+                <div class="col-md-4 text-center text-md-end">
+                    <a href="admin.html" title="Masuk Admin" aria-label="Admin"
+                       style="display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;border-radius:999px;border:1px solid rgba(255,255,255,0.25);color:#fff;opacity:0.6;">
+                        <i class="fas fa-user-shield" style="font-size:14px;"></i>
+                    </a>
                 </div>
             </div>
         </div>
@@ -540,5 +704,6 @@
         });
     </script>
     
+
 </body>
 </html>
