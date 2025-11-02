@@ -112,6 +112,29 @@
   color: #eaf5ee;
   border-color: rgba(255,255,255,0.16);
 }
+/* Unified glass card for footer content (black variant) */
+.footer.footer-black .footer-content {
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  padding: 20px;
+}
+/* Harmonize heading, copy, and links for black variant */
+.footer.footer-black h5 { color: #eaf7ef; letter-spacing: 0.02em; }
+.footer.footer-black p,
+.footer.footer-black li,
+.footer.footer-black a { color: #cfe7d6; }
+.footer.footer-black a:hover { color: #ffc107; }
+.footer.footer-black hr { border-color: rgba(255,255,255,0.12) !important; }
+
+/* Ensure consistent layout alignment across footer columns */
+#footer .container { max-width: 1200px; padding-left: 1rem; padding-right: 1rem; }
+@media (max-width: 768px) {
+  #footer .footer-content { text-align: center; }
+  #footer .social-links { justify-content: center; }
+}
 /* Footer label chip (seen in jadwal.html markup) */
 .footer .footer-label {
   display: inline-flex;
