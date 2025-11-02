@@ -12,8 +12,11 @@ document.addEventListener('DOMContentLoaded', () => {
         // Initialize navbar scroll effect
         initNavbarScroll();
         
-        // Initialize back to top button
+        // Initialize back to top button (supports multiple selectors and auto-create)
         initBackToTop();
+
+        // Ensure floating WhatsApp contact exists globally
+        ensureFloatingContact();
         
         // Initialize AOS (Animate On Scroll)
         initAOS();
@@ -122,29 +125,54 @@ const initNavbarScroll = () => {
  */
 const initBackToTop = () => {
     try {
-        const backToTopButton = document.querySelector('.back-to-top');
-        if (backToTopButton) {
-            const handleScroll = () => {
-                if (window.scrollY > 300) {
-                    backToTopButton.classList.add('active');
-                } else {
-                    backToTopButton.classList.remove('active');
-                }
-            };
-            window.addEventListener('scroll', throttle(handleScroll, 100));
-            
-            backToTopButton.addEventListener('click', (e) => {
-                e.preventDefault();
-                // Respect user's reduced motion preference
-                const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-                window.scrollTo({
-                    top: 0,
-                    behavior: prefersReducedMotion ? 'auto' : 'smooth'
-                });
-            });
+        // Support either class-based or id-based buttons
+        let backToTopButton = document.querySelector('.back-to-top') || document.getElementById('backToTop');
+
+        // Auto-create if missing
+        if (!backToTopButton) {
+            backToTopButton = document.createElement('a');
+            backToTopButton.href = '#';
+            backToTopButton.className = 'back-to-top d-flex align-items-center justify-content-center';
+            backToTopButton.setAttribute('aria-label', 'Kembali ke atas');
+            backToTopButton.innerHTML = '<i class="fas fa-arrow-up"></i>';
+            document.body.appendChild(backToTopButton);
         }
+
+        const toggleVisibility = () => {
+            const show = window.scrollY > 300;
+            backToTopButton.classList.toggle('active', show);
+            backToTopButton.classList.toggle('show', show); // support existing id-based style
+        };
+        window.addEventListener('scroll', throttle(toggleVisibility, 100));
+        toggleVisibility();
+
+        backToTopButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            window.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
+        });
     } catch (error) {
         console.error('Error initializing back to top button:', error);
+    }
+};
+
+/**
+ * Ensure floating WhatsApp contact exists globally
+ */
+const ensureFloatingContact = () => {
+    try {
+        const existing = document.querySelector('.floating-contact');
+        if (existing) return;
+        const contact = document.createElement('a');
+        contact.className = 'floating-contact';
+        contact.href = 'https://wa.me/6282116959078';
+        contact.target = '_blank';
+        contact.rel = 'noopener';
+        contact.setAttribute('aria-label', 'WhatsApp');
+        contact.innerHTML = '<i class="fab fa-whatsapp"></i>';
+        document.body.appendChild(contact);
+    } catch (error) {
+        console.error('Error ensuring floating contact:', error);
     }
 };
 

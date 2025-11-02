@@ -99,14 +99,18 @@
 .footer.footer-black hr { border-color: rgba(255,255,255,0.08) !important; }
 .footer.footer-black .social-links a {
   background: rgba(255,255,255,0.08);
-  color: #fff;
+  color: #28a745; /* brand green for icon glyph */
   border: 1px solid rgba(255,255,255,0.12);
 }
 .footer.footer-black .social-links a:hover {
   transform: translateY(-3px);
   background: #28a745;
+  color: #fff; /* invert to white on green hover for contrast */
   box-shadow: 0 8px 18px rgba(40,167,69,0.25);
 }
+/* Make footer heading and list icons green for visual consistency */
+.footer.footer-black .footer-content h5 i,
+.footer.footer-black .footer-content li i { color: #28a745; }
 .footer.footer-black .footer-label {
   background: rgba(255,255,255,0.08);
   color: #eaf5ee;
