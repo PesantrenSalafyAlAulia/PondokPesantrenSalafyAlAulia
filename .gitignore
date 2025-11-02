@@ -15,6 +15,10 @@ npm-debug.log*
 dist/
 build/
 
+# Node.js dependencies
+node_modules/
+package-lock.json
+yarn.lock
 # Cache
 .cache/
 

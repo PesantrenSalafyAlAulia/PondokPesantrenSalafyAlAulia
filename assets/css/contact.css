@@ -83,4 +83,6 @@
   .contact-card { text-align: left; }
   .contact-icon { width: 56px; height: 56px; }
   .contact-form .btn-success { width: 100%; }
+  /* Kurangi padding section di mobile agar konten lebih kompak */
+  #contact.py-5 { padding-top: 2.5rem !important; padding-bottom: 2.5rem !important; }
 }

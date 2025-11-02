@@ -319,32 +319,23 @@
                     </div>
                     <div class="card-body p-0">
                         <div class="table-responsive">
-                            <table class="table table-hover align-middle mb-0" style="table-layout: fixed; width: 100%;">
-                                <colgroup>
-                                    <col style="width:28%">
-                                    <col style="width:22%">
-                                    <col style="width:50%">
-                                </colgroup>
-                                <thead class="bg-light table-head-premium" data-aos="fade-down">
-                                    <tr>
-                                        <th class="py-3 px-4 text-success fw-bold" data-aos="fade-down" data-aos-delay="80"><i class="fas fa-calendar-day me-2"></i></th>
-                                        <th class="py-3 px-4 text-success fw-bold" data-aos="fade-down" data-aos-delay="130"><i class="fas fa-clock me-2"></i>Waktu</th>
-                                        <th class="py-3 px-4 text-success fw-bold" data-aos="fade-down" data-aos-delay="180"><i class="fas fa-book-open me-2"></i>Kegiatan</th>
-                                    </tr>
-                                </thead>
+                            <table class="table table-hover align-middle mb-0" style="width: 100%;">
                                 <tbody>
                                     <!-- Senin -->
                                     <tr class="day-block" data-day="senin" id="senin">
-                                        <td class="py-4 px-4" colspan="3">
+<td class="py-4 pl-0 pr-4" colspan="3">
                                             <div class="d-flex align-items-center mb-3">
-                                                <div class="day-icon rounded-circle bg-success bg-opacity-10 p-3 me-3">
-                                                    <i class="fas fa-sun text-success"></i>
-                                                </div>
-                                                <h5 class="mb-0 fw-bold">Senin</h5>
+                                                <button class="btn btn-link p-0 d-flex align-items-center text-decoration-none day-toggle" data-bs-toggle="collapse" data-bs-target="#collapse-senin" aria-expanded="false" aria-controls="collapse-senin">
+                                                    <div class="day-icon rounded-circle bg-success bg-opacity-10 p-3 me-3">
+                                                        <i class="fas fa-sun text-success"></i>
+                                                    </div>
+                                                    <h5 class="mb-0 fw-bold me-2">Senin</h5>
+                                                    <i class="fas fa-chevron-down collapse-chevron ms-1 text-muted"></i>
+                                                </button>
                                             </div>
-                                            <div class="schedule-items">
-                                                <div class="d-md-flex align-items-start mb-3">
-                                                    <div class="time-col me-md-4 mb-2 mb-md-0" style="min-width: 180px;">
+                                            <div id="collapse-senin" class="schedule-items collapse">
+                                                <div class="d-md-flex align-items-start mb-2">
+                                                    <div class="time-col me-md-2 mb-2 mb-md-0">
                                                         <span class="badge bg-primary rounded-pill px-3 py-2">
                                                             <i class="fas fa-sun me-1"></i> 07:00 Pagi
                                                         </span>
@@ -358,8 +349,8 @@
                                                         </ul>
                                                     </div>
                                                 </div>
-                                                <div class="d-md-flex align-items-start mb-3">
-                                                    <div class="time-col me-md-4 mb-2 mb-md-0" style="min-width: 180px;">
+                                                <div class="d-md-flex align-items-start mb-2">
+                                                    <div class="time-col me-md-2 mb-2 mb-md-0">
                                                         <span class="badge bg-info rounded-pill px-3 py-2">
                                                             <i class="fas fa-cloud-sun me-1"></i> 15:00 Siang
                                                         </span>
@@ -371,8 +362,8 @@
                                                         </ul>
                                                     </div>
                                                 </div>
-                                                <div class="d-md-flex align-items-start">
-                                                    <div class="time-col me-md-4 mb-2 mb-md-0" style="min-width: 180px;">
+                                                <div class="d-md-flex align-items-start mb-2">
+                                                    <div class="time-col me-md-2 mb-2 mb-md-0">
                                                         <span class="badge bg-dark rounded-pill px-3 py-2">
                                                             <i class="fas fa-moon me-1"></i> 20:00 Malam
                                                         </span>
@@ -405,16 +396,19 @@
 
                                     <!-- Selasa -->
                                     <tr class="day-block" data-day="selasa" id="selasa">
-                                        <td class="py-4 px-4" colspan="3">
+<td class="py-4 pl-0 pr-4" colspan="3">
                                             <div class="d-flex align-items-center mb-3">
-                                                <div class="day-icon rounded-circle bg-info bg-opacity-10 p-3 me-3">
-                                                    <i class="fas fa-cloud-sun text-info"></i>
-                                                </div>
-                                                <h5 class="mb-0 fw-bold">Selasa</h5>
+                                                <button class="btn btn-link p-0 d-flex align-items-center text-decoration-none day-toggle" data-bs-toggle="collapse" data-bs-target="#collapse-selasa" aria-expanded="false" aria-controls="collapse-selasa">
+                                                    <div class="day-icon rounded-circle bg-info bg-opacity-10 p-3 me-3">
+                                                        <i class="fas fa-cloud-sun text-info"></i>
+                                                    </div>
+                                                    <h5 class="mb-0 fw-bold me-2">Selasa</h5>
+                                                    <i class="fas fa-chevron-down collapse-chevron ms-1 text-muted"></i>
+                                                </button>
                                             </div>
-                                            <div class="schedule-items">
-                                                <div class="d-md-flex align-items-start mb-3">
-                                                    <div class="time-col me-md-4 mb-2 mb-md-0" style="min-width: 180px;">
+                                            <div id="collapse-selasa" class="schedule-items collapse">
+                                                <div class="d-md-flex align-items-start mb-2">
+                                                    <div class="time-col me-md-2 mb-2 mb-md-0">
                                                         <span class="badge bg-primary rounded-pill px-3 py-2">
                                                             <i class="fas fa-sun me-1"></i> 07:00 Pagi
                                                         </span>
@@ -428,8 +422,8 @@
                                                         </ul>
                                                     </div>
                                                 </div>
-                                                <div class="d-md-flex align-items-start mb-3">
-                                                    <div class="time-col me-md-4 mb-2 mb-md-0" style="min-width: 180px;">
+                                                <div class="d-md-flex align-items-start mb-2">
+                                                    <div class="time-col me-md-2 mb-2 mb-md-0">
                                                         <span class="badge bg-info rounded-pill px-3 py-2">
                                                             <i class="fas fa-cloud-sun me-1"></i> 15:00 Siang
                                                         </span>
@@ -442,7 +436,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="d-md-flex align-items-start">
-                                                    <div class="time-col me-md-4 mb-2 mb-md-0" style="min-width: 180px;">
+                                                    <div class="time-col me-md-2 mb-2 mb-md-0">
                                                         <span class="badge bg-dark rounded-pill px-3 py-2">
                                                             <i class="fas fa-moon me-1"></i> 20:00 Malam
                                                         </span>
@@ -461,16 +455,19 @@
 
                                     <!-- Rabu -->
                                     <tr class="day-block" data-day="rabu" id="rabu">
-                                        <td class="py-4 px-4" colspan="3">
+<td class="py-4 pl-0 pr-4" colspan="3">
                                             <div class="d-flex align-items-center mb-3">
-                                                <div class="day-icon rounded-circle bg-warning bg-opacity-10 p-3 me-3">
-                                                    <i class="fas fa-cloud text-warning"></i>
-                                                </div>
-                                                <h5 class="mb-0 fw-bold">Rabu</h5>
+                                                <button class="btn btn-link p-0 d-flex align-items-center text-decoration-none day-toggle" data-bs-toggle="collapse" data-bs-target="#collapse-rabu" aria-expanded="false" aria-controls="collapse-rabu">
+                                                    <div class="day-icon rounded-circle bg-warning bg-opacity-10 p-3 me-3">
+                                                        <i class="fas fa-cloud text-warning"></i>
+                                                    </div>
+                                                    <h5 class="mb-0 fw-bold me-2">Rabu</h5>
+                                                    <i class="fas fa-chevron-down collapse-chevron ms-1 text-muted"></i>
+                                                </button>
                                             </div>
-                                            <div class="schedule-items">
-                                                <div class="d-md-flex align-items-start mb-3">
-                                                    <div class="time-col me-md-4 mb-2 mb-md-0" style="min-width: 180px;">
+                                            <div id="collapse-rabu" class="schedule-items collapse">
+                                                <div class="d-md-flex align-items-start mb-2">
+                                                    <div class="time-col me-md-2 mb-2 mb-md-0">
                                                         <span class="badge bg-primary rounded-pill px-3 py-2">
                                                             <i class="fas fa-sun me-1"></i> 07:00 Pagi
                                                         </span>
@@ -484,8 +481,8 @@
                                                         </ul>
                                                     </div>
                                                 </div>
-                                                <div class="d-md-flex align-items-start mb-3">
-                                                    <div class="time-col me-md-4 mb-2 mb-md-0" style="min-width: 180px;">
+                                                <div class="d-md-flex align-items-start mb-2">
+                                                    <div class="time-col me-md-2 mb-2 mb-md-0">
                                                         <span class="badge bg-info rounded-pill px-3 py-2">
                                                             <i class="fas fa-cloud-sun me-1"></i> 15:00 Siang
                                                         </span>
@@ -498,7 +495,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="d-md-flex align-items-start">
-                                                    <div class="time-col me-md-4 mb-2 mb-md-0" style="min-width: 180px;">
+                                                    <div class="time-col me-md-2 mb-2 mb-md-0">
                                                         <span class="badge bg-dark rounded-pill px-3 py-2">
                                                             <i class="fas fa-moon me-1"></i> 20:00 Malam
                                                         </span>
@@ -517,16 +514,19 @@
 
                                     <!-- Kamis -->
                                     <tr class="day-block" data-day="kamis" id="kamis">
-                                        <td class="py-4 px-4" colspan="3">
+<td class="py-4 pl-0 pr-4" colspan="3">
                                             <div class="d-flex align-items-center mb-3">
-                                                <div class="day-icon rounded-circle bg-danger bg-opacity-10 p-3 me-3">
-                                                    <i class="fas fa-cloud-showers-heavy text-danger"></i>
-                                                </div>
-                                                <h5 class="mb-0 fw-bold">Kamis</h5>
+                                                <button class="btn btn-link p-0 d-flex align-items-center text-decoration-none day-toggle" data-bs-toggle="collapse" data-bs-target="#collapse-kamis" aria-expanded="false" aria-controls="collapse-kamis">
+                                                    <div class="day-icon rounded-circle bg-danger bg-opacity-10 p-3 me-3">
+                                                        <i class="fas fa-cloud-showers-heavy text-danger"></i>
+                                                    </div>
+                                                    <h5 class="mb-0 fw-bold me-2">Kamis</h5>
+                                                    <i class="fas fa-chevron-down collapse-chevron ms-1 text-muted"></i>
+                                                </button>
                                             </div>
-                                            <div class="schedule-items">
-                                                <div class="d-md-flex align-items-start mb-3">
-                                                    <div class="time-col me-md-4 mb-2 mb-md-0" style="min-width: 180px;">
+                                            <div id="collapse-kamis" class="schedule-items collapse">
+                                                <div class="d-md-flex align-items-start mb-2">
+                                                    <div class="time-col me-md-2 mb-2 mb-md-0">
                                                         <span class="badge bg-primary rounded-pill px-3 py-2">
                                                             <i class="fas fa-sun me-1"></i> 07:00 Pagi
                                                         </span>
@@ -540,8 +540,8 @@
                                                         </ul>
                                                     </div>
                                                 </div>
-                                                <div class="d-md-flex align-items-start mb-3">
-                                                    <div class="time-col me-md-4 mb-2 mb-md-0" style="min-width: 180px;">
+                                                <div class="d-md-flex align-items-start mb-2">
+                                                    <div class="time-col me-md-2 mb-2 mb-md-0">
                                                         <span class="badge bg-info rounded-pill px-3 py-2">
                                                             <i class="fas fa-cloud-sun me-1"></i> 15:00 Siang
                                                         </span>
@@ -554,7 +554,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="d-md-flex align-items-start">
-                                                    <div class="time-col me-md-4 mb-2 mb-md-0" style="min-width: 180px;">
+                                                    <div class="time-col me-md-2 mb-2 mb-md-0">
                                                         <span class="badge bg-dark rounded-pill px-3 py-2">
                                                             <i class="fas fa-moon me-1"></i> 20:00 Malam
                                                         </span>
@@ -573,16 +573,19 @@
 
                                     <!-- Jumat -->
                                     <tr class="day-block" data-day="jumat" id="jumat">
-                                        <td class="py-4 px-4" colspan="3">
+<td class="py-4 pl-0 pr-4" colspan="3">
                                             <div class="d-flex align-items-center mb-3">
-                                                <div class="day-icon rounded-circle bg-success bg-opacity-10 p-3 me-3">
-                                                    <i class="fas fa-mosque text-success"></i>
-                                                </div>
-                                                <h5 class="mb-0 fw-bold">Jumat</h5>
+                                                <button class="btn btn-link p-0 d-flex align-items-center text-decoration-none day-toggle" data-bs-toggle="collapse" data-bs-target="#collapse-jumat" aria-expanded="false" aria-controls="collapse-jumat">
+                                                    <div class="day-icon rounded-circle bg-success bg-opacity-10 p-3 me-3">
+                                                        <i class="fas fa-mosque text-success"></i>
+                                                    </div>
+                                                    <h5 class="mb-0 fw-bold me-2">Jumat</h5>
+                                                    <i class="fas fa-chevron-down collapse-chevron ms-1 text-muted"></i>
+                                                </button>
                                             </div>
-                                            <div class="schedule-items">
-                                                <div class="d-md-flex align-items-start mb-3">
-                                                    <div class="time-col me-md-4 mb-2 mb-md-0" style="min-width: 180px;">
+                                            <div id="collapse-jumat" class="schedule-items collapse">
+                                                <div class="d-md-flex align-items-start mb-2">
+                                                    <div class="time-col me-md-2 mb-2 mb-md-0">
                                                         <span class="badge bg-primary rounded-pill px-3 py-2">
                                                             <i class="fas fa-sun me-1"></i> 07:00 Pagi
                                                         </span>
@@ -596,8 +599,8 @@
                                                         </ul>
                                                     </div>
                                                 </div>
-                                                <div class="d-md-flex align-items-start mb-3">
-                                                    <div class="time-col me-md-4 mb-2 mb-md-0" style="min-width: 180px;">
+                                                <div class="d-md-flex align-items-start mb-2">
+                                                    <div class="time-col me-md-2 mb-2 mb-md-0">
                                                         <span class="badge bg-info rounded-pill px-3 py-2">
                                                             <i class="fas fa-cloud-sun me-1"></i> 15:00 Siang
                                                         </span>
@@ -610,7 +613,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="d-md-flex align-items-start">
-                                                    <div class="time-col me-md-4 mb-2 mb-md-0" style="min-width: 180px;">
+                                                    <div class="time-col me-md-2 mb-2 mb-md-0">
                                                         <span class="badge bg-dark rounded-pill px-3 py-2">
                                                             <i class="fas fa-moon me-1"></i> 20:00 Malam
                                                         </span>
@@ -629,14 +632,17 @@
 
                                     <!-- Sabtu -->
                                     <tr class="day-block" data-day="sabtu" id="sabtu">
-                                        <td class="py-4 px-4" colspan="3">
+<td class="py-4 pl-0 pr-4" colspan="3">
                                             <div class="d-flex align-items-center mb-3">
-                                                <div class="day-icon rounded-circle bg-primary bg-opacity-10 p-3 me-3">
-                                                    <i class="fas fa-umbrella-beach text-primary"></i>
-                                                </div>
-                                                <h5 class="mb-0 fw-bold">Sabtu</h5>
+                                                <button class="btn btn-link p-0 d-flex align-items-center text-decoration-none day-toggle" data-bs-toggle="collapse" data-bs-target="#collapse-sabtu" aria-expanded="false" aria-controls="collapse-sabtu">
+                                                    <div class="day-icon rounded-circle bg-primary bg-opacity-10 p-3 me-3">
+                                                        <i class="fas fa-umbrella-beach text-primary"></i>
+                                                    </div>
+                                                    <h5 class="mb-0 fw-bold me-2">Sabtu</h5>
+                                                    <i class="fas fa-chevron-down collapse-chevron ms-1 text-muted"></i>
+                                                </button>
                                             </div>
-                                            <div class="schedule-items">
+                                            <div id="collapse-sabtu" class="schedule-items collapse">
                                                 <div class="d-md-flex align-items-start mb-3">
                                                     <div class="time-col me-md-4 mb-2 mb-md-0" style="min-width: 180px;">
                                                         <span class="badge bg-primary rounded-pill px-3 py-2">
@@ -685,14 +691,17 @@
 
                                     <!-- Minggu -->
                                     <tr class="day-block" data-day="minggu" id="minggu">
-                                        <td class="py-4 px-4" colspan="3">
+<td class="py-4 pl-0 pr-4" colspan="3">
                                             <div class="d-flex align-items-center mb-3">
-                                                <div class="day-icon rounded-circle bg-warning bg-opacity-10 p-3 me-3">
-                                                    <i class="fas fa-sun text-warning"></i>
-                                                </div>
-                                                <h5 class="mb-0 fw-bold">Minggu</h5>
+                                                <button class="btn btn-link p-0 d-flex align-items-center text-decoration-none day-toggle" data-bs-toggle="collapse" data-bs-target="#collapse-minggu" aria-expanded="false" aria-controls="collapse-minggu">
+                                                    <div class="day-icon rounded-circle bg-warning bg-opacity-10 p-3 me-3">
+                                                        <i class="fas fa-sun text-warning"></i>
+                                                    </div>
+                                                    <h5 class="mb-0 fw-bold me-2">Minggu</h5>
+                                                    <i class="fas fa-chevron-down collapse-chevron ms-1 text-muted"></i>
+                                                </button>
                                             </div>
-                                            <div class="schedule-items">
+                                            <div id="collapse-minggu" class="schedule-items collapse">
                                                 <div class="d-md-flex align-items-start mb-3">
                                                     <div class="time-col me-md-4 mb-2 mb-md-0" style="min-width: 180px;">
                                                         <span class="badge bg-primary rounded-pill px-3 py-2">

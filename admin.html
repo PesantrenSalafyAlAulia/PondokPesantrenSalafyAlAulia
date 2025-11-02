@@ -107,7 +107,7 @@
         // Definisikan AdminDashboard terlebih dahulu
         const AdminDashboard = ({ user, onLogout }) => {
             return (
-                <div className="bg-white shadow-sm border-b border-gray-200">
+                <div className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-30">
                     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                         <div className="flex justify-between items-center py-4">
                             <div className="flex items-center">
@@ -133,8 +133,8 @@
             );
         };
         
-        // Definisikan AdminDashboardWrapped (modernized)
-        const AdminDashboardWrapped = ({ user, onLogout }) => {
+        // Definisikan AdminDashboardIntro (modernized)
+        const AdminDashboardIntro = ({ user, onLogout }) => {
             const [stats, setStats] = React.useState({ total: 0, categories: 0, recent: 0 });
             React.useEffect(() => {
                 const client = window.supabaseClient;
@@ -206,17 +206,17 @@
 
                         {/* Welcome and quick actions */}
                         <div className="bg-white/80 backdrop-blur rounded-xl shadow p-6 ring-1 ring-white/50">
-                            <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between">
+                            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
                                 <div className="mb-6 lg:mb-0">
                                     <h2 className="text-2xl font-bold text-gray-900">Selamat Datang di Admin Panel</h2>
                                     <p className="text-gray-600 mt-2">Kelola galeri foto pesantren, upload gambar baru, dan atur kategori.</p>
                                 </div>
-                                <div className="flex items-center gap-3">
-                                    <a href="galeri.html" target="_blank" className="inline-flex items-center px-4 py-2 rounded-lg bg-green-600 text-white hover:bg-green-700">
+                                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-3">
+                                    <a href="galeri.html" target="_blank" className="inline-flex items-center justify-center px-4 py-2 rounded-lg bg-green-600 text-white hover:bg-green-700 w-full sm:w-auto">
                                         <i className="fas fa-external-link-alt mr-2"></i>
                                         Lihat Galeri Publik
                                     </a>
-                                    <a href="#" className="inline-flex items-center px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700">
+                                    <a href="#" className="inline-flex items-center justify-center px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700 w-full sm:w-auto">
                                         <i className="fas fa-upload mr-2"></i>
                                         Upload Foto
                                     </a>
@@ -587,7 +587,7 @@
     
             // Bypass login sepenuhnya saat dev mode diaktifkan
             if (DEV_MODE) {
-                return <AdminDashboardWrapped user={{ email: 'alaulia' }} onLogout={() => {}} />;
+                return <AdminDashboardWrappedMain user={{ email: 'alaulia' }} onLogout={() => {}} />;
             }
     
             useEffect(() => {
@@ -631,8 +631,8 @@
                 return <LoginComponent onLogin={handleLogin} />;
             }
     
-            // Ganti penggunaan AdminDashboard dengan AdminDashboardWrapped di AdminApp
-            return <AdminDashboardWrapped user={currentUser} onLogout={handleLogout} />;
+            // Ganti penggunaan AdminDashboard dengan AdminDashboardWrappedMain di AdminApp
+            return <AdminDashboardWrappedMain user={currentUser} onLogout={handleLogout} />;
         };
     
         // Login Component (modernized UI)
@@ -670,23 +670,7 @@
                                 <p className="text-gray-600">Masuk untuk mengelola galeri pesantren</p>
                             </div>
 
-                            {!isSupabaseConfigured && (
-                                <div className="mb-6 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
-                                    <div className="flex items-start">
-                                        <i className="fas fa-exclamation-triangle text-yellow-600 mr-2 mt-0.5"></i>
-                                        <div>
-                                            <span className="text-yellow-700 text-sm">
-                                                Supabase belum dikonfigurasi. Update URL dan anon key di file <code>supabaseClient.js</code> atau langsung pada admin.html.
-                                            </span>
-                                            <div className="mt-3 text-xs text-yellow-700">
-                                                <div className="font-semibold">Contoh konfigurasi cepat (tempel sebelum script utama):</div>
-                                                <pre className="mt-1 p-2 bg-yellow-100 rounded">{'<script>\nwindow.SUPABASE_URL = \'https://YOUR-PROJECT.supabase.co\';\nwindow.SUPABASE_ANON_KEY = \'YOUR_ANON_KEY\';\n<\\/script>'}</pre>
-                                                <div className="mt-2">Pastikan URL valid dan anon key aktif (Settings → API di Supabase).</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            )}
+                            
 
                             {error && (
                                 <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
@@ -1095,11 +1079,11 @@
             );
         };
 
-        // Simple Admin Dashboard
-        const AdminDashboard = ({ user, onLogout }) => {
+        // Simple Admin Dashboard (legacy, renamed to avoid redeclare)
+        const AdminDashboardSimple = ({ user, onLogout }) => {
             return (
                 <div className="min-h-screen bg-gray-50">
-                    <div className="bg-white shadow-sm border-b border-gray-200">
+                    <div className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-30">
                         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                             <div className="flex justify-between items-center py-4">
                                 <div className="flex items-center">
@@ -1420,7 +1404,7 @@
           <div onDragOver={prevent} onDragEnter={prevent} onDrop={onDrop} className="border-2 border-dashed rounded-lg p-6 text-center mb-4 hover:border-blue-400">
             <p className="text-gray-600 mb-2">Tarik & letakkan file ke sini</p>
             <p className="text-sm text-gray-500">Atau</p>
-            <label className="mt-2 inline-block px-4 py-2 bg-blue-600 text-white rounded cursor-pointer">
+            <label className="mt-2 inline-flex items-center justify-center px-4 py-2 bg-blue-600 text-white rounded cursor-pointer w-full sm:w-auto">
               Pilih File
               <input type="file" multiple className="hidden" onChange={onSelectFiles} accept="image/*" />
             </label>
@@ -1437,23 +1421,23 @@
                         <div className="font-medium">{f.file.name}</div>
                         <div className="text-sm text-gray-500">{f.file.type} • {humanSize(f.file.size)} {f.error ? `• Error: ${f.error}` : ''}</div>
                       </div>
-                      <div className="space-x-2">
-                        {f.status === 'pending' && !f.error && (
-                          <button className="px-3 py-2 bg-green-600 text-white rounded" onClick={() => startUpload(f)} disabled={uploading}>Upload</button>
-                        )}
-                        {(f.status === 'uploading') && (
-                          <>
-                            <button className="px-3 py-2 bg-yellow-600 text-white rounded" onClick={() => pauseUpload(f)}>Pause</button>
-                            <button className="px-3 py-2 bg-red-600 text-white rounded" onClick={() => cancelUpload(f)}>Cancel</button>
-                          </>
-                        )}
-                        {f.status === 'paused' && (
-                          <button className="px-3 py-2 bg-blue-600 text-white rounded" onClick={() => resumeUpload(f)}>Resume</button>
-                        )}
-                        {(f.status === 'done' || f.status === 'error' || f.status === 'canceled') && (
-                          <button className="px-3 py-2 bg-gray-600 text-white rounded" onClick={() => removeEntry(f)}>Hapus</button>
-                        )}
-                      </div>
+                    <div className="flex flex-wrap gap-2 justify-end">
+                      {f.status === 'pending' && !f.error && (
+                        <button className="px-3 py-2 bg-green-600 text-white rounded" onClick={() => startUpload(f)} disabled={uploading}>Upload</button>
+                      )}
+                      {(f.status === 'uploading') && (
+                        <>
+                          <button className="px-3 py-2 bg-yellow-600 text-white rounded" onClick={() => pauseUpload(f)}>Pause</button>
+                          <button className="px-3 py-2 bg-red-600 text-white rounded" onClick={() => cancelUpload(f)}>Cancel</button>
+                        </>
+                      )}
+                      {f.status === 'paused' && (
+                        <button className="px-3 py-2 bg-blue-600 text-white rounded" onClick={() => resumeUpload(f)}>Resume</button>
+                      )}
+                      {(f.status === 'done' || f.status === 'error' || f.status === 'canceled') && (
+                        <button className="px-3 py-2 bg-gray-600 text-white rounded" onClick={() => removeEntry(f)}>Hapus</button>
+                      )}
+                    </div>
                     </div>
                     <div className="mt-3">
                       {f.file.type.startsWith('image/') && (
@@ -1668,17 +1652,17 @@
                 </div>
               ) : (
                 <div className="overflow-x-auto">
-                  <table className="min-w-full text-sm">
+                  <table className="min-w-full table-fixed text-xs md:text-sm">
                     <thead className="table-header">
                       <tr className="text-left border-b">
                         <th className="p-2 w-10">
                           <input type="checkbox" checked={selected.length===pageItems.length && pageItems.length>0} onChange={(e)=>toggleSelectAll(e.target.checked)} />
                         </th>
-                        <th className="p-2">Thumbnail</th>
+                        <th className="p-2 w-16">Thumbnail</th>
                         <th className="p-2">Nama</th>
                         <th className="p-2">Kategori</th>
                         <th className="p-2">Tanggal</th>
-                        <th className="p-2">Aksi</th>
+                        <th className="p-2 w-28">Aksi</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -1690,9 +1674,9 @@
                               <input type="checkbox" checked={selected.includes(photo.id)} onChange={()=>toggleSelectOne(photo.id)} />
                             </td>
                             <td className="p-2">
-                              <img src={photo.photo_url} alt={fileName} className="w-14 h-14 object-cover rounded" onError={(e)=>{e.target.src='foto/logo.jpg';}} />
+                              <img src={photo.photo_url} alt={fileName} className="w-12 h-12 md:w-14 md:h-14 object-cover rounded" onError={(e)=>{e.target.src='foto/logo.jpg';}} />
                             </td>
-                            <td className="p-2">{fileName}</td>
+                            <td className="p-2"><div className="max-w-[160px] sm:max-w-none truncate">{fileName}</div></td>
                             <td className="p-2">
                               <div className="flex items-center gap-2">
                                 <span className="text-xs px-2 py-1 rounded bg-blue-50 text-blue-700">{photo.category || 'Umum'}</span>
@@ -1709,17 +1693,19 @@
                               </div>
                             </td>
                             <td className="p-2">{formatDate(photo.upload_date)}</td>
-                            <td className="p-2 space-x-2">
-                              <a href={photo.photo_url} target="_blank" className="px-2 py-1 bg-gray-100 rounded inline-block"><i className="fas fa-external-link-alt mr-1"></i>Lihat</a>
-                              <a href={photo.photo_url} download={fileName} className="px-2 py-1 bg-green-600 text-white rounded inline-block"><i className="fas fa-download mr-1"></i>Download</a>
-                              {confirmDeleteId === photo.id ? (
-                                <>
-                                  <button onClick={()=>deleteOne(photo)} className="px-2 py-1 bg-red-600 text-white rounded inline-block">Ya</button>
-                                  <button onClick={()=>setConfirmDeleteId(null)} className="px-2 py-1 bg-gray-200 rounded inline-block">Batal</button>
-                                </>
-                              ) : (
-                                <button onClick={()=>setConfirmDeleteId(photo.id)} className="px-2 py-1 bg-red-50 text-red-700 rounded inline-block"><i className="fas fa-trash-alt mr-1"></i>Hapus</button>
-                              )}
+                            <td className="p-2">
+                              <div className="flex flex-wrap gap-2">
+                                <a href={photo.photo_url} target="_blank" className="px-2 py-1 bg-gray-100 rounded"><i className="fas fa-external-link-alt mr-1"></i>Lihat</a>
+                                <a href={photo.photo_url} download={fileName} className="px-2 py-1 bg-green-600 text-white rounded"><i className="fas fa-download mr-1"></i>Download</a>
+                                {confirmDeleteId === photo.id ? (
+                                  <>
+                                    <button onClick={()=>deleteOne(photo)} className="px-2 py-1 bg-red-600 text-white rounded">Ya</button>
+                                    <button onClick={()=>setConfirmDeleteId(null)} className="px-2 py-1 bg-gray-200 rounded">Batal</button>
+                                  </>
+                                ) : (
+                                  <button onClick={()=>setConfirmDeleteId(photo.id)} className="px-2 py-1 bg-red-50 text-red-700 rounded"><i className="fas fa-trash-alt mr-1"></i>Hapus</button>
+                                )}
+                              </div>
                             </td>
                           </tr>
                         );
@@ -1827,10 +1813,10 @@
 
     // Extend AdminDashboard to include FileUploadManager and FileBrowser
     const OriginalAdminDashboard = AdminDashboard;
-  const AdminDashboardWrapped = ({ user, onLogout }) => (
+  const AdminDashboardWrappedMain = ({ user, onLogout }) => (
       <div className="bg-gray-50">
         <OriginalAdminDashboard user={user} onLogout={onLogout} />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-0 pb-6">
           <div className="card p-6">
             <div className="flex items-center mb-4">
               <i className="fas fa-cloud-upload-alt text-green-500 text-2xl mr-3"></i>

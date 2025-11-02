@@ -51,6 +51,13 @@ body {
 }
 .hero-btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-sm); }
 
+/* Mobile hero tweaks */
+@media (max-width: 576px) {
+  .hero-section { height: 85vh !important; }
+  .hero-section h1 { font-size: 2.25rem; }
+  .hero-section .lead { font-size: 1rem; margin-bottom: 1rem; }
+}
+
 /* Section title and divider */
 .section-title {
   color: var(--brand-green);

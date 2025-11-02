@@ -33,7 +33,17 @@
   #jadwal-section .day-icon { width: 36px; height: 36px; }
   #jadwal-section .badge { font-size: 0.85rem; }
   #jadwal-section .list-unstyled li { margin-bottom: 4px; }
-  #jadwal-section .time-col { min-width: 150px; border-left: none; padding-left: 0; }
+  #jadwal-section .time-col { min-width: 120px; border-left: none; padding-left: 0; }
+
+}
+
+/* Responsive min-width for time column */
+.time-col { min-width: 120px; }
+@media (min-width: 768px) {
+  .time-col { min-width: 140px; }
+}
+@media (min-width: 992px) {
+  .time-col { min-width: 160px; }
 }
 
 /* Hero refinements */
@@ -177,6 +187,20 @@
   position: fixed; top: 0; left: 0; height: 3px; width: 0%;
   background: linear-gradient(90deg, var(--brand-1), var(--brand-3));
   z-index: 1100; box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+/* Collapsible day header toggle */
+.day-toggle { color: #0f172a; }
+.day-toggle:hover { text-decoration: none; }
+.day-toggle .collapse-chevron { transition: transform .2s ease; }
+.day-toggle[aria-expanded="true"] .collapse-chevron { transform: rotate(180deg); }
+
+/* Active time indicator */
+.schedule-items .active-time {
+  background: linear-gradient(90deg, rgba(34,197,94,0.12), rgba(34,197,94,0.06));
+  border-left: 3px solid var(--brand-1);
+  border-radius: 8px;
+  padding: 8px 10px;
 }
 
 /* Program Tambahan section (cards, icons, title) */

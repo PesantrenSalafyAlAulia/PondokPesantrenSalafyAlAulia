@@ -128,6 +128,18 @@
       currentBlock.classList.add('current-day');
     }
 
+    // Expand collapse for today's schedule by default
+    if (currentBlock) {
+      var collapseEl = currentBlock.querySelector('.schedule-items.collapse');
+      var toggleBtn = currentBlock.querySelector('.day-toggle');
+      if (collapseEl) {
+        collapseEl.classList.add('show');
+      }
+      if (toggleBtn) {
+        toggleBtn.setAttribute('aria-expanded', 'true');
+      }
+    }
+
     // Day filter controls
     var filter = document.querySelector('.day-filter');
     if (filter) {
@@ -180,6 +192,28 @@
         badge.classList.add('badge-time-night');
       }
     });
+
+    // Active time indicator for current day based on icon (morning/afternoon/night)
+    var now = new Date();
+    var hour = now.getHours();
+    var isMorning = hour >= 5 && hour < 12;
+    var isAfternoon = hour >= 12 && hour < 18;
+    var isNight = hour >= 18 || hour < 5;
+
+    if (currentBlock) {
+      Array.prototype.slice.call(currentBlock.querySelectorAll('.schedule-items > .d-md-flex')).forEach(function (row) {
+        var badge = row.querySelector('.time-col .badge');
+        if (!badge) return;
+        var icon = badge.querySelector('i');
+        if (!icon) return;
+        var match = (isMorning && icon.classList.contains('fa-sun')) ||
+                    (isAfternoon && icon.classList.contains('fa-cloud-sun')) ||
+                    (isNight && icon.classList.contains('fa-moon'));
+        if (match) {
+          row.classList.add('active-time');
+        }
+      });
+    }
 
     // Ganti ikon per kegiatan berdasarkan kata kunci
     var iconMap = [
