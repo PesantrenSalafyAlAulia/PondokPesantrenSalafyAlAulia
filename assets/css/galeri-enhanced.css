@@ -355,3 +355,34 @@ body {
   padding: 8px 12px;
   display: inline-block;
 }
+/* ===================== Mobile Responsive Tweaks for Gallery ===================== */
+@media (max-width: 576px) {
+  /* Comfortable spacing inside gallery sections */
+  .gallery-section .container,
+  .section-header .container {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+  /* Ensure masonry items have tighter gaps and safe rounding */
+  .gallery-grid .gallery-item {
+    margin-bottom: 0.75rem;
+    border-radius: 12px;
+  }
+  .gallery-grid .gallery-item img,
+  .gallery-row .gallery-item img {
+    border-radius: 12px;
+  }
+  /* Make in-viewer buttons easier to tap */
+  #gallery-viewer button {
+    width: 42px;
+    height: 42px;
+    font-size: 16px;
+  }
+  /* Slightly lower sticky filter bar for small screens */
+  .filter-bar { top: 62px; }
+}
+
+@media (max-width: 360px) {
+  #gallery-viewer button { width: 38px; height: 38px; }
+  .filter-chip { padding: 5px 10px; font-size: 0.8rem; }
+}

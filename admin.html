@@ -1827,7 +1827,7 @@
 
     // Extend AdminDashboard to include FileUploadManager and FileBrowser
     const OriginalAdminDashboard = AdminDashboard;
-    const AdminDashboardWrapped = ({ user, onLogout }) => (
+  const AdminDashboardWrapped = ({ user, onLogout }) => (
       <div className="bg-gray-50">
         <OriginalAdminDashboard user={user} onLogout={onLogout} />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
@@ -1843,7 +1843,93 @@
       </div>
     );
 
-    </script>
+  </script>
+  <script>
+    // Admin image viewer with swipe support
+    (function(){
+      const buildViewer = () => {
+        if (document.getElementById('admin-image-viewer')) return;
+        const wrap = document.createElement('div');
+        wrap.id = 'admin-image-viewer';
+        wrap.style.cssText = 'position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,0.75);z-index:9999;';
+        wrap.innerHTML = `
+          <div style="position:relative;max-width:90vw;max-height:85vh;">
+            <img id="admin-viewer-img" src="" alt="preview" style="max-width:90vw;max-height:85vh;object-fit:contain;border-radius:8px;box-shadow:0 10px 30px rgba(0,0,0,0.4)" />
+            <button id="admin-viewer-prev" aria-label="Sebelumnya" style="position:absolute;left:-60px;top:50%;transform:translateY(-50%);background:#fff;color:#333;border:none;border-radius:999px;width:42px;height:42px;box-shadow:0 6px 14px rgba(0,0,0,0.25);cursor:pointer"><i class="fas fa-chevron-left"></i></button>
+            <button id="admin-viewer-next" aria-label="Berikutnya" style="position:absolute;right:-60px;top:50%;transform:translateY(-50%);background:#fff;color:#333;border:none;border-radius:999px;width:42px;height:42px;box-shadow:0 6px 14px rgba(0,0,0,0.25);cursor:pointer"><i class="fas fa-chevron-right"></i></button>
+            <button id="admin-viewer-close" aria-label="Tutup" style="position:absolute;right:-60px;top:-60px;background:#fff;color:#333;border:none;border-radius:999px;width:42px;height:42px;box-shadow:0 6px 14px rgba(0,0,0,0.25);cursor:pointer"><i class="fas fa-times"></i></button>
+          </div>`;
+        document.body.appendChild(wrap);
+        const img = document.getElementById('admin-viewer-img');
+        const prev = document.getElementById('admin-viewer-prev');
+        const next = document.getElementById('admin-viewer-next');
+        const close = document.getElementById('admin-viewer-close');
+        const applyLayout = () => {
+          const isMobile = window.innerWidth <= 576;
+          if (isMobile) {
+            prev.style.left = '8px'; prev.style.top = '50%'; prev.style.transform = 'translateY(-50%)';
+            next.style.right = '8px'; next.style.top = '50%'; next.style.transform = 'translateY(-50%)';
+            close.style.right = '8px'; close.style.top = '8px';
+          } else {
+            prev.style.left = '-60px'; prev.style.top = '50%'; prev.style.transform = 'translateY(-50%)';
+            next.style.right = '-60px'; next.style.top = '50%'; next.style.transform = 'translateY(-50%)';
+            close.style.right = '-60px'; close.style.top = '-60px';
+          }
+        };
+        applyLayout();
+        window.addEventListener('resize', applyLayout);
+      };
+      let LINKS = [];
+      let INDEX = 0;
+      const open = (idx) => {
+        buildViewer();
+        if (!LINKS.length) return;
+        INDEX = (idx + LINKS.length) % LINKS.length;
+        const src = LINKS[INDEX].getAttribute('href');
+        const img = document.getElementById('admin-viewer-img');
+        const wrap = document.getElementById('admin-image-viewer');
+        img.src = src;
+        wrap.style.display = 'flex';
+      };
+      const closeViewer = () => { const wrap = document.getElementById('admin-image-viewer'); if (wrap) wrap.style.display = 'none'; };
+      const showPrev = () => open(INDEX - 1);
+      const showNext = () => open(INDEX + 1);
+      const wireNav = () => {
+        const wrap = document.getElementById('admin-image-viewer');
+        document.getElementById('admin-viewer-prev').onclick = showPrev;
+        document.getElementById('admin-viewer-next').onclick = showNext;
+        document.getElementById('admin-viewer-close').onclick = closeViewer;
+        wrap.addEventListener('click', (e) => { if (e.target.id === 'admin-image-viewer') closeViewer(); });
+        // Touch swipe
+        const img = document.getElementById('admin-viewer-img');
+        let sx = 0, sy = 0;
+        img.addEventListener('touchstart', (e) => { const t = e.changedTouches[0]; sx = t.clientX; sy = t.clientY; }, { passive: true });
+        img.addEventListener('touchend', (e) => { const t = e.changedTouches[0]; const dx = t.clientX - sx; const dy = t.clientY - sy; if (Math.abs(dx) > 40 && Math.abs(dy) < 80) { if (dx < 0) showNext(); else showPrev(); } });
+        document.addEventListener('keydown', (e) => { if (wrap.style.display !== 'flex') return; if (e.key === 'Escape') closeViewer(); if (e.key === 'ArrowLeft') showPrev(); if (e.key === 'ArrowRight') showNext(); });
+      };
+      const isImageLink = (a) => /\.(jpg|jpeg|png|webp|gif)(\?.*)?$/i.test(a.getAttribute('href')||'');
+      const collectLinks = () => Array.from(document.querySelectorAll('a[href]')).filter(isImageLink);
+      const rewire = () => {
+        LINKS = collectLinks();
+        LINKS.forEach((a, idx) => {
+          if (a.__wiredViewer) return;
+          a.__wiredViewer = true;
+          a.addEventListener('click', (e) => {
+            // Allow Ctrl/Meta click to open new tab
+            if (e.ctrlKey || e.metaKey) return;
+            e.preventDefault();
+            open(idx);
+            wireNav();
+          });
+        });
+      };
+      // Observe DOM changes as React renders
+      const mo = new MutationObserver(() => { rewire(); });
+      mo.observe(document.body, { childList: true, subtree: true });
+      // Initial wiring after load
+      window.addEventListener('load', () => { rewire(); });
+    })();
+  </script>
     <script type="text/babel">
     // =====================
     // Gallery Supabase Components

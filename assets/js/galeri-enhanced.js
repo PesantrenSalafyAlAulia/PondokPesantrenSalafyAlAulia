@@ -160,14 +160,53 @@
     }
     const lightboxImg = document.getElementById('lightboxImage');
     const modalInstance = (window.bootstrap && window.bootstrap.Modal) ? new window.bootstrap.Modal(modal) : null;
+    let groupLinks = [];
+    let groupIndex = 0;
+    const collectGroup = (clicked) => {
+      const gallery = clicked.getAttribute('data-gallery') || '';
+      if (gallery) {
+        groupLinks = Array.from(document.querySelectorAll(`a.glightbox[data-gallery='${gallery}']`));
+        groupIndex = groupLinks.indexOf(clicked);
+      } else {
+        groupLinks = [clicked];
+        groupIndex = 0;
+      }
+    };
+    const showGroupImage = (idx) => {
+      if (!groupLinks.length) return;
+      groupIndex = (idx + groupLinks.length) % groupLinks.length;
+      const src = groupLinks[groupIndex].getAttribute('href');
+      if (lightboxImg) lightboxImg.src = src;
+      if (modalInstance) modalInstance.show();
+    };
     document.querySelectorAll('a.glightbox').forEach(link => {
+      if (link.__wiredLightbox) return;
+      link.__wiredLightbox = true;
       link.addEventListener('click', (e) => {
         e.preventDefault();
-        const src = link.getAttribute('href');
-        if (lightboxImg) lightboxImg.src = src;
-        if (modalInstance) modalInstance.show();
+        collectGroup(link);
+        showGroupImage(groupIndex);
       });
     });
+    // Touch swipe inside modal image
+    if (lightboxImg) {
+      let sx = 0, sy = 0;
+      lightboxImg.addEventListener('touchstart', (e) => {
+        const t = e.changedTouches[0]; sx = t.clientX; sy = t.clientY;
+      }, { passive: true });
+      lightboxImg.addEventListener('touchend', (e) => {
+        const t = e.changedTouches[0]; const dx = t.clientX - sx; const dy = t.clientY - sy;
+        if (Math.abs(dx) > 40 && Math.abs(dy) < 80) {
+          if (dx < 0) showGroupImage(groupIndex + 1); else showGroupImage(groupIndex - 1);
+        }
+      });
+      // Keyboard nav for completeness
+      document.addEventListener('keydown', (e) => {
+        if (!groupLinks.length) return;
+        if (e.key === 'ArrowLeft') showGroupImage(groupIndex - 1);
+        if (e.key === 'ArrowRight') showGroupImage(groupIndex + 1);
+      });
+    }
 
     // Lazy loading for gallery images
     document.querySelectorAll('.gallery-item img').forEach(img => {

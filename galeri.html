@@ -491,6 +491,34 @@
             img.src = src;
             wrap.style.display = 'flex';
           };
+          // Mobile-friendly nav button positions
+          const prevBtn = document.getElementById('viewer-prev');
+          const nextBtn = document.getElementById('viewer-next');
+          const closeBtn = document.getElementById('viewer-close');
+          const applyNavLayout = () => {
+            const isMobile = window.innerWidth <= 576;
+            if (isMobile) {
+              prevBtn.style.left = '8px';
+              prevBtn.style.top = '50%';
+              prevBtn.style.transform = 'translateY(-50%)';
+              nextBtn.style.right = '8px';
+              nextBtn.style.top = '50%';
+              nextBtn.style.transform = 'translateY(-50%)';
+              closeBtn.style.right = '8px';
+              closeBtn.style.top = '8px';
+            } else {
+              prevBtn.style.left = '-60px';
+              prevBtn.style.top = '50%';
+              prevBtn.style.transform = 'translateY(-50%)';
+              nextBtn.style.right = '-60px';
+              nextBtn.style.top = '50%';
+              nextBtn.style.transform = 'translateY(-50%)';
+              closeBtn.style.right = '-60px';
+              closeBtn.style.top = '-60px';
+            }
+          };
+          applyNavLayout();
+          window.addEventListener('resize', applyNavLayout);
           document.getElementById('viewer-prev').onclick = () => show(CURRENT_INDEX - 1);
           document.getElementById('viewer-next').onclick = () => show(CURRENT_INDEX + 1);
           document.getElementById('viewer-close').onclick = close;
@@ -502,6 +530,25 @@
             if (e.key === 'Escape') close();
             if (e.key === 'ArrowLeft') window.__gallery_show(CURRENT_INDEX - 1);
             if (e.key === 'ArrowRight') window.__gallery_show(CURRENT_INDEX + 1);
+          });
+          // Touch swipe navigation
+          const imgEl = document.getElementById('viewer-img');
+          let touchStartX = 0, touchStartY = 0;
+          imgEl.addEventListener('touchstart', (e) => {
+            const t = e.changedTouches[0];
+            touchStartX = t.clientX; touchStartY = t.clientY;
+          }, { passive: true });
+          imgEl.addEventListener('touchend', (e) => {
+            const t = e.changedTouches[0];
+            const dx = t.clientX - touchStartX;
+            const dy = t.clientY - touchStartY;
+            if (Math.abs(dx) > 40 && Math.abs(dy) < 80) {
+              if (dx < 0) {
+                window.__gallery_show(CURRENT_INDEX + 1);
+              } else {
+                window.__gallery_show(CURRENT_INDEX - 1);
+              }
+            }
           });
         };
 
