@@ -95,7 +95,7 @@
                     </div>
                     <p class="lead mb-5">Dokumentasi kegiatan dan fasilitas Pondok Pesantren Assalafi Al Aulia yang menggambarkan kehidupan santri dan proses pembelajaran yang Islami.</p>
                     <div class="mt-5">
-                        <a href="#gallery" class="btn btn-light hero-btn me-3 mb-3 mb-md-0">
+                        <a href="#supabase-gallery" class="btn btn-light hero-btn me-3 mb-3 mb-md-0">
                             <i class="fas fa-images me-2"></i>Lihat Galeri
                         </a>
                         <a href="kontak.html" class="btn btn-outline-light hero-btn">
@@ -108,7 +108,7 @@
 
         <!-- Scroll down indicator -->
         <div class="scroll-down">
-            <a href="#gallery" class="text-white">
+            <a href="#supabase-gallery" class="text-white">
                 <i class="fas fa-chevron-down fa-2x"></i>
             </a>
         </div>
@@ -621,6 +621,36 @@
                 offset: 100
             });
         }
+    </script>
+
+    <!-- Smooth scroll offset for Supabase gallery -->
+    <script>
+      (function() {
+        document.addEventListener('DOMContentLoaded', function() {
+          const targetId = 'supabase-gallery';
+          const header = document.getElementById('header');
+          const offset = (header && header.offsetHeight) ? header.offsetHeight : 80;
+
+          function scrollToSupabaseGallery() {
+            const el = document.getElementById(targetId);
+            if (!el) return;
+            const y = el.getBoundingClientRect().top + window.pageYOffset - offset;
+            window.scrollTo({ top: y, behavior: 'smooth' });
+          }
+
+          if (window.location.hash === '#supabase-gallery') {
+            // Delay slightly to allow layout settle
+            setTimeout(scrollToSupabaseGallery, 50);
+          }
+
+          document.querySelectorAll('a[href="#supabase-gallery"]').forEach(function(a) {
+            a.addEventListener('click', function(e) {
+              e.preventDefault();
+              scrollToSupabaseGallery();
+            });
+          });
+        });
+      })();
     </script>
     <script>
         // Highlight current day and add interactive features
